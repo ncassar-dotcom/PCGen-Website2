@@ -1,0 +1,9 @@
+OLD-Website2/
+preview-server*.log
+node-*.log
+server-*.log
+data/client-portal.json
+scraped/
+Website.ai
+*.psd
+*.mov

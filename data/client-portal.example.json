@@ -1,0 +1,31 @@
+{
+  "clients": [
+    {
+      "id": "client-demo",
+      "companyName": "Demo Client Ltd",
+      "contactName": "Demo Contact",
+      "email": "client@example.com",
+      "phone": "+356 0000 0000",
+      "accountManager": "PC Gen Support",
+      "status": "Active",
+      "accessCode": "CHANGE-ME",
+      "licences": [
+        {
+          "product": "Example Licence",
+          "seats": 1,
+          "expires": "2026-12-31",
+          "status": "Active"
+        }
+      ],
+      "bills": [
+        {
+          "invoice": "INV-DEMO-001",
+          "amount": 0,
+          "currency": "EUR",
+          "dueDate": "2026-12-31",
+          "status": "Demo"
+        }
+      ]
+    }
+  ]
+}
