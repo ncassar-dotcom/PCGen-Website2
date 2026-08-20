@@ -252,21 +252,34 @@ function preloadWholeSite() {
 }
 
 function header() {
-  const active = currentPath;
-  const links = nav.map((item) => `<a class="${active.startsWith(item.href) ? "is-active" : ""}" href="${item.href}">${item.label}</a>`).join("");
+  const menuLinks = [
+    ["About", "/about/"],
+    ["The Team", "/meet-the-team/"],
+    ["Services", "/services/"],
+    ["Clients", "/clients/"],
+    ["Careers", "/careers/"],
+    ["Contact", "/contact/"]
+  ].map(([label, href]) => `<a class="" href="${href}">${label}</a>`).join("");
   return `
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/" aria-label="PC Gen home"><img src="${assets.logo}" alt="PC Gen"></a>
         <nav class="main-nav" id="main-nav">
-          <span class="nav-group">
-            <a class="${active.startsWith("/about/") || active.startsWith("/meet-the-team/") ? "is-active" : ""}" href="/about/">About</a>
-            <span class="sub-menu">
-              <a href="/about/"><strong>Company</strong><span>Purpose, history, and mission.</span></a>
-              <a href="/meet-the-team/"><strong>PCGEN Team</strong><span>The people supporting your business.</span></a>
-            </span>
-          </span>
-          ${links.replace('<a class="is-active" href="/about/">About</a>', "").replace('<a class="" href="/about/">About</a>', "")}
+          <div class="main-nav-top">
+            <a class="main-nav-support" href="/remote-support.html">Remote Support</a>
+          </div>
+          <div class="main-nav-links">
+            ${menuLinks}
+          </div>
+          <div class="main-nav-footer">
+            <div class="socials">
+              <a href="${contact.facebook}" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+              <a href="${contact.instagram}" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+              <a href="${contact.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+            </div>
+            <a href="" title="Call 0035621461111 via 3CX" tcxhref="0035621461111" target="_blank">${contact.phone}</a>
+            <a href="mailto:${contact.support}">${contact.support}</a>
+          </div>
         </nav>
         <div class="support-downloads" aria-label="Header actions">
           <a class="remote-header-link" href="/remote-support.html">Remote Support</a>
@@ -367,12 +380,6 @@ function homeHero() {
       <div class="container home-hero-stage">
         <div class="home-hero-copy">
           <h1><span>YOUR IT<span class="title-accent-dot" aria-hidden="true"></span></span><span>OUR PASSION</span></h1>
-          <div class="home-stats-line" aria-label="PC Gen highlights">
-            <span style="padding-right: 8px;">24/7 Business Support</span>
-            <span style="padding-left: 8px; padding-right: 8px;">16 Years of Experience</span>
-            <span style="padding-left: 8px;">200+ Clients</span>
-          </div>
-          <p class="lead">PC Gen delivers end-to-end IT services without the cost and complexity of maintaining an in-house team. From technical support and managed IT to cybersecurity, infrastructure, and bespoke technology projects, we provide the expertise your business needs through a single trusted partner.</p>
         </div>
         <div class="home-hero-actions" aria-label="Home actions">
           <a class="home-action-tile" href="/services/"><span aria-hidden="true">+</span><strong>Our<br>Services</strong></a>
@@ -382,8 +389,42 @@ function homeHero() {
     </section>`;
 }
 
+function homeProofSection() {
+  return `
+    <section class="section home-proof-section">
+      <div class="container home-proof-grid">
+        <div class="home-proof-copy">
+          <h2>Managed IT. Secure Infrastructure. Results.</h2>
+          <p>PC Gen delivers end-to-end IT services without the cost and complexity of maintaining an in-house team. From technical support and managed IT to cybersecurity, infrastructure, and bespoke technology projects, we provide the expertise your business needs through a single trusted partner.</p>
+          <a class="home-proof-link" href="/about/">Read about PC Gen</a>
+        </div>
+        <div class="home-proof-metrics" aria-label="PC Gen highlights">
+          <article>
+            <strong>24/7</strong>
+            <span>Business support</span>
+          </article>
+          <article>
+            <strong>16+</strong>
+            <span>Years of experience</span>
+          </article>
+          <article>
+            <strong>200+</strong>
+            <span>Clients supported</span>
+          </article>
+        </div>
+      </div>
+    </section>`;
+}
+
 function sectionHead(label, title, text) {
-  return `<p class="eyebrow section-eyebrow">${label}</p><h2 class="section-title">${title}</h2>${text ? `<p class="section-copy">${text}</p>` : ""}`;
+  const hiddenEyebrows = new Set([
+    "Trusted by 200+ clients",
+    "Why outsource?",
+    "Managed services",
+    "Technology partners"
+  ]);
+  const eyebrow = label && !hiddenEyebrows.has(label) ? `<p class="eyebrow section-eyebrow">${label}</p>` : "";
+  return `${eyebrow}<h2 class="section-title">${title}</h2>${text ? `<p class="section-copy">${text}</p>` : ""}`;
 }
 
 function logoGrid(items, klass = "logos") {
@@ -429,7 +470,6 @@ function newsletter() {
     <section class="section dark newsletter-section">
       <div class="container split">
         <div>
-          <p class="eyebrow">Newsletter</p>
           <h2>Sign up for our newsletter</h2>
           <p class="lead">Be the first to know about releases, industry news, and insights.</p>
         </div>
@@ -592,9 +632,10 @@ function clientAdminPage() {
 const pages = {
   home: () => `
     ${homeHero()}
-    <section class="section">
+    ${homeProofSection()}
+    <section class="section home-client-section">
       <div class="container">
-        ${sectionHead("Trusted by 200+ clients", "Supporting IT needs across global businesses", "")}
+        ${sectionHead("Trusted by 200+ clients", "Enterprise IT Infrastructure", "")}
         ${logoShowcase(clientLogos)}
       </div>
     </section>
@@ -603,7 +644,6 @@ const pages = {
       <div class="container split soft-section-content">
         <div aria-hidden="true"></div>
         <div class="copy">
-          <p class="eyebrow">Since 2008</p>
           <h2>We have been thriving for 16 years</h2>
           <p>First founded in 2008 on the Island of Malta, PCGEN was launched with the aim of providing regional small businesses with the tools they need to increase productivity and efficiency.</p>
           <p>We treat our clients as business partners and take pride in their success. Our work is built around proactive solutions designed for each client's specific needs.</p>
