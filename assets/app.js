@@ -42,7 +42,7 @@ const assets = {
   heroVideo: "https://pcgen.mt/wp-content/uploads/2024/10/StoryBlock-jHQ3cBoeDl.mp4",
   aboutVideo: "https://pcgen.mt/wp-content/uploads/2024/10/StoryBlock-SO7rcnPFTE.mp4",
   clientsVideo: "https://pcgen.mt/wp-content/uploads/2024/10/StoryBlock-6JfWql180h.mp4",
-  growthVideo: "/assets/principles.webm",
+  growthVideo: "/assets/hero-flow-wiggle-loop.webm",
   founder: "https://pcgen.mt/wp-content/uploads/2024/10/Ken-Cauchi-BIO-V1.2.png",
   mission: "https://pcgen.mt/wp-content/uploads/2022/10/MissionStatement-Image.png",
   teamThumb: "/assets/brand/team-nev-thumbnail.png",
@@ -76,12 +76,12 @@ const clientLogos = [
 ];
 
 const partnerLogos = [
-  ["Microsoft Silver Partner", "https://pcgen.mt/wp-content/uploads/2024/09/27-274949_microsoft-silver-partner-logo-hd-png-download.png"],
-  ["3CX Advanced Silver", "https://pcgen.mt/wp-content/uploads/2024/10/3CX-Advanced-Silver.png"],
-  ["Technology Partner", "https://pcgen.mt/wp-content/uploads/2024/09/Screenshot-2024-09-24-164638.png"],
-  ["CodeTwo Reseller", "https://pcgen.mt/wp-content/uploads/2024/09/codetwo-reseller-400x56-1-300x42-1.png"],
-  ["Dell EMC Gold Partner", "https://pcgen.mt/wp-content/uploads/2024/09/DellEMC-Partner-Gold-01.png"],
-  ["Bitdefender", "https://pcgen.mt/wp-content/uploads/2024/09/bitdefender.png"]
+  ["Microsoft Silver Partner", "/assets/ms.png"],
+  ["3CX", "/assets/3cx-logo.png"],
+  ["Acronis", "/assets/Acronis-logo-white.svg"],
+  ["CodeTwo", "/assets/codetwo-logo.webp"],
+  ["Dell Technologies", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dell_Technologies_logo.svg"],
+  ["Bitdefender", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Bitdefender_logo.svg"]
 ];
 
 const services = [
@@ -165,12 +165,16 @@ const staticImageAssets = [
   "/assets/backgrounds/HeaderBG-2.png",
   "/assets/backgrounds/HeaderBG.png",
   "/assets/backgrounds/hero-flow.jpg",
+  "/assets/3cx-logo.png",
+  "/assets/Acronis-logo-white.svg",
   "/assets/brand/favicon.png",
   "/assets/brand/hero-3d-icon.png",
   "/assets/brand/hero-pcg-icon-3d-4.png",
   "/assets/brand/logo.png",
   "/assets/brand/PCG-Icon-3D.png",
-  "/assets/brand/team-nev-thumbnail.png"
+  "/assets/brand/team-nev-thumbnail.png",
+  "/assets/codetwo-logo.webp",
+  "/assets/ms.png"
 ];
 
 const sitePages = [
@@ -380,7 +384,9 @@ function homeHero() {
       <div class="container home-hero-stage">
         <div class="home-hero-copy">
           <h1><span>YOUR IT<span class="title-accent-dot" aria-hidden="true"></span></span><span>OUR PASSION</span></h1>
+          <p class="home-hero-kicker">Managed IT. Secure Infrastructure. Results.</p>
         </div>
+        ${logoGrid(partnerLogos, "logos home-hero-logos")}
         <div class="home-hero-actions" aria-label="Home actions">
           <a class="home-action-tile" href="/services/"><span aria-hidden="true">+</span><strong>Our<br>Services</strong></a>
           <a class="home-action-tile secondary" href="/contact/"><span aria-hidden="true">+</span><strong>Get in<br>Touch</strong></a>
@@ -394,9 +400,7 @@ function homeProofSection() {
     <section class="section home-proof-section">
       <div class="container home-proof-grid">
         <div class="home-proof-copy">
-          <h2>Managed IT. Secure Infrastructure. Results.</h2>
           <p>PC Gen delivers end-to-end IT services without the cost and complexity of maintaining an in-house team. From technical support and managed IT to cybersecurity, infrastructure, and bespoke technology projects, we provide the expertise your business needs through a single trusted partner.</p>
-          <a class="home-proof-link" href="/about/">Read about PC Gen</a>
         </div>
         <div class="home-proof-metrics" aria-label="PC Gen highlights">
           <article>
@@ -457,6 +461,14 @@ function serviceCards(limit) {
     </article>`).join("")}</div>`;
 }
 
+function servicePills(limit = 6) {
+  return `<div class="home-services-pills">${services.slice(0, limit).map((service) => `
+    <a class="home-service-pill" href="/services/">
+      <span class="home-service-ring" aria-hidden="true"></span>
+      <span>${service[0]}</span>
+    </a>`).join("")}</div>`;
+}
+
 function testimonialsMarkup(limit = testimonials.length) {
   return `<div class="grid two">${testimonials.slice(0, limit).map((item) => `
     <blockquote class="testimonial">
@@ -466,19 +478,7 @@ function testimonialsMarkup(limit = testimonials.length) {
 }
 
 function newsletter() {
-  return `
-    <section class="section dark newsletter-section">
-      <div class="container split">
-        <div>
-          <h2>Sign up for our newsletter</h2>
-          <p class="lead">Be the first to know about releases, industry news, and insights.</p>
-        </div>
-        <form class="form-shell" action="mailto:${contact.email}" method="post" enctype="text/plain">
-          <input type="email" name="email" placeholder="Email" required>
-          <button class="button" type="submit">Subscribe</button>
-        </form>
-      </div>
-    </section>`;
+  return "";
 }
 
 function mapSection() {
@@ -635,85 +635,91 @@ const pages = {
     ${homeProofSection()}
     <section class="section home-client-section">
       <div class="container">
-        ${sectionHead("Trusted by 200+ clients", "Enterprise IT Infrastructure", "")}
         ${logoShowcase(clientLogos)}
       </div>
     </section>
-    <section class="section soft section-soft-media">
-      <video class="soft-section-video" src="${assets.growthVideo}" autoplay loop muted playsinline></video>
-      <div class="container split soft-section-content">
-        <div aria-hidden="true"></div>
-        <div class="copy">
-          <h2>We have been thriving for 16 years</h2>
-          <p>First founded in 2008 on the Island of Malta, PCGEN was launched with the aim of providing regional small businesses with the tools they need to increase productivity and efficiency.</p>
-          <p>We treat our clients as business partners and take pride in their success. Our work is built around proactive solutions designed for each client's specific needs.</p>
+    <section class="section dark why-section">
+      <video class="why-section-video" src="${assets.growthVideo}" autoplay loop muted playsinline aria-hidden="true"></video>
+      <div class="container why-section-content">
+        <div class="why-section-intro">
+          <h2 class="section-title"><span>AN EXPERT IT TEAM WITHOUT</span><span>THE IN-HOUSE OVERHEAD</span></h2>
+          <p class="section-copy">Outsourcing IT support gives businesses skilled people, lower risk, and predictable support without building an internal department from scratch.</p>
         </div>
-      </div>
-    </section>
-    <section class="section dark">
-      <div class="container">
-        ${sectionHead("Why outsource?", "An expert IT team without the in-house overhead", "Outsourcing IT support gives businesses skilled people, lower risk, and predictable support without building an internal department from scratch.")}
-        <div class="grid three">
+        <div class="grid three why-grid">
           <article class="card"><span class="icon">01</span><h3>Cost-Effective</h3><p>Benefit from an entire team of experts at a fraction of the cost of a full in-house team.</p></article>
           <article class="card"><span class="icon">02</span><h3>Skilled & Experienced</h3><p>Get instant access to trained IT engineers with years of practical experience.</p></article>
           <article class="card"><span class="icon">03</span><h3>Reduce Risk</h3><p>Use experienced providers with industry-specific knowledge and proactive monitoring.</p></article>
         </div>
+        <div class="home-services-row">
+          <div>
+            <h2 class="section-title">Our Services</h2>
+          </div>
+          <a class="home-services-view" href="/services/">View all <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        ${servicePills(6)}
       </div>
     </section>
-    <section class="section">
-      <div class="container">
-        ${sectionHead("Managed services", "Data analytics, content & IT managed services", "PC Gen manages a wide range of company IT needs under one roof.")}
-        ${serviceCards(6)}
-      </div>
-    </section>
-    <section class="section soft"><div class="container">${sectionHead("Technology partners", "Our technology partners", "Recognised vendor relationships that support reliable business IT delivery.")}${logoGrid(partnerLogos)}</div></section>
     ${newsletter()}
   `,
 
   about: () => `
-    ${hero({
-      eyebrow: "About PC Gen",
-      title: "We operate in a unique way",
-      text: "Like an extension of your company, we work alongside you to help your business thrive while your employees focus on core operations.",
-      media: null
-    })}
-    <section class="section">
-      <div class="container">
-        ${sectionHead("Why choose us", "Experience, colleagues, clients, and services working together", "Founded in 2008, PC Gen was built to help Maltese small businesses increase productivity through streamlined IT operations.")}
-        <div class="grid four">
-          <article class="card"><span class="icon">16</span><h3>Years of experience</h3><p>Practical knowledge across changing business IT environments.</p></article>
-          <article class="card"><span class="icon">+</span><h3>Expert colleagues</h3><p>Qualified technicians and consultants for day-to-day and project work.</p></article>
-          <article class="card"><span class="icon">200</span><h3>Clients</h3><p>Trusted by more than 200 organisations.</p></article>
-          <article class="card"><span class="icon">IT</span><h3>Different services</h3><p>Support, security, cloud, disaster recovery, hosting, and more.</p></article>
+    <section class="hero about-hero">
+      <div class="container about-hero-stage">
+        <div class="about-hero-title">
+          <h1><span>WE OPERATE IN</span><span>A UNIQUE WAY<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+        </div>
+        <div class="about-hero-body">
+          <div class="about-hero-copy">
+            <p>PC Gen provides comprehensive, end-to-end IT services, giving your organisation access to specialist expertise without the cost, complexity, and administrative burden of maintaining an in-house IT team.</p>
+            <p>From responsive technical support and fully managed IT services to cybersecurity, infrastructure solutions, and bespoke technology projects, we deliver reliable, scalable solutions tailored to your business needs. With PC Gen as your single trusted technology partner, you can simplify IT management, strengthen operational resilience, and focus confidently on growing your business.</p>
+          </div>
+          <div class="about-stat-grid" aria-label="PC Gen company highlights">
+            <article class="about-stat-card"><span>16</span><h3>Years of experience</h3><p>Practical expertise across evolving business IT environments.</p></article>
+            <article class="about-stat-card"><span>+</span><h3>Experienced IT Professionals</h3><p>Qualified technicians and consultants providing expert support for daily operations and specialised technology projects.</p></article>
+            <article class="about-stat-card"><span>200</span><h3>Esteemed clients</h3><p>Trusted by over 200 organisations to deliver reliable, professional IT solutions.</p></article>
+            <article class="about-stat-card"><span>IT</span><h3>Comprehensive IT Services</h3><p>A complete range of solutions, including technical support, cybersecurity, cloud services, disaster recovery, hosting, and more.</p></article>
+          </div>
         </div>
       </div>
     </section>
-    <section class="section soft">
-      <div class="container split">
-        <div class="portrait"><img src="${assets.founder}" alt="Kenneth Cauchi" loading="lazy"></div>
-        <div class="copy">
-          <p class="eyebrow">Founder vision</p>
-          <h2>Kenneth Cauchi has a purpose and a vision</h2>
-          <p>Founded in 2008 by Kenneth Cauchi, PC Generation Ltd. was created with a singular purpose: to help small businesses in Malta increase productivity and efficiency through streamlined IT operations.</p>
-          <p>At PC Gen, IT is our passion. We stay abreast of technological advancements so companies can make informed decisions and keep succeeding in a contemporary business environment.</p>
+    <section class="section about-founder-section">
+      <div class="container about-founder-grid">
+        <div class="about-founder-media">
+          <img src="/assets/backgrounds/Kenneth.png" alt="Kenneth Cauchi" loading="lazy">
+          <span aria-hidden="true">&gt;&gt;</span>
+        </div>
+        <div class="about-founder-copy">
+          <div class="about-founder-heading">
+            <h2>Founder Vision</h2>
+            <a href="/meet-the-team/">View team <span aria-hidden="true">&#8599;</span></a>
+          </div>
+          <p>Founded in 2008 by Kenneth Cauchi, PC Generation Ltd. was established with a clear purpose: to help small businesses across Malta enhance productivity, improve efficiency, and achieve greater operational resilience through streamlined IT solutions.</p>
+          <p>Technology is at the heart of everything we do. Our team remains at the forefront of the latest industry developments, enabling us to provide informed guidance and forward-thinking solutions that help organisations make confident technology decisions and succeed in an increasingly digital business environment.</p>
         </div>
       </div>
     </section>
-    <section class="section dark">
-      <div class="container split">
-        <div class="copy">
-          <p class="eyebrow">Mission statement</p>
-          <h2>Your company deserves IT support that understands your needs</h2>
-          <p>We believe our clients' success is our success. That means proactive support, clear guidance, and practical solutions tailored to real business requirements.</p>
+    <section class="section about-support-section">
+      <div class="container about-support-content">
+        <h2 class="section-title about-support-title">IT Support Built<br>Around Your Business</h2>
+        <p>We believe our success is directly linked to the success of our clients. That is why we take the time to understand each organisation's unique challenges, operational requirements, and long-term objectives.</p>
+        <p>Through proactive support, clear expert guidance, and practical technology solutions, we help businesses improve efficiency, strengthen resilience, and make confident IT decisions. Our partnership-driven approach ensures that every solution delivers genuine value while supporting sustainable growth.</p>
+        <div class="about-client-row">
+          <h3>Some of our clients</h3>
+          <a href="/clients/">View all <span aria-hidden="true">&#8599;</span></a>
         </div>
-        <div class="feature-media"><img src="${assets.mission}" alt="PC Gen mission" loading="lazy"></div>
+        ${logoCarousel(clientLogos)}
       </div>
     </section>
-    <section class="section"><div class="container">${sectionHead("Trusted by 200+ clients", "Businesses using PC Gen", "A selection of client logos retained from the current site.")}${logoCarousel(clientLogos)}</div></section>
     ${newsletter()}
   `,
 
   team: () => `
+    ${hero({
+      title: "Meet the Team",
+      text: "Meet our team of professionals serving businesses across Malta.",
+      media: null,
+      showActions: false
+    })}
     <section class="team-section">
       <div class="container">
         <div class="team-panel">
@@ -743,7 +749,6 @@ const pages = {
 
   services: () => `
     ${hero({
-      eyebrow: "Services",
       title: "Our wide range of services",
       text: "From desktop support to bespoke projects, PC Gen is every business's one-stop-shop for IT solutions.",
       media: null,
@@ -803,7 +808,6 @@ const pages = {
 
   clients: () => `
     ${hero({
-      eyebrow: "Clients",
       title: '<span class="hero-title-line">Trusted by 200+</span><span class="hero-title-line">Customers</span>',
       text: "PC Gen provides IT services and solutions to over 200 businesses, supported by a reliable team and consistent results.",
       media: null,
@@ -829,7 +833,6 @@ const pages = {
 
   careers: () => `
     ${hero({
-      eyebrow: "Careers",
       title: "We're looking for IT experts",
       text: "Our company is growing and we are always looking for talented IT experts to join our dynamic team.",
       media: null,
@@ -850,7 +853,6 @@ const pages = {
 
   contact: () => `
     ${hero({
-      eyebrow: "Get in touch",
       title: "Talk to the PC Gen team",
       text: "The existing contact details and service options are preserved, with a cleaner responsive form.",
       media: null,
@@ -930,7 +932,7 @@ function render() {
   let content;
   if (pageKey.startsWith("job:")) content = jobPage(pageKey.split(":")[1]);
   else content = pages[pageKey] ? pages[pageKey]() : pages.home();
-  root.innerHTML = rewriteSiteUrls(header() + content + footer());
+  root.innerHTML = rewriteSiteUrls(header() + content + footer() + `<button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button>`);
   bindUI();
 }
 
@@ -1241,12 +1243,19 @@ function bindNewsletterParallax() {
 
 function bindUI() {
   const headerElement = document.querySelector(".site-header");
+  const scrollTopButton = document.querySelector("[data-scroll-top]");
   const updateHeaderState = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const isScrolled = scrollTop > (headerElement?.offsetHeight || 96);
     headerElement?.classList.toggle("is-scrolled", scrollTop > 24);
+    scrollTopButton?.classList.toggle("is-scrolled", isScrolled);
   };
   updateHeaderState();
   window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+  scrollTopButton?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
   document.querySelectorAll("video[data-playback-rate]").forEach((video) => {
     const rate = Number(video.dataset.playbackRate);

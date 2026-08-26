@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const root = __dirname;
-const port = 4173;
+const port = 4174;
 const host = "127.0.0.1";
 const dataPath = path.join(root, "data", "client-portal.json");
 const exampleDataPath = path.join(root, "data", "client-portal.example.json");
