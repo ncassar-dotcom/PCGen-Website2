@@ -8,6 +8,8 @@ const port = 4174;
 const host = "127.0.0.1";
 const dataPath = path.join(root, "data", "client-portal.json");
 const exampleDataPath = path.join(root, "data", "client-portal.example.json");
+const vacancyDataPath = path.join(root, "data", "vacancies.json");
+const vacancyExampleDataPath = path.join(root, "data", "vacancies.example.json");
 const adminPassword = process.env.PCGEN_ADMIN_PASSWORD || "";
 const sessions = new Map();
 
@@ -95,6 +97,18 @@ function writeDatabase(database) {
   fs.writeFileSync(dataPath, `${JSON.stringify(database, null, 2)}\n`, "utf8");
 }
 
+function readVacancyDatabase() {
+  if (!fs.existsSync(vacancyDataPath) && fs.existsSync(vacancyExampleDataPath)) {
+    fs.copyFileSync(vacancyExampleDataPath, vacancyDataPath);
+  }
+  const raw = fs.readFileSync(vacancyDataPath, "utf8");
+  return JSON.parse(raw);
+}
+
+function writeVacancyDatabase(database) {
+  fs.writeFileSync(vacancyDataPath, `${JSON.stringify(database, null, 2)}\n`, "utf8");
+}
+
 function publicClient(client) {
   return {
     id: client.id,
@@ -106,6 +120,71 @@ function publicClient(client) {
     status: client.status,
     licences: client.licences || [],
     bills: client.bills || []
+  };
+}
+
+function publicVacancy(vacancy) {
+  return {
+    id: vacancy.id,
+    title: vacancy.title,
+    company: vacancy.company,
+    logo: vacancy.logo,
+    employmentType: vacancy.employmentType,
+    applyBy: vacancy.applyBy,
+    applyByLabel: vacancy.applyByLabel,
+    location: vacancy.location,
+    category: vacancy.category,
+    intro: vacancy.intro,
+    summary: vacancy.summary,
+    responsibilities: vacancy.responsibilities || [],
+    requirements: vacancy.requirements || [],
+    assets: vacancy.assets || [],
+    apply: vacancy.apply || {},
+    createdAt: vacancy.createdAt
+  };
+}
+
+function parseList(value, fallback = []) {
+  if (Array.isArray(value)) return value.map((item) => String(item || "").trim()).filter(Boolean);
+  if (typeof value === "string") return value.split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
+  return fallback;
+}
+
+function slugify(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || crypto.randomUUID();
+}
+
+function normaliseVacancy(input, existing = {}) {
+  const title = String(input.title || existing.title || "").trim();
+  const id = String(input.id || existing.id || slugify(title)).trim();
+  const apply = input.apply || existing.apply || {};
+  return {
+    id,
+    status: String(input.status || existing.status || "published").trim(),
+    title,
+    company: String(input.company || existing.company || "PC Gen").trim(),
+    logo: String(input.logo || existing.logo || "/assets/brand/favicon.png").trim(),
+    employmentType: String(input.employmentType || existing.employmentType || "Full-Time").trim(),
+    applyBy: String(input.applyBy || existing.applyBy || "").trim(),
+    applyByLabel: String(input.applyByLabel || existing.applyByLabel || "Open application").trim(),
+    location: String(input.location || existing.location || "Malta").trim(),
+    category: String(input.category || existing.category || "Support").trim(),
+    intro: String(input.intro || existing.intro || "").trim(),
+    summary: String(input.summary || existing.summary || "").trim(),
+    responsibilities: parseList(input.responsibilities, existing.responsibilities || []),
+    requirements: parseList(input.requirements, existing.requirements || []),
+    assets: parseList(input.assets, existing.assets || []),
+    apply: {
+      heading: String(apply.heading || "Apply for this position").trim(),
+      email: String(apply.email || "info@pcgen.mt").trim(),
+      liveUrl: String(apply.liveUrl || "").trim(),
+      instructions: String(apply.instructions || "").trim()
+    },
+    createdAt: existing.createdAt || new Date().toISOString()
   };
 }
 
@@ -161,6 +240,27 @@ async function handleApi(req, res, url) {
       return;
     }
 
+    if (req.method === "GET" && url.pathname === "/api/vacancies") {
+      const database = readVacancyDatabase();
+      const vacancies = (database.vacancies || [])
+        .filter((vacancy) => String(vacancy.status || "").toLowerCase() === "published")
+        .map(publicVacancy);
+      sendJson(res, 200, { vacancies });
+      return;
+    }
+
+    const publicVacancyMatch = url.pathname.match(/^\/api\/vacancies\/([^/]+)$/);
+    if (req.method === "GET" && publicVacancyMatch) {
+      const database = readVacancyDatabase();
+      const vacancy = (database.vacancies || []).find((item) => item.id === publicVacancyMatch[1] && String(item.status || "").toLowerCase() === "published");
+      if (!vacancy) {
+        sendJson(res, 404, { error: "Vacancy not found." });
+        return;
+      }
+      sendJson(res, 200, { vacancy: publicVacancy(vacancy) });
+      return;
+    }
+
     if (req.method === "GET" && url.pathname === "/api/client/me") {
       const session = sessionFromRequest(req, "client");
       if (!session) {
@@ -198,6 +298,65 @@ async function handleApi(req, res, url) {
         database.clients.push(client);
         writeDatabase(database);
         sendJson(res, 201, { client });
+        return;
+      }
+    }
+
+    if (url.pathname === "/api/admin/vacancies") {
+      const session = sessionFromRequest(req, "admin");
+      if (!session) {
+        sendJson(res, 401, { error: "Admin login required." });
+        return;
+      }
+      const database = readVacancyDatabase();
+      database.vacancies = database.vacancies || [];
+      if (req.method === "GET") {
+        sendJson(res, 200, { vacancies: database.vacancies });
+        return;
+      }
+      if (req.method === "POST") {
+        const body = await readBody(req);
+        const vacancy = normaliseVacancy(body);
+        if (!vacancy.title) {
+          sendJson(res, 400, { error: "Vacancy title is required." });
+          return;
+        }
+        if (database.vacancies.some((item) => item.id === vacancy.id)) {
+          sendJson(res, 409, { error: "A vacancy with this ID already exists." });
+          return;
+        }
+        database.vacancies.push(vacancy);
+        writeVacancyDatabase(database);
+        sendJson(res, 201, { vacancy });
+        return;
+      }
+    }
+
+    const vacancyMatch = url.pathname.match(/^\/api\/admin\/vacancies\/([^/]+)$/);
+    if (vacancyMatch) {
+      const session = sessionFromRequest(req, "admin");
+      if (!session) {
+        sendJson(res, 401, { error: "Admin login required." });
+        return;
+      }
+      const database = readVacancyDatabase();
+      database.vacancies = database.vacancies || [];
+      const vacancyIndex = database.vacancies.findIndex((item) => item.id === vacancyMatch[1]);
+      if (vacancyIndex === -1) {
+        sendJson(res, 404, { error: "Vacancy not found." });
+        return;
+      }
+      if (req.method === "PUT") {
+        const body = await readBody(req);
+        database.vacancies[vacancyIndex] = normaliseVacancy(body, database.vacancies[vacancyIndex]);
+        writeVacancyDatabase(database);
+        sendJson(res, 200, { vacancy: database.vacancies[vacancyIndex] });
+        return;
+      }
+      if (req.method === "DELETE") {
+        const [removed] = database.vacancies.splice(vacancyIndex, 1);
+        writeVacancyDatabase(database);
+        sendJson(res, 200, { vacancy: removed });
         return;
       }
     }
@@ -245,6 +404,11 @@ const server = http.createServer((req, res) => {
 
   let pathname = decodeURIComponent(url.pathname);
   if (pathname.endsWith("/")) pathname += "index.html";
+
+  if (pathname.startsWith("/data/")) {
+    send(res, 403, "Forbidden");
+    return;
+  }
 
   const filePath = path.normalize(path.join(root, pathname));
   if (!filePath.startsWith(root)) {

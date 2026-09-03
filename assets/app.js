@@ -45,7 +45,6 @@ const assets = {
   growthVideo: "/assets/hero-flow-wiggle-loop.webm",
   founder: "https://pcgen.mt/wp-content/uploads/2024/10/Ken-Cauchi-BIO-V1.2.png",
   mission: "https://pcgen.mt/wp-content/uploads/2022/10/MissionStatement-Image.png",
-  teamThumb: "/assets/brand/team-nev-thumbnail.png",
   team: "https://pcgen.mt/wp-content/uploads/elementor/thumbs/meet-the-Team--scaled-rampnlpjz033ne104htxkj3ebt5mhuabw47e75f3eo.jpg"
 };
 
@@ -111,51 +110,18 @@ const testimonials = [
 ];
 
 const team = [
-  ["Founder & CEO", "Kenneth Cauchi"],
-  ["IT Specialist & Team Leader", "Andre' Bartolo"],
-  ["Full-Stack Support Engineer", "Gerald Lluca"],
-  ["IT Support Engineer", "Rajul Raj"],
-  ["IT Support Engineer", "Joe Smart"],
-  ["IT Support Officer", "Sphamandla Maduna"],
-  ["Accounts Executive", "Bridget Muscat"],
-  ["IT Support Engineer", "Team Member"],
-  ["IT Support Engineer", "Team Member"],
-  ["Systems Administrator", "Team Member"],
-  ["Technical Support Officer", "Team Member"],
-  ["Client Support Coordinator", "Team Member"]
-];
-
-const jobs = {
-  "technical-support-engineer": {
-    title: "Technical Support Engineer",
-    intro: "We are looking to hire an experienced, professional, motivated and efficient Technical Support Engineer to join our support team.",
-    url: "/jobs/technical-support-engineer/",
-    live: "https://pcgen.mt/jobs/technical-support-engineer/"
-  },
-  "junior-it-support-officer": {
-    title: "Junior IT Support Officer",
-    intro: "We are looking for a young and cheerful Junior IT Support Officer to join our support team.",
-    url: "/jobs/junior-it-support-officer/",
-    live: "https://pcgen.mt/jobs/junior-it-support-officer/"
-  }
-};
-
-const jobRequirements = [
-  "Hold a degree in computer science or equivalent.",
-  "Have a minimum of 2 years' experience in a similar post.",
-  "Provide technical support on Microsoft server platforms including installation, configuration, upgrades and maintenance.",
-  "Be experienced with routers, firewalls, switches, server technologies, wireless infrastructure, IP telephony, installation and configuration.",
-  "VMware and Hyper-V installation, configuration and monitoring.",
-  "Office 365 and SharePoint configuration and monitoring.",
-  "Be familiar with network design and infrastructure and document systems or network problems for future reference.",
-  "Work effectively under pressure, multitask and meet deadlines.",
-  "Be highly motivated, meticulous and possess excellent organisational and communication skills."
-];
-
-const jobAssets = [
-  "Industry certification from Microsoft, HP, Cisco, Mikrotik, or other IT industry leaders.",
-  "Certifications including MCP, MCSA, MCSE, ITIL, CCNA and 3CX.",
-  "A clean driving licence and own transport."
+  { name: "Kenneth Cauchi", role: "Owner", image: "/assets/team/kenneth-cauchi.png" },
+  { name: "Andre Bartolo", role: "Team Lead", image: "/assets/team/andre-bartolo.png" },
+  { name: "Gerald Lluca", role: "Full-Stack Support Engineer", image: "/assets/team/gerald-lluca.png" },
+  { name: "Bridget Muscat", role: "Accounts Executive", image: "/assets/team/bridget-muscat.png" },
+  { name: "Joe Smart", role: "IT Support Engineer", image: "/assets/team/joe-smart.png" },
+  { name: "Rajul Raj", role: "IT Support Engineer", image: "/assets/team/rajul-raj.png" },
+  { name: "Sphamandla Maduna", role: "IT Support Officer" },
+  { name: "Nipuna Athauda", role: "IT Support Engineer", image: "/assets/team/nipuna-athauda.png" },
+  { name: "Asma Troudi", role: "Client Support Coordinator", image: "/assets/team/asma-troudi.jpg" },
+  { name: "Neville Cassar", role: "Technical Support Officer", image: "/assets/team/neville-cassar.png" },
+  { name: "Kiran Kumar Dandu", role: "IT Support Engineer" },
+  { name: "Rishwik", role: "IT Support Engineer" }
 ];
 
 const staticImageAssets = [
@@ -224,6 +190,7 @@ function preloadSiteImages() {
   const sources = [
     ...Object.values(assets),
     ...staticImageAssets,
+    ...team.map((member) => member.image),
     ...clientLogos.map(([, src]) => src),
     ...partnerLogos.map(([, src]) => src)
   ].filter(isImageSource);
@@ -368,7 +335,7 @@ function hero({ eyebrow, title, text, primary = ["Our services", "/services/"], 
       <div class="container hero-grid">
         <div class="hero-content">
           ${eyebrow ? `<p class="eyebrow">${eyebrow}</p>` : ""}
-          <h1>${title}</h1>
+          <h1>${title}<span class="title-accent-dot" aria-hidden="true"></span></h1>
           <p class="lead">${text}</p>
           ${statsMarkup}
           ${actionsMarkup}
@@ -383,7 +350,7 @@ function homeHero() {
     <section class="hero home-hero">
       <div class="container home-hero-stage">
         <div class="home-hero-copy">
-          <h1><span>YOUR IT<span class="title-accent-dot" aria-hidden="true"></span></span><span>OUR PASSION</span></h1>
+          <h1><span>YOUR IT</span><span>OUR PASSION<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
           <p class="home-hero-kicker">Managed IT. Secure Infrastructure. Results.</p>
         </div>
         ${logoGrid(partnerLogos, "logos home-hero-logos")}
@@ -421,14 +388,7 @@ function homeProofSection() {
 }
 
 function sectionHead(label, title, text) {
-  const hiddenEyebrows = new Set([
-    "Trusted by 200+ clients",
-    "Why outsource?",
-    "Managed services",
-    "Technology partners"
-  ]);
-  const eyebrow = label && !hiddenEyebrows.has(label) ? `<p class="eyebrow section-eyebrow">${label}</p>` : "";
-  return `${eyebrow}<h2 class="section-title">${title}</h2>${text ? `<p class="section-copy">${text}</p>` : ""}`;
+  return `<h2 class="section-title">${title}</h2>${text ? `<p class="section-copy">${text}</p>` : ""}`;
 }
 
 function logoGrid(items, klass = "logos") {
@@ -456,8 +416,10 @@ function logoShowcase(items) {
 function serviceCards(limit) {
   return `<div class="grid ${limit ? "three" : "four"}">${services.slice(0, limit || services.length).map((service) => `
     <article class="service-card">
+      <span class="service-card-dot" aria-hidden="true"></span>
       <h3>${service[0]}</h3>
-      <details><summary>Read More</summary><p>${service[2]}</p></details>
+      <p>${service[2]}</p>
+      <span class="service-card-bar" aria-hidden="true"></span>
     </article>`).join("")}</div>`;
 }
 
@@ -523,6 +485,161 @@ function apiRequest(url, options = {}) {
   });
 }
 
+function escapeAttribute(value = "") {
+  return escapeHtml(value).replace(/`/g, "&#96;");
+}
+
+function formatVacancyDate(value) {
+  if (!value) return "";
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }).replace(/ /g, "-");
+}
+
+function vacancyMeta(vacancy) {
+  return [
+    vacancy.employmentType,
+    vacancy.applyBy ? `Apply by ${formatVacancyDate(vacancy.applyBy)}` : vacancy.applyByLabel,
+    vacancy.location
+  ].filter(Boolean);
+}
+
+function vacancyLogo(vacancy) {
+  if (vacancy.logo) {
+    return `<img src="${escapeAttribute(siteUrl(vacancy.logo))}" alt="" loading="lazy">`;
+  }
+  return `<span>${escapeHtml((vacancy.company || vacancy.title || "PC").slice(0, 2).toUpperCase())}</span>`;
+}
+
+function vacancyListItem(vacancy, selectedId) {
+  const meta = vacancyMeta(vacancy);
+  return `
+    <button class="vacancy-list-item${vacancy.id === selectedId ? " is-selected" : ""}" type="button" data-vacancy-id="${escapeAttribute(vacancy.id)}">
+      <span class="vacancy-logo">${vacancyLogo(vacancy)}</span>
+      <span class="vacancy-list-copy">
+        <span class="vacancy-company">${escapeHtml(vacancy.company || "PC Gen")}</span>
+        <strong>${escapeHtml(vacancy.title)}</strong>
+        <span class="vacancy-meta">${meta.map(escapeHtml).join(" <b>·</b> ")}</span>
+      </span>
+    </button>`;
+}
+
+function vacancyDetailSection(title, items = []) {
+  if (!Array.isArray(items) || !items.length) return "";
+  return `
+    <section>
+      <h3>${escapeHtml(title)}</h3>
+      <ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+    </section>`;
+}
+
+function vacancyApplyMarkup(vacancy) {
+  const apply = vacancy.apply || {};
+  const email = apply.email || contact.email;
+  const subject = encodeURIComponent(`${vacancy.title} application`);
+  return `
+    <form class="vacancy-apply form-shell" action="mailto:${escapeAttribute(email)}?subject=${subject}" method="post" enctype="text/plain">
+      <h3>${escapeHtml(apply.heading || "Apply for this position")}</h3>
+      <input type="hidden" name="position" value="${escapeAttribute(vacancy.title)}">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="phone" placeholder="Phone" required>
+      <textarea name="message" placeholder="Cover Letter" required></textarea>
+      ${apply.instructions ? `<p class="notice">${escapeHtml(apply.instructions)}</p>` : ""}
+      <button class="button" type="submit">Email application</button>
+      ${apply.liveUrl ? `<a class="button secondary" href="${escapeAttribute(apply.liveUrl)}" target="_blank" rel="noopener">Apply on live site</a>` : ""}
+    </form>`;
+}
+
+function vacancyPreviewMarkup(vacancy) {
+  const meta = vacancyMeta(vacancy);
+  return `
+    <article class="vacancy-detail-card">
+      <div class="vacancy-detail-head">
+        <div>
+          <span class="vacancy-company">${escapeHtml(vacancy.company || "PC Gen")}</span>
+          <h2>${escapeHtml(vacancy.title)}</h2>
+          <p>${meta.map(escapeHtml).join(" <b>·</b> ")}</p>
+        </div>
+      </div>
+      <p class="vacancy-intro">${escapeHtml(vacancy.intro || "")}</p>
+      ${vacancyDetailSection("Responsibilities", vacancy.responsibilities)}
+      ${vacancyDetailSection("Job Requirements", vacancy.requirements)}
+      ${vacancyDetailSection("Assets to the role", vacancy.assets)}
+      ${vacancyApplyMarkup(vacancy)}
+    </article>`;
+}
+
+function renderVacancyBoard(board, vacancies, selectedId = "") {
+  const list = board.querySelector("[data-vacancy-list]");
+  const preview = board.querySelector("[data-vacancy-preview]");
+  const filter = board.querySelector("[data-vacancy-filter]");
+  const search = board.querySelector("[data-vacancy-search]");
+  const sort = board.querySelector("[data-vacancy-sort]");
+  const query = String(search?.value || "").trim().toLowerCase();
+  const category = filter?.value || "all";
+  const sorted = [...vacancies].sort((a, b) => {
+    if (sort?.value === "title") return String(a.title).localeCompare(String(b.title));
+    if (sort?.value === "applyBy") return String(a.applyBy || "9999-12-31").localeCompare(String(b.applyBy || "9999-12-31"));
+    return String(b.createdAt || "").localeCompare(String(a.createdAt || ""));
+  });
+  const visible = sorted.filter((vacancy) => {
+    const haystack = [vacancy.title, vacancy.company, vacancy.location, vacancy.category, vacancy.intro].join(" ").toLowerCase();
+    return (!query || haystack.includes(query)) && (category === "all" || vacancy.category === category);
+  });
+  const selected = vacancies.find((vacancy) => vacancy.id === selectedId);
+
+  if (list) {
+    list.innerHTML = visible.length
+      ? visible.map((vacancy) => vacancyListItem(vacancy, selectedId)).join("")
+      : `<p class="notice">No vacancies match your search.</p>`;
+    list.querySelectorAll("[data-vacancy-id]").forEach((button) => {
+      button.addEventListener("click", () => renderVacancyBoard(board, vacancies, button.dataset.vacancyId));
+    });
+  }
+
+  if (preview) {
+    preview.innerHTML = selected
+      ? vacancyPreviewMarkup(selected)
+      : `<div class="vacancy-empty-preview"><span aria-hidden="true">←</span> Click a job to preview</div>`;
+  }
+}
+
+async function bindVacancyBoard() {
+  const board = document.querySelector("[data-vacancy-board]");
+  if (!board) return;
+  const list = board.querySelector("[data-vacancy-list]");
+  const filter = board.querySelector("[data-vacancy-filter]");
+  try {
+    const data = await apiRequest("/api/vacancies");
+    const vacancies = data.vacancies || [];
+    const categories = [...new Set(vacancies.map((vacancy) => vacancy.category).filter(Boolean))].sort();
+    if (filter) {
+      filter.innerHTML = `<option value="all">Filter</option>${categories.map((category) => `<option value="${escapeAttribute(category)}">${escapeHtml(category)}</option>`).join("")}`;
+    }
+    renderVacancyBoard(board, vacancies);
+    board.querySelector("[data-vacancy-search]")?.addEventListener("input", () => renderVacancyBoard(board, vacancies, board.querySelector(".vacancy-list-item.is-selected")?.dataset.vacancyId || ""));
+    board.querySelector("[data-vacancy-filter]")?.addEventListener("change", () => renderVacancyBoard(board, vacancies, board.querySelector(".vacancy-list-item.is-selected")?.dataset.vacancyId || ""));
+    board.querySelector("[data-vacancy-sort]")?.addEventListener("change", () => renderVacancyBoard(board, vacancies, board.querySelector(".vacancy-list-item.is-selected")?.dataset.vacancyId || ""));
+  } catch (error) {
+    if (list) list.innerHTML = `<p class="notice">${escapeHtml(error.message || "Vacancies could not be loaded.")}</p>`;
+  }
+}
+
+async function bindVacancyJobPage() {
+  const shell = document.querySelector("[data-job-slug]");
+  if (!shell) return;
+  try {
+    const data = await apiRequest(`/api/vacancies/${shell.dataset.jobSlug}`);
+    shell.innerHTML = vacancyPreviewMarkup(data.vacancy);
+  } catch (error) {
+    shell.innerHTML = `
+      <h1>Vacancy not found<span class="title-accent-dot" aria-hidden="true"></span></h1>
+      <p class="lead">${escapeHtml(error.message || "This vacancy is no longer available.")}</p>
+      <a class="button" href="${siteUrl("/careers/")}">View vacancies</a>`;
+  }
+}
+
 function licenceRows(licences = []) {
   if (!licences.length) return `<p class="notice">No licences have been added yet.</p>`;
   return licences.map((licence) => `
@@ -578,7 +695,7 @@ function clientLoginPage() {
         <div class="portal-auth-grid">
           <div>
             <p class="eyebrow">Client Login</p>
-            <h1>Access your client area</h1>
+        <h1>Access your client area<span class="title-accent-dot" aria-hidden="true"></span></h1>
             <p class="lead">Clients can review company details, licence expiry dates, pending bills, and request new licence purchases.</p>
           </div>
           <div class="portal-auth-cards">
@@ -605,7 +722,7 @@ function clientPortalPage() {
     <section class="section dark portal-section">
       <div class="container portal-shell" data-client-portal>
         <p class="eyebrow">Client Portal</p>
-        <h1>Loading client details</h1>
+        <h1>Loading client details<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Please wait while we load your account.</p>
       </div>
     </section>
@@ -617,7 +734,7 @@ function clientAdminPage() {
     <section class="section dark portal-section">
       <div class="container portal-shell" data-client-admin>
         <p class="eyebrow">Web Admin</p>
-        <h1>Client database</h1>
+        <h1>Client database<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Login to add, edit, or remove client records.</p>
         <form class="form-shell portal-form admin-login-inline" data-admin-login>
           <input type="password" name="password" placeholder="Admin password" autocomplete="current-password" required>
@@ -714,58 +831,60 @@ const pages = {
   `,
 
   team: () => `
-    ${hero({
-      title: "Meet the Team",
-      text: "Meet our team of professionals serving businesses across Malta.",
-      media: null,
-      showActions: false
-    })}
-    <section class="team-section">
-      <div class="container">
-        <div class="team-panel">
-          <p class="eyebrow">Team Section</p>
-          <h2>Meet the Team</h2>
-          <p class="team-intro">Meet our team of professionals serving businesses across Malta.</p>
-          <div class="team-actions">
-            <a class="button" href="/about/">About us</a>
-            <a class="button secondary" href="/contact/">Contact</a>
+    <section class="hero team-hero">
+      <div class="container team-hero-stage">
+        <div class="team-hero-top">
+          <div class="team-hero-copy">
+            <h1><span>MEET THE</span><span>TEAM<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+            <div class="team-hero-text">
+            <p>Meet the PC Gen professionals supporting businesses across Malta with practical technical expertise, managed IT services, cybersecurity, infrastructure, and responsive day-to-day support.</p>
+            <p>Our team combines hands-on engineering experience with a service-first approach, helping clients make confident technology decisions and keep their operations running smoothly.</p>
+            </div>
           </div>
-          <div class="team-card-grid">
-            ${team.map(([role, name]) => `
-              <article class="team-card">
-                <img src="${assets.teamThumb}" alt="${name}" loading="lazy">
-                <div class="team-card-body">
-                  <p>${role}</p>
-                  <h3>${name}</h3>
-                  <span class="team-card-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                </div>
-              </article>`).join("")}
-          </div>
+          <a class="team-about-tile" href="/about/" aria-label="About us">
+            <span aria-hidden="true">+</span>
+            <strong>About us</strong>
+          </a>
         </div>
+        <div class="team-card-grid team-showcase-grid">
+          ${team.map((member) => `
+            <article class="team-card team-showcase-card">
+              <div class="team-photo-wrap${member.image ? "" : " is-placeholder"}">
+                <span class="team-social" aria-label="LinkedIn profile">in</span>
+                ${member.image ? `<img src="${member.image}" alt="${member.name}" loading="lazy">` : ""}
+              </div>
+              <div class="team-member-meta">
+                <h3>${member.name}</h3>
+                <p>${member.role}</p>
+              </div>
+            </article>`).join("")}
+            </div>
       </div>
     </section>
     ${newsletter()}
   `,
 
   services: () => `
-    ${hero({
-      title: "Our wide range of services",
-      text: "From desktop support to bespoke projects, PC Gen is every business's one-stop-shop for IT solutions.",
-      media: null,
-      primary: ["Get in touch", "/contact/"],
-      secondary: ["View clients", "/clients/"],
-      showActions: false
-    })}
-    <section class="section">
-      <div class="container">
-        ${sectionHead("All services", "Built around the needs of business IT", "Every service from the current website is preserved, with expandable details for easier browsing on desktop and mobile.")}
-        ${serviceCards()}
+    <section class="hero services-hero">
+      <div class="container hero-grid services-hero-grid">
+        <div class="hero-content services-hero-copy">
+          <h1><span>OUR</span><span>SERVICES<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+          <p class="lead">From desktop support to bespoke projects, PC Gen is every business's one-stop-shop for IT solutions.</p>
+        </div>
+        <div class="services-hero-services">
+          ${serviceCards()}
+        </div>
       </div>
     </section>
-    <section class="section dark">
-      <div class="container split">
-        <div><p class="eyebrow">Interested?</p><h2>Any of our services pique your interest?</h2></div>
-        <div><p class="lead">Our team is available to offer support whenever you need it.</p></div>
+    <section class="section dark services-cta-section">
+      <div class="container split services-cta-grid">
+        <div class="services-cta-copy">
+          <h2>Any of our services<br>pique your interest<span class="services-cta-question">?</span></h2>
+          <p class="lead">Our team is available to offer support whenever you need it.</p>
+        </div>
+        <div class="services-cta-action">
+          <a class="home-action-tile secondary services-cta-button" href="/contact/"><span aria-hidden="true">+</span><strong>Get in<br>Touch</strong></a>
+        </div>
       </div>
     </section>
     ${newsletter()}
@@ -832,19 +951,37 @@ const pages = {
   `,
 
   careers: () => `
-    ${hero({
-      title: "We're looking for IT experts",
-      text: "Our company is growing and we are always looking for talented IT experts to join our dynamic team.",
-      media: null,
-      primary: ["View openings", "#openings"],
-      secondary: ["Contact us", "/contact/"],
-      showActions: false
-    })}
-    <section class="section" id="openings">
-      <div class="container">
-        ${sectionHead("Support", "Start doing work that matters", "Open positions in our support team.")}
-        <div class="grid">
-          ${Object.values(jobs).map((job) => `<article class="job-card"><div><h3>${job.title}</h3><p>Job Type: Full Time</p></div><a class="button" href="${job.url}">More Details</a></article>`).join("")}
+    <section class="hero services-hero careers-services-hero">
+      <div class="container hero-grid services-hero-grid careers-services-hero-grid">
+        <div class="hero-content services-hero-copy careers-services-hero-copy">
+          <h1>We're looking for IT experts<span class="title-accent-dot" aria-hidden="true"></span></h1>
+          <p class="lead">Our company is growing and we are always looking for talented IT experts to join our dynamic team.</p>
+        </div>
+      </div>
+      <div class="container careers-openings" id="openings">
+        <div class="careers-vacancy-board" data-vacancy-board>
+          <div class="vacancy-tools" aria-label="Vacancy controls">
+            <label class="vacancy-search">
+              <span>Search vacancies</span>
+              <input type="search" placeholder="Search jobs" data-vacancy-search>
+            </label>
+            <select data-vacancy-filter aria-label="Filter vacancies">
+              <option value="all">Filter</option>
+            </select>
+            <select data-vacancy-sort aria-label="Sort vacancies">
+              <option value="newest">Sort</option>
+              <option value="title">Title</option>
+              <option value="applyBy">Apply date</option>
+            </select>
+          </div>
+          <div class="vacancy-layout">
+            <div class="vacancy-list" data-vacancy-list>
+              <p class="notice">Loading vacancies...</p>
+            </div>
+            <aside class="vacancy-preview" data-vacancy-preview>
+              <div class="vacancy-empty-preview"><span aria-hidden="true">←</span> Click a job to preview</div>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -897,31 +1034,10 @@ const pages = {
 };
 
 function jobPage(slug) {
-  const job = jobs[slug];
   return `
     <section class="section dark">
-      <div class="container">
-        ${sectionHead("Careers", job.title, job.intro)}
-        <div class="split">
-          <div class="card">
-            <h3>Job Requirements</h3>
-            <ul>${jobRequirements.map((item) => `<li>${item}</li>`).join("")}</ul>
-            <h3 style="margin-top:28px">Assets to the role</h3>
-            <ul>${jobAssets.map((item) => `<li>${item}</li>`).join("")}</ul>
-            <p class="notice">Job Type: Full Time</p>
-          </div>
-          <form class="form-shell" action="mailto:${contact.email}" method="post" enctype="text/plain">
-            <h2>Apply for this position</h2>
-            <input type="hidden" name="position" value="${job.title}">
-            <input type="text" name="awsm_applicant_name" placeholder="Full Name" required>
-            <input type="email" name="awsm_applicant_email" placeholder="Email" required>
-            <input type="tel" name="awsm_applicant_phone" placeholder="Phone" required>
-            <textarea name="awsm_applicant_letter" placeholder="Cover Letter" required></textarea>
-            <p class="notice">CV upload requires the live WordPress application form. The original application link is preserved below.</p>
-            <button class="button" type="submit">Email application</button>
-            <a class="button secondary" href="${job.live}" target="_blank" rel="noopener">Apply on live site</a>
-          </form>
-        </div>
+      <div class="container vacancy-job-page" data-job-slug="${escapeHtml(slug)}">
+        <p class="notice">Loading vacancy details...</p>
       </div>
     </section>
     ${newsletter()}
@@ -985,7 +1101,7 @@ function renderClientPortal(client) {
     <div class="portal-topline">
       <div>
         <p class="eyebrow">Client Portal</p>
-        <h1>${escapeHtml(client.companyName)}</h1>
+        <h1>${escapeHtml(client.companyName)}<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Welcome ${escapeHtml(client.contactName || "to your PC Gen client area")}.</p>
       </div>
       <button class="button secondary" type="button" data-portal-logout>Logout</button>
@@ -1028,7 +1144,7 @@ async function bindClientPortal() {
   } catch {
     portal.innerHTML = `
       <p class="eyebrow">Client Portal</p>
-      <h1>Login required</h1>
+      <h1>Login required<span class="title-accent-dot" aria-hidden="true"></span></h1>
       <p class="lead">Please login to view your client details, licence expiry dates, and pending bills.</p>
       <a class="button" href="/client-login/">Client login</a>`;
   }
@@ -1072,20 +1188,75 @@ function adminForm(client = {}) {
     </form>`;
 }
 
+function serialiseListLines(items = []) {
+  return Array.isArray(items) ? items.join("\n") : "";
+}
+
+function renderAdminVacancyList(vacancies) {
+  return vacancies.map((vacancy) => `
+    <article class="admin-client" data-vacancy-id="${escapeAttribute(vacancy.id)}">
+      <div>
+        <h3>${escapeHtml(vacancy.title)}</h3>
+        <p>${escapeHtml(vacancy.company || "PC Gen")} &middot; ${escapeHtml(vacancy.employmentType || "Full-Time")} &middot; ${escapeHtml(vacancy.location || "Malta")}</p>
+        <span>${escapeHtml(vacancy.status || "published")} &middot; ${escapeHtml(vacancy.category || "Support")}</span>
+      </div>
+      <div class="admin-actions">
+        <button class="button secondary" type="button" data-edit-vacancy="${escapeAttribute(vacancy.id)}">Edit</button>
+        <button class="button secondary" type="button" data-delete-vacancy="${escapeAttribute(vacancy.id)}">Remove</button>
+      </div>
+    </article>`).join("");
+}
+
+function adminVacancyForm(vacancy = {}) {
+  const apply = vacancy.apply || {};
+  return `
+    <form class="form-shell portal-form admin-vacancy-form" data-admin-vacancy-form>
+      <input type="hidden" name="id" value="${escapeAttribute(vacancy.id || "")}">
+      <div class="form-grid-two">
+        <input type="text" name="title" placeholder="Vacancy title" value="${escapeAttribute(vacancy.title || "")}" required>
+        <input type="text" name="status" placeholder="Status: published or draft" value="${escapeAttribute(vacancy.status || "published")}">
+        <input type="text" name="company" placeholder="Company" value="${escapeAttribute(vacancy.company || "PC Gen")}">
+        <input type="text" name="category" placeholder="Category" value="${escapeAttribute(vacancy.category || "Support")}">
+        <input type="text" name="employmentType" placeholder="Employment type" value="${escapeAttribute(vacancy.employmentType || "Full-Time")}">
+        <input type="text" name="location" placeholder="Location" value="${escapeAttribute(vacancy.location || "Malta")}">
+        <input type="date" name="applyBy" value="${escapeAttribute(vacancy.applyBy || "")}">
+        <input type="text" name="applyByLabel" placeholder="Apply label" value="${escapeAttribute(vacancy.applyByLabel || "Open application")}">
+        <input type="text" name="logo" placeholder="Logo path" value="${escapeAttribute(vacancy.logo || "/assets/brand/favicon.png")}">
+        <input type="email" name="applyEmail" placeholder="Application email" value="${escapeAttribute(apply.email || contact.email)}">
+      </div>
+      <textarea name="intro" placeholder="Intro">${escapeHtml(vacancy.intro || "")}</textarea>
+      <textarea name="summary" placeholder="Summary">${escapeHtml(vacancy.summary || "")}</textarea>
+      <textarea name="responsibilities" placeholder="Responsibilities: one per line">${escapeHtml(serialiseListLines(vacancy.responsibilities))}</textarea>
+      <textarea name="requirements" placeholder="Requirements: one per line">${escapeHtml(serialiseListLines(vacancy.requirements))}</textarea>
+      <textarea name="assets" placeholder="Assets: one per line">${escapeHtml(serialiseListLines(vacancy.assets))}</textarea>
+      <textarea name="applyInstructions" placeholder="Application instructions">${escapeHtml(apply.instructions || "")}</textarea>
+      <input type="url" name="applyLiveUrl" placeholder="Live application URL" value="${escapeAttribute(apply.liveUrl || "")}">
+      <div class="admin-form-actions">
+        <button class="button" type="submit">${vacancy.id ? "Update vacancy" : "Add vacancy"}</button>
+        <button class="button secondary" type="button" data-clear-vacancy-form>Clear</button>
+      </div>
+      <p class="notice" data-vacancy-save-message></p>
+    </form>`;
+}
+
 async function bindClientAdmin() {
   const shell = document.querySelector("[data-client-admin]");
   if (!shell) return;
 
-  async function loadAdmin(selectedId = "") {
+  async function loadAdmin(selectedClientId = "", selectedVacancyId = "") {
     try {
-      const data = await apiRequest("/api/admin/clients");
-      const selected = data.clients.find((client) => client.id === selectedId) || {};
+      const [clientData, vacancyData] = await Promise.all([
+        apiRequest("/api/admin/clients"),
+        apiRequest("/api/admin/vacancies")
+      ]);
+      const selected = clientData.clients.find((client) => client.id === selectedClientId) || {};
+      const selectedVacancy = vacancyData.vacancies.find((vacancy) => vacancy.id === selectedVacancyId) || {};
       shell.innerHTML = `
         <div class="portal-topline">
           <div>
             <p class="eyebrow">Web Admin</p>
-            <h1>Client database</h1>
-            <p class="lead">Add, edit, or remove client records, licences, and pending bills.</p>
+            <h1>Website database<span class="title-accent-dot" aria-hidden="true"></span></h1>
+            <p class="lead">Add, edit, or remove client records, vacancies, and vacancy details.</p>
           </div>
           <button class="button secondary" type="button" data-portal-logout>Logout</button>
         </div>
@@ -1093,7 +1264,12 @@ async function bindClientAdmin() {
           <section class="portal-card">${adminForm(selected)}</section>
           <section class="portal-card">
             <h2>Clients</h2>
-            <div class="admin-client-list">${renderAdminClientList(data.clients)}</div>
+            <div class="admin-client-list">${renderAdminClientList(clientData.clients)}</div>
+          </section>
+          <section class="portal-card">${adminVacancyForm(selectedVacancy)}</section>
+          <section class="portal-card">
+            <h2>Vacancies</h2>
+            <div class="admin-client-list">${renderAdminVacancyList(vacancyData.vacancies)}</div>
           </section>
         </div>`;
       bindClientAdminActions(loadAdmin);
@@ -1101,7 +1277,7 @@ async function bindClientAdmin() {
     } catch {
       shell.innerHTML = `
         <p class="eyebrow">Web Admin</p>
-        <h1>Client database</h1>
+        <h1>Client database<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Login to add, edit, or remove client records.</p>
         <form class="form-shell portal-form admin-login-inline" data-admin-login>
           <input type="password" name="password" placeholder="Admin password" autocomplete="current-password" required>
@@ -1153,6 +1329,59 @@ function bindClientAdminActions(loadAdmin) {
     button.addEventListener("click", async () => {
       if (!confirm("Remove this client record?")) return;
       await apiRequest(`/api/admin/clients/${button.dataset.deleteClient}`, { method: "DELETE" });
+      loadAdmin();
+    });
+  });
+
+  const vacancyForm = document.querySelector("[data-admin-vacancy-form]");
+  vacancyForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const message = vacancyForm.querySelector("[data-vacancy-save-message]");
+    const formData = new FormData(vacancyForm);
+    const id = formData.get("id");
+    const payload = {
+      id,
+      title: formData.get("title"),
+      status: formData.get("status"),
+      company: formData.get("company"),
+      category: formData.get("category"),
+      employmentType: formData.get("employmentType"),
+      location: formData.get("location"),
+      applyBy: formData.get("applyBy"),
+      applyByLabel: formData.get("applyByLabel"),
+      logo: formData.get("logo"),
+      intro: formData.get("intro"),
+      summary: formData.get("summary"),
+      responsibilities: String(formData.get("responsibilities") || "").split(/\r?\n/).map((item) => item.trim()).filter(Boolean),
+      requirements: String(formData.get("requirements") || "").split(/\r?\n/).map((item) => item.trim()).filter(Boolean),
+      assets: String(formData.get("assets") || "").split(/\r?\n/).map((item) => item.trim()).filter(Boolean),
+      apply: {
+        heading: "Apply for this position",
+        email: formData.get("applyEmail"),
+        liveUrl: formData.get("applyLiveUrl"),
+        instructions: formData.get("applyInstructions")
+      }
+    };
+    message.textContent = "Saving...";
+    try {
+      await apiRequest(id ? `/api/admin/vacancies/${id}` : "/api/admin/vacancies", {
+        method: id ? "PUT" : "POST",
+        body: JSON.stringify(payload)
+      });
+      loadAdmin("", id || "");
+    } catch (error) {
+      message.textContent = error.message;
+    }
+  });
+
+  document.querySelector("[data-clear-vacancy-form]")?.addEventListener("click", () => loadAdmin());
+  document.querySelectorAll("[data-edit-vacancy]").forEach((button) => {
+    button.addEventListener("click", () => loadAdmin("", button.dataset.editVacancy));
+  });
+  document.querySelectorAll("[data-delete-vacancy]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      if (!confirm("Remove this vacancy record?")) return;
+      await apiRequest(`/api/admin/vacancies/${button.dataset.deleteVacancy}`, { method: "DELETE" });
       loadAdmin();
     });
   });
@@ -1317,6 +1546,8 @@ function bindUI() {
   bindLoginForms();
   bindClientPortal();
   bindClientAdmin();
+  bindVacancyBoard();
+  bindVacancyJobPage();
   bindPortalLogout();
   bindHeaderBgParallax();
   bindNewsletterParallax();
