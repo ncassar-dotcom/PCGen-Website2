@@ -1,0 +1,86 @@
+{
+  "vacancies": [
+    {
+      "id": "technical-support-engineer",
+      "status": "published",
+      "title": "Technical Support Engineer",
+      "company": "PC Gen",
+      "logo": "/assets/brand/favicon.png",
+      "employmentType": "Full-Time",
+      "applyBy": "",
+      "applyByLabel": "Open application",
+      "location": "Malta",
+      "category": "Support",
+      "intro": "We are looking to hire an experienced, professional, motivated and efficient Technical Support Engineer to join our support team.",
+      "summary": "A hands-on support role for an experienced IT professional who can work across Microsoft server platforms, networking, virtualisation, cloud services, and day-to-day client support.",
+      "responsibilities": [
+        "Provide responsive technical support to business clients.",
+        "Install, configure, upgrade, and maintain Microsoft server platforms.",
+        "Support routers, firewalls, switches, wireless infrastructure, IP telephony, and related systems.",
+        "Document systems, network issues, and fixes for future reference."
+      ],
+      "requirements": [
+        "Hold a degree in computer science or equivalent.",
+        "Have a minimum of 2 years' experience in a similar post.",
+        "Provide technical support on Microsoft server platforms including installation, configuration, upgrades and maintenance.",
+        "Be experienced with routers, firewalls, switches, server technologies, wireless infrastructure, IP telephony, installation and configuration.",
+        "VMware and Hyper-V installation, configuration and monitoring.",
+        "Office 365 and SharePoint configuration and monitoring.",
+        "Be familiar with network design and infrastructure and document systems or network problems for future reference.",
+        "Work effectively under pressure, multitask and meet deadlines.",
+        "Be highly motivated, meticulous and possess excellent organisational and communication skills."
+      ],
+      "assets": [
+        "Industry certification from Microsoft, HP, Cisco, Mikrotik, or other IT industry leaders.",
+        "Certifications including MCP, MCSA, MCSE, ITIL, CCNA and 3CX.",
+        "A clean driving licence and own transport."
+      ],
+      "apply": {
+        "heading": "Apply for this position",
+        "email": "info@pcgen.mt",
+        "liveUrl": "https://pcgen.mt/jobs/technical-support-engineer/",
+        "instructions": "CV upload requires the live WordPress application form. The original application link is preserved below."
+      },
+      "createdAt": "2026-09-02T00:00:00.000Z"
+    },
+    {
+      "id": "junior-it-support-officer",
+      "status": "published",
+      "title": "Junior IT Support Officer",
+      "company": "PC Gen",
+      "logo": "/assets/brand/favicon.png",
+      "employmentType": "Full-Time",
+      "applyBy": "",
+      "applyByLabel": "Open application",
+      "location": "Malta",
+      "category": "Support",
+      "intro": "We are looking for a young and cheerful Junior IT Support Officer to join our support team.",
+      "summary": "An entry-level support role for someone eager to learn, support business users, and grow practical technical skills with the PC Gen team.",
+      "responsibilities": [
+        "Assist clients with day-to-day technical support requests.",
+        "Help with workstation setup, software support, and basic troubleshooting.",
+        "Escalate technical issues clearly to senior team members.",
+        "Keep support notes and client updates accurate."
+      ],
+      "requirements": [
+        "Have a strong interest in IT support and business technology.",
+        "Be willing to learn across Microsoft, networking, and cloud environments.",
+        "Communicate clearly with clients and colleagues.",
+        "Work effectively under pressure, multitask and meet deadlines.",
+        "Be highly motivated, meticulous and organised."
+      ],
+      "assets": [
+        "IT qualifications or certifications.",
+        "Previous helpdesk, desktop support, or customer service experience.",
+        "A clean driving licence and own transport."
+      ],
+      "apply": {
+        "heading": "Apply for this position",
+        "email": "info@pcgen.mt",
+        "liveUrl": "https://pcgen.mt/jobs/junior-it-support-officer/",
+        "instructions": "CV upload requires the live WordPress application form. The original application link is preserved below."
+      },
+      "createdAt": "2026-09-02T00:00:00.000Z"
+    }
+  ]
+}

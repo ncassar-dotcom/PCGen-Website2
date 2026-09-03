@@ -42,10 +42,9 @@ const assets = {
   heroVideo: "https://pcgen.mt/wp-content/uploads/2024/10/StoryBlock-jHQ3cBoeDl.mp4",
   aboutVideo: "https://pcgen.mt/wp-content/uploads/2024/10/StoryBlock-SO7rcnPFTE.mp4",
   clientsVideo: "https://pcgen.mt/wp-content/uploads/2024/10/StoryBlock-6JfWql180h.mp4",
-  growthVideo: "/assets/principles.webm",
+  growthVideo: "/assets/hero-flow-wiggle-loop.webm",
   founder: "https://pcgen.mt/wp-content/uploads/2024/10/Ken-Cauchi-BIO-V1.2.png",
   mission: "https://pcgen.mt/wp-content/uploads/2022/10/MissionStatement-Image.png",
-  teamThumb: "/assets/brand/team-nev-thumbnail.png",
   team: "https://pcgen.mt/wp-content/uploads/elementor/thumbs/meet-the-Team--scaled-rampnlpjz033ne104htxkj3ebt5mhuabw47e75f3eo.jpg"
 };
 
@@ -76,12 +75,12 @@ const clientLogos = [
 ];
 
 const partnerLogos = [
-  ["Microsoft Silver Partner", "https://pcgen.mt/wp-content/uploads/2024/09/27-274949_microsoft-silver-partner-logo-hd-png-download.png"],
-  ["3CX Advanced Silver", "https://pcgen.mt/wp-content/uploads/2024/10/3CX-Advanced-Silver.png"],
-  ["Technology Partner", "https://pcgen.mt/wp-content/uploads/2024/09/Screenshot-2024-09-24-164638.png"],
-  ["CodeTwo Reseller", "https://pcgen.mt/wp-content/uploads/2024/09/codetwo-reseller-400x56-1-300x42-1.png"],
-  ["Dell EMC Gold Partner", "https://pcgen.mt/wp-content/uploads/2024/09/DellEMC-Partner-Gold-01.png"],
-  ["Bitdefender", "https://pcgen.mt/wp-content/uploads/2024/09/bitdefender.png"]
+  ["Microsoft Silver Partner", "/assets/ms.png"],
+  ["3CX", "/assets/3cx-logo.png"],
+  ["Acronis", "/assets/Acronis-logo-white.svg"],
+  ["CodeTwo", "/assets/codetwo-logo.webp"],
+  ["Dell Technologies", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dell_Technologies_logo.svg"],
+  ["Bitdefender", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Bitdefender_logo.svg"]
 ];
 
 const services = [
@@ -111,51 +110,18 @@ const testimonials = [
 ];
 
 const team = [
-  ["Founder & CEO", "Kenneth Cauchi"],
-  ["IT Specialist & Team Leader", "Andre' Bartolo"],
-  ["Full-Stack Support Engineer", "Gerald Lluca"],
-  ["IT Support Engineer", "Rajul Raj"],
-  ["IT Support Engineer", "Joe Smart"],
-  ["IT Support Officer", "Sphamandla Maduna"],
-  ["Accounts Executive", "Bridget Muscat"],
-  ["IT Support Engineer", "Team Member"],
-  ["IT Support Engineer", "Team Member"],
-  ["Systems Administrator", "Team Member"],
-  ["Technical Support Officer", "Team Member"],
-  ["Client Support Coordinator", "Team Member"]
-];
-
-const jobs = {
-  "technical-support-engineer": {
-    title: "Technical Support Engineer",
-    intro: "We are looking to hire an experienced, professional, motivated and efficient Technical Support Engineer to join our support team.",
-    url: "/jobs/technical-support-engineer/",
-    live: "https://pcgen.mt/jobs/technical-support-engineer/"
-  },
-  "junior-it-support-officer": {
-    title: "Junior IT Support Officer",
-    intro: "We are looking for a young and cheerful Junior IT Support Officer to join our support team.",
-    url: "/jobs/junior-it-support-officer/",
-    live: "https://pcgen.mt/jobs/junior-it-support-officer/"
-  }
-};
-
-const jobRequirements = [
-  "Hold a degree in computer science or equivalent.",
-  "Have a minimum of 2 years' experience in a similar post.",
-  "Provide technical support on Microsoft server platforms including installation, configuration, upgrades and maintenance.",
-  "Be experienced with routers, firewalls, switches, server technologies, wireless infrastructure, IP telephony, installation and configuration.",
-  "VMware and Hyper-V installation, configuration and monitoring.",
-  "Office 365 and SharePoint configuration and monitoring.",
-  "Be familiar with network design and infrastructure and document systems or network problems for future reference.",
-  "Work effectively under pressure, multitask and meet deadlines.",
-  "Be highly motivated, meticulous and possess excellent organisational and communication skills."
-];
-
-const jobAssets = [
-  "Industry certification from Microsoft, HP, Cisco, Mikrotik, or other IT industry leaders.",
-  "Certifications including MCP, MCSA, MCSE, ITIL, CCNA and 3CX.",
-  "A clean driving licence and own transport."
+  { name: "Kenneth Cauchi", role: "Owner", image: "/assets/team/kenneth-cauchi.png" },
+  { name: "Andre Bartolo", role: "Team Lead", image: "/assets/team/andre-bartolo.png" },
+  { name: "Gerald Lluca", role: "Full-Stack Support Engineer", image: "/assets/team/gerald-lluca.png" },
+  { name: "Bridget Muscat", role: "Accounts Executive", image: "/assets/team/bridget-muscat.png" },
+  { name: "Joe Smart", role: "IT Support Engineer", image: "/assets/team/joe-smart.png" },
+  { name: "Rajul Raj", role: "IT Support Engineer", image: "/assets/team/rajul-raj.png" },
+  { name: "Sphamandla Maduna", role: "IT Support Officer" },
+  { name: "Nipuna Athauda", role: "IT Support Engineer", image: "/assets/team/nipuna-athauda.png" },
+  { name: "Asma Troudi", role: "Client Support Coordinator", image: "/assets/team/asma-troudi.jpg" },
+  { name: "Neville Cassar", role: "Technical Support Officer", image: "/assets/team/neville-cassar.png" },
+  { name: "Kiran Kumar Dandu", role: "IT Support Engineer" },
+  { name: "Rishwik", role: "IT Support Engineer" }
 ];
 
 const staticImageAssets = [
@@ -165,12 +131,16 @@ const staticImageAssets = [
   "/assets/backgrounds/HeaderBG-2.png",
   "/assets/backgrounds/HeaderBG.png",
   "/assets/backgrounds/hero-flow.jpg",
+  "/assets/3cx-logo.png",
+  "/assets/Acronis-logo-white.svg",
   "/assets/brand/favicon.png",
   "/assets/brand/hero-3d-icon.png",
   "/assets/brand/hero-pcg-icon-3d-4.png",
   "/assets/brand/logo.png",
   "/assets/brand/PCG-Icon-3D.png",
-  "/assets/brand/team-nev-thumbnail.png"
+  "/assets/brand/team-nev-thumbnail.png",
+  "/assets/codetwo-logo.webp",
+  "/assets/ms.png"
 ];
 
 const sitePages = [
@@ -220,6 +190,7 @@ function preloadSiteImages() {
   const sources = [
     ...Object.values(assets),
     ...staticImageAssets,
+    ...team.map((member) => member.image),
     ...clientLogos.map(([, src]) => src),
     ...partnerLogos.map(([, src]) => src)
   ].filter(isImageSource);
@@ -252,21 +223,34 @@ function preloadWholeSite() {
 }
 
 function header() {
-  const active = currentPath;
-  const links = nav.map((item) => `<a class="${active.startsWith(item.href) ? "is-active" : ""}" href="${item.href}">${item.label}</a>`).join("");
+  const menuLinks = [
+    ["About", "/about/"],
+    ["The Team", "/meet-the-team/"],
+    ["Services", "/services/"],
+    ["Clients", "/clients/"],
+    ["Careers", "/careers/"],
+    ["Contact", "/contact/"]
+  ].map(([label, href]) => `<a class="" href="${href}">${label}</a>`).join("");
   return `
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/" aria-label="PC Gen home"><img src="${assets.logo}" alt="PC Gen"></a>
         <nav class="main-nav" id="main-nav">
-          <span class="nav-group">
-            <a class="${active.startsWith("/about/") || active.startsWith("/meet-the-team/") ? "is-active" : ""}" href="/about/">About</a>
-            <span class="sub-menu">
-              <a href="/about/"><strong>Company</strong><span>Purpose, history, and mission.</span></a>
-              <a href="/meet-the-team/"><strong>PCGEN Team</strong><span>The people supporting your business.</span></a>
-            </span>
-          </span>
-          ${links.replace('<a class="is-active" href="/about/">About</a>', "").replace('<a class="" href="/about/">About</a>', "")}
+          <div class="main-nav-top">
+            <a class="main-nav-support" href="/remote-support.html">Remote Support</a>
+          </div>
+          <div class="main-nav-links">
+            ${menuLinks}
+          </div>
+          <div class="main-nav-footer">
+            <div class="socials">
+              <a href="${contact.facebook}" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+              <a href="${contact.instagram}" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+              <a href="${contact.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+            </div>
+            <a href="" title="Call 0035621461111 via 3CX" tcxhref="0035621461111" target="_blank">${contact.phone}</a>
+            <a href="mailto:${contact.support}">${contact.support}</a>
+          </div>
         </nav>
         <div class="support-downloads" aria-label="Header actions">
           <a class="remote-header-link" href="/remote-support.html">Remote Support</a>
@@ -351,7 +335,7 @@ function hero({ eyebrow, title, text, primary = ["Our services", "/services/"], 
       <div class="container hero-grid">
         <div class="hero-content">
           ${eyebrow ? `<p class="eyebrow">${eyebrow}</p>` : ""}
-          <h1>${title}</h1>
+          <h1>${title}<span class="title-accent-dot" aria-hidden="true"></span></h1>
           <p class="lead">${text}</p>
           ${statsMarkup}
           ${actionsMarkup}
@@ -366,14 +350,10 @@ function homeHero() {
     <section class="hero home-hero">
       <div class="container home-hero-stage">
         <div class="home-hero-copy">
-          <h1><span>YOUR IT<span class="title-accent-dot" aria-hidden="true"></span></span><span>OUR PASSION</span></h1>
-          <div class="home-stats-line" aria-label="PC Gen highlights">
-            <span style="padding-right: 8px;">24/7 Business Support</span>
-            <span style="padding-left: 8px; padding-right: 8px;">16 Years of Experience</span>
-            <span style="padding-left: 8px;">200+ Clients</span>
-          </div>
-          <p class="lead">PC Gen delivers end-to-end IT services without the cost and complexity of maintaining an in-house team. From technical support and managed IT to cybersecurity, infrastructure, and bespoke technology projects, we provide the expertise your business needs through a single trusted partner.</p>
+          <h1><span>YOUR IT</span><span>OUR PASSION<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+          <p class="home-hero-kicker">Managed IT. Secure Infrastructure. Results.</p>
         </div>
+        ${logoGrid(partnerLogos, "logos home-hero-logos")}
         <div class="home-hero-actions" aria-label="Home actions">
           <a class="home-action-tile" href="/services/"><span aria-hidden="true">+</span><strong>Our<br>Services</strong></a>
           <a class="home-action-tile secondary" href="/contact/"><span aria-hidden="true">+</span><strong>Get in<br>Touch</strong></a>
@@ -382,8 +362,33 @@ function homeHero() {
     </section>`;
 }
 
+function homeProofSection() {
+  return `
+    <section class="section home-proof-section">
+      <div class="container home-proof-grid">
+        <div class="home-proof-copy">
+          <p>PC Gen delivers end-to-end IT services without the cost and complexity of maintaining an in-house team. From technical support and managed IT to cybersecurity, infrastructure, and bespoke technology projects, we provide the expertise your business needs through a single trusted partner.</p>
+        </div>
+        <div class="home-proof-metrics" aria-label="PC Gen highlights">
+          <article>
+            <strong>24/7</strong>
+            <span>Business support</span>
+          </article>
+          <article>
+            <strong>16+</strong>
+            <span>Years of experience</span>
+          </article>
+          <article>
+            <strong>200+</strong>
+            <span>Clients supported</span>
+          </article>
+        </div>
+      </div>
+    </section>`;
+}
+
 function sectionHead(label, title, text) {
-  return `<p class="eyebrow section-eyebrow">${label}</p><h2 class="section-title">${title}</h2>${text ? `<p class="section-copy">${text}</p>` : ""}`;
+  return `<h2 class="section-title">${title}</h2>${text ? `<p class="section-copy">${text}</p>` : ""}`;
 }
 
 function logoGrid(items, klass = "logos") {
@@ -411,9 +416,19 @@ function logoShowcase(items) {
 function serviceCards(limit) {
   return `<div class="grid ${limit ? "three" : "four"}">${services.slice(0, limit || services.length).map((service) => `
     <article class="service-card">
+      <span class="service-card-dot" aria-hidden="true"></span>
       <h3>${service[0]}</h3>
-      <details><summary>Read More</summary><p>${service[2]}</p></details>
+      <p>${service[2]}</p>
+      <span class="service-card-bar" aria-hidden="true"></span>
     </article>`).join("")}</div>`;
+}
+
+function servicePills(limit = 6) {
+  return `<div class="home-services-pills">${services.slice(0, limit).map((service) => `
+    <a class="home-service-pill" href="/services/">
+      <span class="home-service-ring" aria-hidden="true"></span>
+      <span>${service[0]}</span>
+    </a>`).join("")}</div>`;
 }
 
 function testimonialsMarkup(limit = testimonials.length) {
@@ -425,20 +440,7 @@ function testimonialsMarkup(limit = testimonials.length) {
 }
 
 function newsletter() {
-  return `
-    <section class="section dark newsletter-section">
-      <div class="container split">
-        <div>
-          <p class="eyebrow">Newsletter</p>
-          <h2>Sign up for our newsletter</h2>
-          <p class="lead">Be the first to know about releases, industry news, and insights.</p>
-        </div>
-        <form class="form-shell" action="mailto:${contact.email}" method="post" enctype="text/plain">
-          <input type="email" name="email" placeholder="Email" required>
-          <button class="button" type="submit">Subscribe</button>
-        </form>
-      </div>
-    </section>`;
+  return "";
 }
 
 function mapSection() {
@@ -481,6 +483,161 @@ function apiRequest(url, options = {}) {
     if (!response.ok) throw new Error(data.error || "Request failed.");
     return data;
   });
+}
+
+function escapeAttribute(value = "") {
+  return escapeHtml(value).replace(/`/g, "&#96;");
+}
+
+function formatVacancyDate(value) {
+  if (!value) return "";
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }).replace(/ /g, "-");
+}
+
+function vacancyMeta(vacancy) {
+  return [
+    vacancy.employmentType,
+    vacancy.applyBy ? `Apply by ${formatVacancyDate(vacancy.applyBy)}` : vacancy.applyByLabel,
+    vacancy.location
+  ].filter(Boolean);
+}
+
+function vacancyLogo(vacancy) {
+  if (vacancy.logo) {
+    return `<img src="${escapeAttribute(siteUrl(vacancy.logo))}" alt="" loading="lazy">`;
+  }
+  return `<span>${escapeHtml((vacancy.company || vacancy.title || "PC").slice(0, 2).toUpperCase())}</span>`;
+}
+
+function vacancyListItem(vacancy, selectedId) {
+  const meta = vacancyMeta(vacancy);
+  return `
+    <button class="vacancy-list-item${vacancy.id === selectedId ? " is-selected" : ""}" type="button" data-vacancy-id="${escapeAttribute(vacancy.id)}">
+      <span class="vacancy-logo">${vacancyLogo(vacancy)}</span>
+      <span class="vacancy-list-copy">
+        <span class="vacancy-company">${escapeHtml(vacancy.company || "PC Gen")}</span>
+        <strong>${escapeHtml(vacancy.title)}</strong>
+        <span class="vacancy-meta">${meta.map(escapeHtml).join(" <b>·</b> ")}</span>
+      </span>
+    </button>`;
+}
+
+function vacancyDetailSection(title, items = []) {
+  if (!Array.isArray(items) || !items.length) return "";
+  return `
+    <section>
+      <h3>${escapeHtml(title)}</h3>
+      <ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+    </section>`;
+}
+
+function vacancyApplyMarkup(vacancy) {
+  const apply = vacancy.apply || {};
+  const email = apply.email || contact.email;
+  const subject = encodeURIComponent(`${vacancy.title} application`);
+  return `
+    <form class="vacancy-apply form-shell" action="mailto:${escapeAttribute(email)}?subject=${subject}" method="post" enctype="text/plain">
+      <h3>${escapeHtml(apply.heading || "Apply for this position")}</h3>
+      <input type="hidden" name="position" value="${escapeAttribute(vacancy.title)}">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="phone" placeholder="Phone" required>
+      <textarea name="message" placeholder="Cover Letter" required></textarea>
+      ${apply.instructions ? `<p class="notice">${escapeHtml(apply.instructions)}</p>` : ""}
+      <button class="button" type="submit">Email application</button>
+      ${apply.liveUrl ? `<a class="button secondary" href="${escapeAttribute(apply.liveUrl)}" target="_blank" rel="noopener">Apply on live site</a>` : ""}
+    </form>`;
+}
+
+function vacancyPreviewMarkup(vacancy) {
+  const meta = vacancyMeta(vacancy);
+  return `
+    <article class="vacancy-detail-card">
+      <div class="vacancy-detail-head">
+        <div>
+          <span class="vacancy-company">${escapeHtml(vacancy.company || "PC Gen")}</span>
+          <h2>${escapeHtml(vacancy.title)}</h2>
+          <p>${meta.map(escapeHtml).join(" <b>·</b> ")}</p>
+        </div>
+      </div>
+      <p class="vacancy-intro">${escapeHtml(vacancy.intro || "")}</p>
+      ${vacancyDetailSection("Responsibilities", vacancy.responsibilities)}
+      ${vacancyDetailSection("Job Requirements", vacancy.requirements)}
+      ${vacancyDetailSection("Assets to the role", vacancy.assets)}
+      ${vacancyApplyMarkup(vacancy)}
+    </article>`;
+}
+
+function renderVacancyBoard(board, vacancies, selectedId = "") {
+  const list = board.querySelector("[data-vacancy-list]");
+  const preview = board.querySelector("[data-vacancy-preview]");
+  const filter = board.querySelector("[data-vacancy-filter]");
+  const search = board.querySelector("[data-vacancy-search]");
+  const sort = board.querySelector("[data-vacancy-sort]");
+  const query = String(search?.value || "").trim().toLowerCase();
+  const category = filter?.value || "all";
+  const sorted = [...vacancies].sort((a, b) => {
+    if (sort?.value === "title") return String(a.title).localeCompare(String(b.title));
+    if (sort?.value === "applyBy") return String(a.applyBy || "9999-12-31").localeCompare(String(b.applyBy || "9999-12-31"));
+    return String(b.createdAt || "").localeCompare(String(a.createdAt || ""));
+  });
+  const visible = sorted.filter((vacancy) => {
+    const haystack = [vacancy.title, vacancy.company, vacancy.location, vacancy.category, vacancy.intro].join(" ").toLowerCase();
+    return (!query || haystack.includes(query)) && (category === "all" || vacancy.category === category);
+  });
+  const selected = vacancies.find((vacancy) => vacancy.id === selectedId);
+
+  if (list) {
+    list.innerHTML = visible.length
+      ? visible.map((vacancy) => vacancyListItem(vacancy, selectedId)).join("")
+      : `<p class="notice">No vacancies match your search.</p>`;
+    list.querySelectorAll("[data-vacancy-id]").forEach((button) => {
+      button.addEventListener("click", () => renderVacancyBoard(board, vacancies, button.dataset.vacancyId));
+    });
+  }
+
+  if (preview) {
+    preview.innerHTML = selected
+      ? vacancyPreviewMarkup(selected)
+      : `<div class="vacancy-empty-preview"><span aria-hidden="true">←</span> Click a job to preview</div>`;
+  }
+}
+
+async function bindVacancyBoard() {
+  const board = document.querySelector("[data-vacancy-board]");
+  if (!board) return;
+  const list = board.querySelector("[data-vacancy-list]");
+  const filter = board.querySelector("[data-vacancy-filter]");
+  try {
+    const data = await apiRequest("/api/vacancies");
+    const vacancies = data.vacancies || [];
+    const categories = [...new Set(vacancies.map((vacancy) => vacancy.category).filter(Boolean))].sort();
+    if (filter) {
+      filter.innerHTML = `<option value="all">Filter</option>${categories.map((category) => `<option value="${escapeAttribute(category)}">${escapeHtml(category)}</option>`).join("")}`;
+    }
+    renderVacancyBoard(board, vacancies);
+    board.querySelector("[data-vacancy-search]")?.addEventListener("input", () => renderVacancyBoard(board, vacancies, board.querySelector(".vacancy-list-item.is-selected")?.dataset.vacancyId || ""));
+    board.querySelector("[data-vacancy-filter]")?.addEventListener("change", () => renderVacancyBoard(board, vacancies, board.querySelector(".vacancy-list-item.is-selected")?.dataset.vacancyId || ""));
+    board.querySelector("[data-vacancy-sort]")?.addEventListener("change", () => renderVacancyBoard(board, vacancies, board.querySelector(".vacancy-list-item.is-selected")?.dataset.vacancyId || ""));
+  } catch (error) {
+    if (list) list.innerHTML = `<p class="notice">${escapeHtml(error.message || "Vacancies could not be loaded.")}</p>`;
+  }
+}
+
+async function bindVacancyJobPage() {
+  const shell = document.querySelector("[data-job-slug]");
+  if (!shell) return;
+  try {
+    const data = await apiRequest(`/api/vacancies/${shell.dataset.jobSlug}`);
+    shell.innerHTML = vacancyPreviewMarkup(data.vacancy);
+  } catch (error) {
+    shell.innerHTML = `
+      <h1>Vacancy not found<span class="title-accent-dot" aria-hidden="true"></span></h1>
+      <p class="lead">${escapeHtml(error.message || "This vacancy is no longer available.")}</p>
+      <a class="button" href="${siteUrl("/careers/")}">View vacancies</a>`;
+  }
 }
 
 function licenceRows(licences = []) {
@@ -538,7 +695,7 @@ function clientLoginPage() {
         <div class="portal-auth-grid">
           <div>
             <p class="eyebrow">Client Login</p>
-            <h1>Access your client area</h1>
+        <h1>Access your client area<span class="title-accent-dot" aria-hidden="true"></span></h1>
             <p class="lead">Clients can review company details, licence expiry dates, pending bills, and request new licence purchases.</p>
           </div>
           <div class="portal-auth-cards">
@@ -565,7 +722,7 @@ function clientPortalPage() {
     <section class="section dark portal-section">
       <div class="container portal-shell" data-client-portal>
         <p class="eyebrow">Client Portal</p>
-        <h1>Loading client details</h1>
+        <h1>Loading client details<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Please wait while we load your account.</p>
       </div>
     </section>
@@ -577,7 +734,7 @@ function clientAdminPage() {
     <section class="section dark portal-section">
       <div class="container portal-shell" data-client-admin>
         <p class="eyebrow">Web Admin</p>
-        <h1>Client database</h1>
+        <h1>Client database<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Login to add, edit, or remove client records.</p>
         <form class="form-shell portal-form admin-login-inline" data-admin-login>
           <input type="password" name="password" placeholder="Admin password" autocomplete="current-password" required>
@@ -592,135 +749,142 @@ function clientAdminPage() {
 const pages = {
   home: () => `
     ${homeHero()}
-    <section class="section">
+    ${homeProofSection()}
+    <section class="section home-client-section">
       <div class="container">
-        ${sectionHead("Trusted by 200+ clients", "Supporting IT needs across global businesses", "")}
         ${logoShowcase(clientLogos)}
       </div>
     </section>
-    <section class="section soft section-soft-media">
-      <video class="soft-section-video" src="${assets.growthVideo}" autoplay loop muted playsinline></video>
-      <div class="container split soft-section-content">
-        <div aria-hidden="true"></div>
-        <div class="copy">
-          <p class="eyebrow">Since 2008</p>
-          <h2>We have been thriving for 16 years</h2>
-          <p>First founded in 2008 on the Island of Malta, PCGEN was launched with the aim of providing regional small businesses with the tools they need to increase productivity and efficiency.</p>
-          <p>We treat our clients as business partners and take pride in their success. Our work is built around proactive solutions designed for each client's specific needs.</p>
+    <section class="section dark why-section">
+      <video class="why-section-video" src="${assets.growthVideo}" autoplay loop muted playsinline aria-hidden="true"></video>
+      <div class="container why-section-content">
+        <div class="why-section-intro">
+          <h2 class="section-title"><span>AN EXPERT IT TEAM WITHOUT</span><span>THE IN-HOUSE OVERHEAD</span></h2>
+          <p class="section-copy">Outsourcing IT support gives businesses skilled people, lower risk, and predictable support without building an internal department from scratch.</p>
         </div>
-      </div>
-    </section>
-    <section class="section dark">
-      <div class="container">
-        ${sectionHead("Why outsource?", "An expert IT team without the in-house overhead", "Outsourcing IT support gives businesses skilled people, lower risk, and predictable support without building an internal department from scratch.")}
-        <div class="grid three">
+        <div class="grid three why-grid">
           <article class="card"><span class="icon">01</span><h3>Cost-Effective</h3><p>Benefit from an entire team of experts at a fraction of the cost of a full in-house team.</p></article>
           <article class="card"><span class="icon">02</span><h3>Skilled & Experienced</h3><p>Get instant access to trained IT engineers with years of practical experience.</p></article>
           <article class="card"><span class="icon">03</span><h3>Reduce Risk</h3><p>Use experienced providers with industry-specific knowledge and proactive monitoring.</p></article>
         </div>
+        <div class="home-services-row">
+          <div>
+            <h2 class="section-title">Our Services</h2>
+          </div>
+          <a class="home-services-view" href="/services/">View all <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        ${servicePills(6)}
       </div>
     </section>
-    <section class="section">
-      <div class="container">
-        ${sectionHead("Managed services", "Data analytics, content & IT managed services", "PC Gen manages a wide range of company IT needs under one roof.")}
-        ${serviceCards(6)}
-      </div>
-    </section>
-    <section class="section soft"><div class="container">${sectionHead("Technology partners", "Our technology partners", "Recognised vendor relationships that support reliable business IT delivery.")}${logoGrid(partnerLogos)}</div></section>
     ${newsletter()}
   `,
 
   about: () => `
-    ${hero({
-      eyebrow: "About PC Gen",
-      title: "We operate in a unique way",
-      text: "Like an extension of your company, we work alongside you to help your business thrive while your employees focus on core operations.",
-      media: null
-    })}
-    <section class="section">
-      <div class="container">
-        ${sectionHead("Why choose us", "Experience, colleagues, clients, and services working together", "Founded in 2008, PC Gen was built to help Maltese small businesses increase productivity through streamlined IT operations.")}
-        <div class="grid four">
-          <article class="card"><span class="icon">16</span><h3>Years of experience</h3><p>Practical knowledge across changing business IT environments.</p></article>
-          <article class="card"><span class="icon">+</span><h3>Expert colleagues</h3><p>Qualified technicians and consultants for day-to-day and project work.</p></article>
-          <article class="card"><span class="icon">200</span><h3>Clients</h3><p>Trusted by more than 200 organisations.</p></article>
-          <article class="card"><span class="icon">IT</span><h3>Different services</h3><p>Support, security, cloud, disaster recovery, hosting, and more.</p></article>
+    <section class="hero about-hero">
+      <div class="container about-hero-stage">
+        <div class="about-hero-title">
+          <h1><span>WE OPERATE IN</span><span>A UNIQUE WAY<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+        </div>
+        <div class="about-hero-body">
+          <div class="about-hero-copy">
+            <p>PC Gen provides comprehensive, end-to-end IT services, giving your organisation access to specialist expertise without the cost, complexity, and administrative burden of maintaining an in-house IT team.</p>
+            <p>From responsive technical support and fully managed IT services to cybersecurity, infrastructure solutions, and bespoke technology projects, we deliver reliable, scalable solutions tailored to your business needs. With PC Gen as your single trusted technology partner, you can simplify IT management, strengthen operational resilience, and focus confidently on growing your business.</p>
+          </div>
+          <div class="about-stat-grid" aria-label="PC Gen company highlights">
+            <article class="about-stat-card"><span>16</span><h3>Years of experience</h3><p>Practical expertise across evolving business IT environments.</p></article>
+            <article class="about-stat-card"><span>+</span><h3>Experienced IT Professionals</h3><p>Qualified technicians and consultants providing expert support for daily operations and specialised technology projects.</p></article>
+            <article class="about-stat-card"><span>200</span><h3>Esteemed clients</h3><p>Trusted by over 200 organisations to deliver reliable, professional IT solutions.</p></article>
+            <article class="about-stat-card"><span>IT</span><h3>Comprehensive IT Services</h3><p>A complete range of solutions, including technical support, cybersecurity, cloud services, disaster recovery, hosting, and more.</p></article>
+          </div>
         </div>
       </div>
     </section>
-    <section class="section soft">
-      <div class="container split">
-        <div class="portrait"><img src="${assets.founder}" alt="Kenneth Cauchi" loading="lazy"></div>
-        <div class="copy">
-          <p class="eyebrow">Founder vision</p>
-          <h2>Kenneth Cauchi has a purpose and a vision</h2>
-          <p>Founded in 2008 by Kenneth Cauchi, PC Generation Ltd. was created with a singular purpose: to help small businesses in Malta increase productivity and efficiency through streamlined IT operations.</p>
-          <p>At PC Gen, IT is our passion. We stay abreast of technological advancements so companies can make informed decisions and keep succeeding in a contemporary business environment.</p>
+    <section class="section about-founder-section">
+      <div class="container about-founder-grid">
+        <div class="about-founder-media">
+          <img src="/assets/backgrounds/Kenneth.png" alt="Kenneth Cauchi" loading="lazy">
+          <span aria-hidden="true">&gt;&gt;</span>
+        </div>
+        <div class="about-founder-copy">
+          <div class="about-founder-heading">
+            <h2>Founder Vision</h2>
+            <a href="/meet-the-team/">View team <span aria-hidden="true">&#8599;</span></a>
+          </div>
+          <p>Founded in 2008 by Kenneth Cauchi, PC Generation Ltd. was established with a clear purpose: to help small businesses across Malta enhance productivity, improve efficiency, and achieve greater operational resilience through streamlined IT solutions.</p>
+          <p>Technology is at the heart of everything we do. Our team remains at the forefront of the latest industry developments, enabling us to provide informed guidance and forward-thinking solutions that help organisations make confident technology decisions and succeed in an increasingly digital business environment.</p>
         </div>
       </div>
     </section>
-    <section class="section dark">
-      <div class="container split">
-        <div class="copy">
-          <p class="eyebrow">Mission statement</p>
-          <h2>Your company deserves IT support that understands your needs</h2>
-          <p>We believe our clients' success is our success. That means proactive support, clear guidance, and practical solutions tailored to real business requirements.</p>
+    <section class="section about-support-section">
+      <div class="container about-support-content">
+        <h2 class="section-title about-support-title">IT Support Built<br>Around Your Business</h2>
+        <p>We believe our success is directly linked to the success of our clients. That is why we take the time to understand each organisation's unique challenges, operational requirements, and long-term objectives.</p>
+        <p>Through proactive support, clear expert guidance, and practical technology solutions, we help businesses improve efficiency, strengthen resilience, and make confident IT decisions. Our partnership-driven approach ensures that every solution delivers genuine value while supporting sustainable growth.</p>
+        <div class="about-client-row">
+          <h3>Some of our clients</h3>
+          <a href="/clients/">View all <span aria-hidden="true">&#8599;</span></a>
         </div>
-        <div class="feature-media"><img src="${assets.mission}" alt="PC Gen mission" loading="lazy"></div>
+        ${logoCarousel(clientLogos)}
       </div>
     </section>
-    <section class="section"><div class="container">${sectionHead("Trusted by 200+ clients", "Businesses using PC Gen", "A selection of client logos retained from the current site.")}${logoCarousel(clientLogos)}</div></section>
     ${newsletter()}
   `,
 
   team: () => `
-    <section class="team-section">
-      <div class="container">
-        <div class="team-panel">
-          <p class="eyebrow">Team Section</p>
-          <h2>Meet the Team</h2>
-          <p class="team-intro">Meet our team of professionals serving businesses across Malta.</p>
-          <div class="team-actions">
-            <a class="button" href="/about/">About us</a>
-            <a class="button secondary" href="/contact/">Contact</a>
+    <section class="hero team-hero">
+      <div class="container team-hero-stage">
+        <div class="team-hero-top">
+          <div class="team-hero-copy">
+            <h1><span>MEET THE</span><span>TEAM<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+            <div class="team-hero-text">
+            <p>Meet the PC Gen professionals supporting businesses across Malta with practical technical expertise, managed IT services, cybersecurity, infrastructure, and responsive day-to-day support.</p>
+            <p>Our team combines hands-on engineering experience with a service-first approach, helping clients make confident technology decisions and keep their operations running smoothly.</p>
+            </div>
           </div>
-          <div class="team-card-grid">
-            ${team.map(([role, name]) => `
-              <article class="team-card">
-                <img src="${assets.teamThumb}" alt="${name}" loading="lazy">
-                <div class="team-card-body">
-                  <p>${role}</p>
-                  <h3>${name}</h3>
-                  <span class="team-card-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                </div>
-              </article>`).join("")}
-          </div>
+          <a class="team-about-tile" href="/about/" aria-label="About us">
+            <span aria-hidden="true">+</span>
+            <strong>About us</strong>
+          </a>
         </div>
+        <div class="team-card-grid team-showcase-grid">
+          ${team.map((member) => `
+            <article class="team-card team-showcase-card">
+              <div class="team-photo-wrap${member.image ? "" : " is-placeholder"}">
+                <span class="team-social" aria-label="LinkedIn profile">in</span>
+                ${member.image ? `<img src="${member.image}" alt="${member.name}" loading="lazy">` : ""}
+              </div>
+              <div class="team-member-meta">
+                <h3>${member.name}</h3>
+                <p>${member.role}</p>
+              </div>
+            </article>`).join("")}
+            </div>
       </div>
     </section>
     ${newsletter()}
   `,
 
   services: () => `
-    ${hero({
-      eyebrow: "Services",
-      title: "Our wide range of services",
-      text: "From desktop support to bespoke projects, PC Gen is every business's one-stop-shop for IT solutions.",
-      media: null,
-      primary: ["Get in touch", "/contact/"],
-      secondary: ["View clients", "/clients/"],
-      showActions: false
-    })}
-    <section class="section">
-      <div class="container">
-        ${sectionHead("All services", "Built around the needs of business IT", "Every service from the current website is preserved, with expandable details for easier browsing on desktop and mobile.")}
-        ${serviceCards()}
+    <section class="hero services-hero">
+      <div class="container hero-grid services-hero-grid">
+        <div class="hero-content services-hero-copy">
+          <h1><span>OUR</span><span>SERVICES<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+          <p class="lead">From desktop support to bespoke projects, PC Gen is every business's one-stop-shop for IT solutions.</p>
+        </div>
+        <div class="services-hero-services">
+          ${serviceCards()}
+        </div>
       </div>
     </section>
-    <section class="section dark">
-      <div class="container split">
-        <div><p class="eyebrow">Interested?</p><h2>Any of our services pique your interest?</h2></div>
-        <div><p class="lead">Our team is available to offer support whenever you need it.</p></div>
+    <section class="section dark services-cta-section">
+      <div class="container split services-cta-grid">
+        <div class="services-cta-copy">
+          <h2>Any of our services<br>pique your interest<span class="services-cta-question">?</span></h2>
+          <p class="lead">Our team is available to offer support whenever you need it.</p>
+        </div>
+        <div class="services-cta-action">
+          <a class="home-action-tile secondary services-cta-button" href="/contact/"><span aria-hidden="true">+</span><strong>Get in<br>Touch</strong></a>
+        </div>
       </div>
     </section>
     ${newsletter()}
@@ -763,7 +927,6 @@ const pages = {
 
   clients: () => `
     ${hero({
-      eyebrow: "Clients",
       title: '<span class="hero-title-line">Trusted by 200+</span><span class="hero-title-line">Customers</span>',
       text: "PC Gen provides IT services and solutions to over 200 businesses, supported by a reliable team and consistent results.",
       media: null,
@@ -788,20 +951,37 @@ const pages = {
   `,
 
   careers: () => `
-    ${hero({
-      eyebrow: "Careers",
-      title: "We're looking for IT experts",
-      text: "Our company is growing and we are always looking for talented IT experts to join our dynamic team.",
-      media: null,
-      primary: ["View openings", "#openings"],
-      secondary: ["Contact us", "/contact/"],
-      showActions: false
-    })}
-    <section class="section" id="openings">
-      <div class="container">
-        ${sectionHead("Support", "Start doing work that matters", "Open positions in our support team.")}
-        <div class="grid">
-          ${Object.values(jobs).map((job) => `<article class="job-card"><div><h3>${job.title}</h3><p>Job Type: Full Time</p></div><a class="button" href="${job.url}">More Details</a></article>`).join("")}
+    <section class="hero services-hero careers-services-hero">
+      <div class="container hero-grid services-hero-grid careers-services-hero-grid">
+        <div class="hero-content services-hero-copy careers-services-hero-copy">
+          <h1>We're looking for IT experts<span class="title-accent-dot" aria-hidden="true"></span></h1>
+          <p class="lead">Our company is growing and we are always looking for talented IT experts to join our dynamic team.</p>
+        </div>
+      </div>
+      <div class="container careers-openings" id="openings">
+        <div class="careers-vacancy-board" data-vacancy-board>
+          <div class="vacancy-tools" aria-label="Vacancy controls">
+            <label class="vacancy-search">
+              <span>Search vacancies</span>
+              <input type="search" placeholder="Search jobs" data-vacancy-search>
+            </label>
+            <select data-vacancy-filter aria-label="Filter vacancies">
+              <option value="all">Filter</option>
+            </select>
+            <select data-vacancy-sort aria-label="Sort vacancies">
+              <option value="newest">Sort</option>
+              <option value="title">Title</option>
+              <option value="applyBy">Apply date</option>
+            </select>
+          </div>
+          <div class="vacancy-layout">
+            <div class="vacancy-list" data-vacancy-list>
+              <p class="notice">Loading vacancies...</p>
+            </div>
+            <aside class="vacancy-preview" data-vacancy-preview>
+              <div class="vacancy-empty-preview"><span aria-hidden="true">←</span> Click a job to preview</div>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -810,7 +990,6 @@ const pages = {
 
   contact: () => `
     ${hero({
-      eyebrow: "Get in touch",
       title: "Talk to the PC Gen team",
       text: "The existing contact details and service options are preserved, with a cleaner responsive form.",
       media: null,
@@ -855,31 +1034,10 @@ const pages = {
 };
 
 function jobPage(slug) {
-  const job = jobs[slug];
   return `
     <section class="section dark">
-      <div class="container">
-        ${sectionHead("Careers", job.title, job.intro)}
-        <div class="split">
-          <div class="card">
-            <h3>Job Requirements</h3>
-            <ul>${jobRequirements.map((item) => `<li>${item}</li>`).join("")}</ul>
-            <h3 style="margin-top:28px">Assets to the role</h3>
-            <ul>${jobAssets.map((item) => `<li>${item}</li>`).join("")}</ul>
-            <p class="notice">Job Type: Full Time</p>
-          </div>
-          <form class="form-shell" action="mailto:${contact.email}" method="post" enctype="text/plain">
-            <h2>Apply for this position</h2>
-            <input type="hidden" name="position" value="${job.title}">
-            <input type="text" name="awsm_applicant_name" placeholder="Full Name" required>
-            <input type="email" name="awsm_applicant_email" placeholder="Email" required>
-            <input type="tel" name="awsm_applicant_phone" placeholder="Phone" required>
-            <textarea name="awsm_applicant_letter" placeholder="Cover Letter" required></textarea>
-            <p class="notice">CV upload requires the live WordPress application form. The original application link is preserved below.</p>
-            <button class="button" type="submit">Email application</button>
-            <a class="button secondary" href="${job.live}" target="_blank" rel="noopener">Apply on live site</a>
-          </form>
-        </div>
+      <div class="container vacancy-job-page" data-job-slug="${escapeHtml(slug)}">
+        <p class="notice">Loading vacancy details...</p>
       </div>
     </section>
     ${newsletter()}
@@ -890,7 +1048,7 @@ function render() {
   let content;
   if (pageKey.startsWith("job:")) content = jobPage(pageKey.split(":")[1]);
   else content = pages[pageKey] ? pages[pageKey]() : pages.home();
-  root.innerHTML = rewriteSiteUrls(header() + content + footer());
+  root.innerHTML = rewriteSiteUrls(header() + content + footer() + `<button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button>`);
   bindUI();
 }
 
@@ -943,7 +1101,7 @@ function renderClientPortal(client) {
     <div class="portal-topline">
       <div>
         <p class="eyebrow">Client Portal</p>
-        <h1>${escapeHtml(client.companyName)}</h1>
+        <h1>${escapeHtml(client.companyName)}<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Welcome ${escapeHtml(client.contactName || "to your PC Gen client area")}.</p>
       </div>
       <button class="button secondary" type="button" data-portal-logout>Logout</button>
@@ -986,7 +1144,7 @@ async function bindClientPortal() {
   } catch {
     portal.innerHTML = `
       <p class="eyebrow">Client Portal</p>
-      <h1>Login required</h1>
+      <h1>Login required<span class="title-accent-dot" aria-hidden="true"></span></h1>
       <p class="lead">Please login to view your client details, licence expiry dates, and pending bills.</p>
       <a class="button" href="/client-login/">Client login</a>`;
   }
@@ -1030,20 +1188,75 @@ function adminForm(client = {}) {
     </form>`;
 }
 
+function serialiseListLines(items = []) {
+  return Array.isArray(items) ? items.join("\n") : "";
+}
+
+function renderAdminVacancyList(vacancies) {
+  return vacancies.map((vacancy) => `
+    <article class="admin-client" data-vacancy-id="${escapeAttribute(vacancy.id)}">
+      <div>
+        <h3>${escapeHtml(vacancy.title)}</h3>
+        <p>${escapeHtml(vacancy.company || "PC Gen")} &middot; ${escapeHtml(vacancy.employmentType || "Full-Time")} &middot; ${escapeHtml(vacancy.location || "Malta")}</p>
+        <span>${escapeHtml(vacancy.status || "published")} &middot; ${escapeHtml(vacancy.category || "Support")}</span>
+      </div>
+      <div class="admin-actions">
+        <button class="button secondary" type="button" data-edit-vacancy="${escapeAttribute(vacancy.id)}">Edit</button>
+        <button class="button secondary" type="button" data-delete-vacancy="${escapeAttribute(vacancy.id)}">Remove</button>
+      </div>
+    </article>`).join("");
+}
+
+function adminVacancyForm(vacancy = {}) {
+  const apply = vacancy.apply || {};
+  return `
+    <form class="form-shell portal-form admin-vacancy-form" data-admin-vacancy-form>
+      <input type="hidden" name="id" value="${escapeAttribute(vacancy.id || "")}">
+      <div class="form-grid-two">
+        <input type="text" name="title" placeholder="Vacancy title" value="${escapeAttribute(vacancy.title || "")}" required>
+        <input type="text" name="status" placeholder="Status: published or draft" value="${escapeAttribute(vacancy.status || "published")}">
+        <input type="text" name="company" placeholder="Company" value="${escapeAttribute(vacancy.company || "PC Gen")}">
+        <input type="text" name="category" placeholder="Category" value="${escapeAttribute(vacancy.category || "Support")}">
+        <input type="text" name="employmentType" placeholder="Employment type" value="${escapeAttribute(vacancy.employmentType || "Full-Time")}">
+        <input type="text" name="location" placeholder="Location" value="${escapeAttribute(vacancy.location || "Malta")}">
+        <input type="date" name="applyBy" value="${escapeAttribute(vacancy.applyBy || "")}">
+        <input type="text" name="applyByLabel" placeholder="Apply label" value="${escapeAttribute(vacancy.applyByLabel || "Open application")}">
+        <input type="text" name="logo" placeholder="Logo path" value="${escapeAttribute(vacancy.logo || "/assets/brand/favicon.png")}">
+        <input type="email" name="applyEmail" placeholder="Application email" value="${escapeAttribute(apply.email || contact.email)}">
+      </div>
+      <textarea name="intro" placeholder="Intro">${escapeHtml(vacancy.intro || "")}</textarea>
+      <textarea name="summary" placeholder="Summary">${escapeHtml(vacancy.summary || "")}</textarea>
+      <textarea name="responsibilities" placeholder="Responsibilities: one per line">${escapeHtml(serialiseListLines(vacancy.responsibilities))}</textarea>
+      <textarea name="requirements" placeholder="Requirements: one per line">${escapeHtml(serialiseListLines(vacancy.requirements))}</textarea>
+      <textarea name="assets" placeholder="Assets: one per line">${escapeHtml(serialiseListLines(vacancy.assets))}</textarea>
+      <textarea name="applyInstructions" placeholder="Application instructions">${escapeHtml(apply.instructions || "")}</textarea>
+      <input type="url" name="applyLiveUrl" placeholder="Live application URL" value="${escapeAttribute(apply.liveUrl || "")}">
+      <div class="admin-form-actions">
+        <button class="button" type="submit">${vacancy.id ? "Update vacancy" : "Add vacancy"}</button>
+        <button class="button secondary" type="button" data-clear-vacancy-form>Clear</button>
+      </div>
+      <p class="notice" data-vacancy-save-message></p>
+    </form>`;
+}
+
 async function bindClientAdmin() {
   const shell = document.querySelector("[data-client-admin]");
   if (!shell) return;
 
-  async function loadAdmin(selectedId = "") {
+  async function loadAdmin(selectedClientId = "", selectedVacancyId = "") {
     try {
-      const data = await apiRequest("/api/admin/clients");
-      const selected = data.clients.find((client) => client.id === selectedId) || {};
+      const [clientData, vacancyData] = await Promise.all([
+        apiRequest("/api/admin/clients"),
+        apiRequest("/api/admin/vacancies")
+      ]);
+      const selected = clientData.clients.find((client) => client.id === selectedClientId) || {};
+      const selectedVacancy = vacancyData.vacancies.find((vacancy) => vacancy.id === selectedVacancyId) || {};
       shell.innerHTML = `
         <div class="portal-topline">
           <div>
             <p class="eyebrow">Web Admin</p>
-            <h1>Client database</h1>
-            <p class="lead">Add, edit, or remove client records, licences, and pending bills.</p>
+            <h1>Website database<span class="title-accent-dot" aria-hidden="true"></span></h1>
+            <p class="lead">Add, edit, or remove client records, vacancies, and vacancy details.</p>
           </div>
           <button class="button secondary" type="button" data-portal-logout>Logout</button>
         </div>
@@ -1051,7 +1264,12 @@ async function bindClientAdmin() {
           <section class="portal-card">${adminForm(selected)}</section>
           <section class="portal-card">
             <h2>Clients</h2>
-            <div class="admin-client-list">${renderAdminClientList(data.clients)}</div>
+            <div class="admin-client-list">${renderAdminClientList(clientData.clients)}</div>
+          </section>
+          <section class="portal-card">${adminVacancyForm(selectedVacancy)}</section>
+          <section class="portal-card">
+            <h2>Vacancies</h2>
+            <div class="admin-client-list">${renderAdminVacancyList(vacancyData.vacancies)}</div>
           </section>
         </div>`;
       bindClientAdminActions(loadAdmin);
@@ -1059,7 +1277,7 @@ async function bindClientAdmin() {
     } catch {
       shell.innerHTML = `
         <p class="eyebrow">Web Admin</p>
-        <h1>Client database</h1>
+        <h1>Client database<span class="title-accent-dot" aria-hidden="true"></span></h1>
         <p class="lead">Login to add, edit, or remove client records.</p>
         <form class="form-shell portal-form admin-login-inline" data-admin-login>
           <input type="password" name="password" placeholder="Admin password" autocomplete="current-password" required>
@@ -1111,6 +1329,59 @@ function bindClientAdminActions(loadAdmin) {
     button.addEventListener("click", async () => {
       if (!confirm("Remove this client record?")) return;
       await apiRequest(`/api/admin/clients/${button.dataset.deleteClient}`, { method: "DELETE" });
+      loadAdmin();
+    });
+  });
+
+  const vacancyForm = document.querySelector("[data-admin-vacancy-form]");
+  vacancyForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const message = vacancyForm.querySelector("[data-vacancy-save-message]");
+    const formData = new FormData(vacancyForm);
+    const id = formData.get("id");
+    const payload = {
+      id,
+      title: formData.get("title"),
+      status: formData.get("status"),
+      company: formData.get("company"),
+      category: formData.get("category"),
+      employmentType: formData.get("employmentType"),
+      location: formData.get("location"),
+      applyBy: formData.get("applyBy"),
+      applyByLabel: formData.get("applyByLabel"),
+      logo: formData.get("logo"),
+      intro: formData.get("intro"),
+      summary: formData.get("summary"),
+      responsibilities: String(formData.get("responsibilities") || "").split(/\r?\n/).map((item) => item.trim()).filter(Boolean),
+      requirements: String(formData.get("requirements") || "").split(/\r?\n/).map((item) => item.trim()).filter(Boolean),
+      assets: String(formData.get("assets") || "").split(/\r?\n/).map((item) => item.trim()).filter(Boolean),
+      apply: {
+        heading: "Apply for this position",
+        email: formData.get("applyEmail"),
+        liveUrl: formData.get("applyLiveUrl"),
+        instructions: formData.get("applyInstructions")
+      }
+    };
+    message.textContent = "Saving...";
+    try {
+      await apiRequest(id ? `/api/admin/vacancies/${id}` : "/api/admin/vacancies", {
+        method: id ? "PUT" : "POST",
+        body: JSON.stringify(payload)
+      });
+      loadAdmin("", id || "");
+    } catch (error) {
+      message.textContent = error.message;
+    }
+  });
+
+  document.querySelector("[data-clear-vacancy-form]")?.addEventListener("click", () => loadAdmin());
+  document.querySelectorAll("[data-edit-vacancy]").forEach((button) => {
+    button.addEventListener("click", () => loadAdmin("", button.dataset.editVacancy));
+  });
+  document.querySelectorAll("[data-delete-vacancy]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      if (!confirm("Remove this vacancy record?")) return;
+      await apiRequest(`/api/admin/vacancies/${button.dataset.deleteVacancy}`, { method: "DELETE" });
       loadAdmin();
     });
   });
@@ -1201,12 +1472,19 @@ function bindNewsletterParallax() {
 
 function bindUI() {
   const headerElement = document.querySelector(".site-header");
+  const scrollTopButton = document.querySelector("[data-scroll-top]");
   const updateHeaderState = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const isScrolled = scrollTop > (headerElement?.offsetHeight || 96);
     headerElement?.classList.toggle("is-scrolled", scrollTop > 24);
+    scrollTopButton?.classList.toggle("is-scrolled", isScrolled);
   };
   updateHeaderState();
   window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+  scrollTopButton?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
   document.querySelectorAll("video[data-playback-rate]").forEach((video) => {
     const rate = Number(video.dataset.playbackRate);
@@ -1268,6 +1546,8 @@ function bindUI() {
   bindLoginForms();
   bindClientPortal();
   bindClientAdmin();
+  bindVacancyBoard();
+  bindVacancyJobPage();
   bindPortalLogout();
   bindHeaderBgParallax();
   bindNewsletterParallax();
