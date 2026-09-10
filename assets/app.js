@@ -70,14 +70,14 @@ const clientLogos = [
   ["J&G", "https://pcgen.mt/wp-content/uploads/2024/10/JG-LOGO.png"],
   ["FSH", "https://pcgen.mt/wp-content/uploads/2024/10/FSH-Logo.png"],
   ["Kencar", "https://pcgen.mt/wp-content/uploads/2024/10/Kencar-_Full-Logo-160x111-1.png"],
-  ["Camel Brand", "/assets/clients-logos/CamelBrand.svg"],
+  ["Camel Brand", "/assets/clients-logos/CamelBrand-white.svg", "/assets/clients-logos/CamelBrand.svg"],
   ["GARD", "https://pcgen.mt/wp-content/uploads/2024/10/GARD.jpeg"],
   ["Fino", "/assets/Fino.png"]
 ];
 
 const clientsHeroLogos = [
   ["Andrew Vassallo", "/assets/clients-logos/AV.png"],
-  ["Camel Brand", "/assets/clients-logos/CamelBrand.svg"],
+  ["Camel Brand", "/assets/clients-logos/CamelBrand-white.svg", "/assets/clients-logos/CamelBrand.svg"],
   ["Danzah Group", "/assets/clients-logos/Danzah.png"],
   ["FSH", "/assets/clients-logos/FSH-Logo.png"],
   ["GARD", "/assets/clients-logos/GARD.png"],
@@ -208,8 +208,8 @@ function preloadSiteImages() {
     ...Object.values(assets),
     ...staticImageAssets,
     ...team.map((member) => member.image),
-    ...clientLogos.map(([, src]) => src),
-    ...clientsHeroLogos.map(([, src]) => src),
+    ...clientLogos.flatMap(([, src, hoverSrc]) => [src, hoverSrc]),
+    ...clientsHeroLogos.flatMap(([, src, hoverSrc]) => [src, hoverSrc]),
     ...partnerLogos.map(([, src]) => src)
   ].filter(isImageSource);
   const uniqueSources = [...new Set(sources)];
@@ -409,17 +409,24 @@ function sectionHead(label, title, text) {
   return `<h2 class="section-title">${title}</h2>${text ? `<p class="section-copy">${text}</p>` : ""}`;
 }
 
+function logoTile([alt, src, hoverSrc]) {
+  const swap = hoverSrc
+    ? ` data-logo-default="${siteUrl(src)}" data-logo-hover="${siteUrl(hoverSrc)}" style="filter: none"`
+    : "";
+  return `<div class="logo-tile"><img src="${src}" alt="${alt}" loading="lazy"${swap}></div>`;
+}
+
 function logoGrid(items, klass = "logos") {
-  return `<div class="${klass}">${items.map(([alt, src]) => `<div class="logo-tile"><img src="${src}" alt="${alt}" loading="lazy"></div>`).join("")}</div>`;
+  return `<div class="${klass}">${items.map(logoTile).join("")}</div>`;
 }
 
 function logoCarousel(items) {
-  const tiles = items.map(([alt, src]) => `<div class="logo-tile"><img src="${src}" alt="${alt}" loading="lazy"></div>`).join("");
+  const tiles = items.map(logoTile).join("");
   return `<div class="logo-carousel" aria-label="Client logos"><div class="logo-carousel-track"><div class="logo-carousel-set">${tiles}</div><div class="logo-carousel-set" aria-hidden="true">${tiles}</div></div></div>`;
 }
 
 function logoShowcase(items) {
-  const tiles = items.map(([alt, src]) => `<div class="logo-tile"><img src="${src}" alt="${alt}" loading="lazy"></div>`).join("");
+  const tiles = items.map(logoTile).join("");
   return `
     <div class="logo-showcase" aria-label="Client logos carousel">
       <div class="logo-showcase-viewport" data-logo-viewport>
@@ -1492,6 +1499,12 @@ function bindNewsletterParallax() {
 }
 
 function bindUI() {
+  document.querySelectorAll("img[data-logo-hover]").forEach((image) => {
+    const tile = image.closest(".logo-tile");
+    tile.addEventListener("mouseenter", () => { image.src = image.dataset.logoHover; });
+    tile.addEventListener("mouseleave", () => { image.src = image.dataset.logoDefault; });
+  });
+
   const headerElement = document.querySelector(".site-header");
   const scrollTopButton = document.querySelector("[data-scroll-top]");
   const updateHeaderState = () => {
