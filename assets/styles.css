@@ -3999,6 +3999,8 @@ body.menu-open .menu-toggle:hover {
 }
 
 .why-grid {
+  padding-top: 100px;
+  padding-bottom: 100px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(190px, auto));
   align-items: stretch;
