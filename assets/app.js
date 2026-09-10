@@ -2,7 +2,8 @@ const root = document.getElementById("app");
 const pageKey = document.body.dataset.page || "home";
 window.PCGEN_JS_ENABLED = true;
 
-const siteBasePath = location.hostname.endsWith("github.io") ? "/Pcgen-website" : "";
+const githubPagesBasePath = "/PCGen-Website2";
+const siteBasePath = location.hostname === "ncassar-dotcom.github.io" ? githubPagesBasePath : "";
 const currentPath = (() => {
   const pathname = location.pathname.replace(/\/index\.html$/, "/");
   if (siteBasePath && pathname.startsWith(`${siteBasePath}/`)) return pathname.slice(siteBasePath.length) || "/";
