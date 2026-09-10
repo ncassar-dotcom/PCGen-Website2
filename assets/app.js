@@ -70,14 +70,14 @@ const clientLogos = [
   ["J&G", "https://pcgen.mt/wp-content/uploads/2024/10/JG-LOGO.png"],
   ["FSH", "https://pcgen.mt/wp-content/uploads/2024/10/FSH-Logo.png"],
   ["Kencar", "https://pcgen.mt/wp-content/uploads/2024/10/Kencar-_Full-Logo-160x111-1.png"],
-  ["Camel Brand", "https://pcgen.mt/wp-content/uploads/2024/10/camel-brand-logo.png"],
+  ["Camel Brand", "/assets/clients-logos/CamelBrand.svg"],
   ["GARD", "https://pcgen.mt/wp-content/uploads/2024/10/GARD.jpeg"],
   ["Fino", "/assets/Fino.png"]
 ];
 
 const clientsHeroLogos = [
   ["Andrew Vassallo", "/assets/clients-logos/AV.png"],
-  ["Camel Brand", "/assets/clients-logos/camel-brand-logo.png"],
+  ["Camel Brand", "/assets/clients-logos/CamelBrand.svg"],
   ["Danzah Group", "/assets/clients-logos/Danzah.png"],
   ["FSH", "/assets/clients-logos/FSH-Logo.png"],
   ["GARD", "/assets/clients-logos/GARD.png"],
