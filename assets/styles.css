@@ -1528,7 +1528,7 @@ body[data-page="contact"] .contact-list {
 .logo-carousel-track {
   display: flex;
   width: max-content;
-  animation: logoCarousel 72s linear infinite;
+  animation: logoCarousel 120s linear infinite;
 }
 
 .logo-carousel:hover .logo-carousel-track {
@@ -1571,7 +1571,7 @@ body[data-page="contact"] .contact-list {
 .logo-showcase-track {
   display: flex;
   width: max-content;
-  animation: logoCarousel 46s linear infinite;
+  animation: logoCarousel 76.666667s linear infinite;
 }
 
 .logo-showcase-set {
@@ -3311,12 +3311,14 @@ h3 {
 }
 
 .home-client-section .logo-showcase-set,
+body[data-page="clients"] .clients-hero-logo-panel .logo-showcase-set,
 body[data-page="about"] .about-support-section .logo-showcase-set {
   gap: 100px;
   padding-right: 100px;
 }
 
 .home-client-section .logo-showcase .logo-tile,
+body[data-page="clients"] .clients-hero-logo-panel .logo-showcase .logo-tile,
 body[data-page="about"] .about-support-section .logo-showcase .logo-tile {
   width: 136px;
   flex: 0 0 136px;
@@ -3328,6 +3330,7 @@ body[data-page="about"] .about-support-section .logo-showcase .logo-tile {
 }
 
 .home-client-section .logo-showcase .logo-tile img,
+body[data-page="clients"] .clients-hero-logo-panel .logo-showcase .logo-tile img,
 body[data-page="about"] .about-support-section .logo-showcase .logo-tile img {
   width: 120px;
   height: auto;
@@ -3339,6 +3342,8 @@ body[data-page="about"] .about-support-section .logo-showcase .logo-tile img {
 
 .home-client-section .logo-showcase .logo-tile:hover img,
 .home-client-section .logo-showcase .logo-tile:focus-within img,
+body[data-page="clients"] .clients-hero-logo-panel .logo-showcase .logo-tile:hover img,
+body[data-page="clients"] .clients-hero-logo-panel .logo-showcase .logo-tile:focus-within img,
 body[data-page="about"] .about-support-section .logo-showcase .logo-tile:hover img,
 body[data-page="about"] .about-support-section .logo-showcase .logo-tile:focus-within img {
   filter: none;

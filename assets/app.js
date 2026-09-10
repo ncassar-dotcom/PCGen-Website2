@@ -963,7 +963,7 @@ const pages = {
         ${clientHeroStories()}
       </div>
       <div class="container clients-hero-logo-panel">
-        ${logoGrid(clientsHeroLogos, "logos clients-hero-logos")}
+        ${logoShowcase(clientsHeroLogos)}
       </div>
     </section>
     <section class="section dark">
