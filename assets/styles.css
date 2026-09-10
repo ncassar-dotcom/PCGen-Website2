@@ -1915,6 +1915,17 @@ body[data-page="contact"] .contact-list {
   color: rgba(255, 255, 255, 0.68);
 }
 
+.site-footer a {
+  font-size: 100%;
+  transition: color 180ms ease, font-size 180ms ease;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--accent);
+  font-size: 101%;
+}
+
 .site-footer h3 {
   margin-bottom: 18px;
   font-size: 17px;
