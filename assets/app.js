@@ -74,6 +74,22 @@ const clientLogos = [
   ["Fino", "/assets/Fino.png"]
 ];
 
+const clientsHeroLogos = [
+  ["Andrew Vassallo", "/assets/clients-logos/AV.png"],
+  ["Camel Brand", "/assets/clients-logos/camel-brand-logo.png"],
+  ["Danzah Group", "/assets/clients-logos/Danzah.png"],
+  ["FSH", "/assets/clients-logos/FSH-Logo.png"],
+  ["GARD", "/assets/clients-logos/GARD.png"],
+  ["Client logo", "/assets/clients-logos/image002.png"],
+  ["J&G", "/assets/clients-logos/JG-LOGO.png"],
+  ["Kencar", "/assets/clients-logos/Kencar-_Full-Logo-160x111-1.png"],
+  ["Pitstop", "/assets/clients-logos/Pitstop-Logo.png"],
+  ["Smart Effects", "/assets/clients-logos/smart-effects-color-logo.png"],
+  ["TUM Invest", "/assets/clients-logos/TUMInvest_Logo_FullColour-e1562143591464.png"],
+  ["V&C Group", "/assets/clients-logos/VC-1.png"],
+  ["VGB", "/assets/clients-logos/VGB-main-logo@1.png"]
+];
+
 const partnerLogos = [
   ["Microsoft Silver Partner", "/assets/ms.png"],
   ["3CX", "/assets/3cx-logo.png"],
@@ -192,6 +208,7 @@ function preloadSiteImages() {
     ...staticImageAssets,
     ...team.map((member) => member.image),
     ...clientLogos.map(([, src]) => src),
+    ...clientsHeroLogos.map(([, src]) => src),
     ...partnerLogos.map(([, src]) => src)
   ].filter(isImageSource);
   const uniqueSources = [...new Set(sources)];
@@ -434,6 +451,15 @@ function servicePills(limit = 6) {
 function testimonialsMarkup(limit = testimonials.length) {
   return `<div class="grid two">${testimonials.slice(0, limit).map((item) => `
     <blockquote class="testimonial">
+      <p>${item[0]}</p>
+      <cite>${item[1]}<br><span>${item[2]}</span></cite>
+    </blockquote>`).join("")}</div>`;
+}
+
+function clientHeroStories() {
+  return `<div class="clients-hero-stories" aria-label="Client satisfaction stories">${testimonials.map((item, index) => `
+    <blockquote class="clients-hero-story">
+      <span class="clients-hero-story-number">${String(index + 1).padStart(2, "0")}</span>
       <p>${item[0]}</p>
       <cite>${item[1]}<br><span>${item[2]}</span></cite>
     </blockquote>`).join("")}</div>`;
@@ -752,7 +778,7 @@ const pages = {
     ${homeProofSection()}
     <section class="section home-client-section">
       <div class="container">
-        ${logoShowcase(clientLogos)}
+        ${logoShowcase(clientsHeroLogos)}
       </div>
     </section>
     <section class="section dark why-section">
@@ -763,15 +789,15 @@ const pages = {
           <p class="section-copy">Outsourcing IT support gives businesses skilled people, lower risk, and predictable support without building an internal department from scratch.</p>
         </div>
         <div class="grid three why-grid">
-          <article class="card"><span class="icon">01</span><h3>Cost-Effective</h3><p>Benefit from an entire team of experts at a fraction of the cost of a full in-house team.</p></article>
-          <article class="card"><span class="icon">02</span><h3>Skilled & Experienced</h3><p>Get instant access to trained IT engineers with years of practical experience.</p></article>
-          <article class="card"><span class="icon">03</span><h3>Reduce Risk</h3><p>Use experienced providers with industry-specific knowledge and proactive monitoring.</p></article>
+          <article class="card"><h3>Cost-Effective</h3><p>Benefit from an entire team of experts at a fraction of the cost of a full in-house team.</p></article>
+          <article class="card"><h3>Skilled & Experienced</h3><p>Get instant access to trained IT engineers with years of practical experience.</p></article>
+          <article class="card"><h3>Reduce Risk</h3><p>Use experienced providers with industry-specific knowledge and proactive monitoring.</p></article>
         </div>
         <div class="home-services-row">
           <div>
             <h2 class="section-title">Our Services</h2>
           </div>
-          <a class="home-services-view" href="/services/">View all <span aria-hidden="true">&#8599;</span></a>
+          <a class="home-services-view" href="/services/">View all</a>
         </div>
         ${servicePills(6)}
       </div>
@@ -824,7 +850,7 @@ const pages = {
           <h3>Some of our clients</h3>
           <a href="/clients/">View all <span aria-hidden="true">&#8599;</span></a>
         </div>
-        ${logoCarousel(clientLogos)}
+        ${logoShowcase(clientsHeroLogos)}
       </div>
     </section>
     ${newsletter()}
@@ -926,21 +952,19 @@ const pages = {
   "client-admin": () => clientAdminPage(),
 
   clients: () => `
-    ${hero({
-      title: '<span class="hero-title-line">Trusted by 200+</span><span class="hero-title-line">Customers</span>',
-      text: "PC Gen provides IT services and solutions to over 200 businesses, supported by a reliable team and consistent results.",
-      media: null,
-      primary: ["Get in touch", "/contact/"],
-      secondary: ["View services", "/services/"],
-      showActions: false
-    })}
-    <section class="section">
-      <div class="container">
-        ${sectionHead("Client satisfaction", "Beneficial to our business", "Current customer stories kept intact and redesigned for quicker scanning.")}
-        ${testimonialsMarkup()}
+    <section class="hero clients-hero">
+      <div class="container clients-hero-grid">
+        <div class="hero-content clients-hero-copy">
+          <span class="clients-hero-kicker">Client satisfaction</span>
+          <h1><span>TRUSTED</span><span>BY 200+</span><span>CUSTOMERS<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+          <p class="lead">PC Gen provides IT services and solutions to over 200 businesses, supported by a reliable team and consistent results.</p>
+        </div>
+        ${clientHeroStories()}
+      </div>
+      <div class="container clients-hero-logo-panel">
+        ${logoGrid(clientsHeroLogos, "logos clients-hero-logos")}
       </div>
     </section>
-    <section class="section soft"><div class="container">${sectionHead("Local businesses", "Many local businesses have used our services", "The client logos from the existing site are retained as live media links.")}${logoGrid(clientLogos)}</div></section>
     <section class="section dark">
       <div class="container split">
         <div><p class="eyebrow">Next success story</p><h2>Become the next in PC Gen's success story.</h2></div>
@@ -989,17 +1013,13 @@ const pages = {
   `,
 
   contact: () => `
-    ${hero({
-      title: "Talk to the PC Gen team",
-      text: "The existing contact details and service options are preserved, with a cleaner responsive form.",
-      media: null,
-      primary: ["Call us", `tel:${contact.tel}`],
-      secondary: ["Email us", `mailto:${contact.email}`],
-      showActions: false
-    })}
-    <section class="section dark">
-      <div class="container">
-        <div class="split">
+    <section class="hero contact-hero">
+      <div class="container hero-grid contact-hero-grid">
+        <div class="hero-content contact-hero-copy">
+          <h1>Talk to the PC Gen team<span class="title-accent-dot" aria-hidden="true"></span></h1>
+          <p class="lead">The existing contact details and service options are preserved, with a cleaner responsive form.</p>
+        </div>
+        <div class="split contact-hero-contact-grid">
           <div class="card">
             <ul class="contact-list">
               <li><strong>Find us</strong><span>${contact.address}</span></li>
