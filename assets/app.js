@@ -882,14 +882,16 @@ const pages = {
         </div>
         <div class="team-card-grid team-showcase-grid">
           ${team.map((member) => `
-            <article class="team-card team-showcase-card">
-              <div class="team-photo-wrap${member.image ? "" : " is-placeholder"}">
-                <span class="team-social" aria-label="LinkedIn profile">in</span>
-                ${member.image ? `<img src="${member.image}" alt="${member.name}" loading="lazy">` : ""}
-              </div>
-              <div class="team-member-meta">
-                <h3>${member.name}</h3>
-                <p>${member.role}</p>
+            <article class="team-card team-showcase-card team-flip-card" tabindex="0" aria-label="${member.name} — ${member.role}">
+              <div class="team-flip-inner">
+                <div class="team-flip-front team-photo-wrap" aria-hidden="true">
+                  ${member.image ? `<img src="${member.image}" alt="" loading="lazy">` : `<span class="team-flip-initials">${member.name.split(" ").map((part) => part[0]).slice(0, 2).join("")}</span>`}
+                </div>
+                <div class="team-flip-back">
+                  <h3>${member.name}</h3>
+                  <p>${member.role}</p>
+                  <a class="team-linkedin-button" href="${member.linkedin || contact.linkedin}" target="_blank" rel="noopener noreferrer">${member.linkedin ? "LinkedIn profile" : "PC Gen on LinkedIn"}<span aria-hidden="true">↗</span></a>
+                </div>
               </div>
             </article>`).join("")}
             </div>
@@ -1499,6 +1501,15 @@ function bindNewsletterParallax() {
 }
 
 function bindUI() {
+  document.querySelectorAll(".team-flip-card").forEach((card) => {
+    card.addEventListener("pointerup", (event) => {
+      if (event.pointerType !== "mouse" && !event.target.closest("a")) card.focus();
+    });
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") document.activeElement?.blur();
+    });
+  });
+
   document.querySelectorAll("img[data-logo-hover]").forEach((image) => {
     const tile = image.closest(".logo-tile");
     tile.addEventListener("mouseenter", () => { image.src = image.dataset.logoHover; });
