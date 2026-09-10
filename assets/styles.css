@@ -4337,8 +4337,9 @@ body[data-page="team"] .team-card-grid {
 
 .about-stat-card span {
   display: inline-grid;
-  min-width: 32px;
-  height: 32px;
+  width: 46px;
+  min-width: 46px;
+  height: 46px;
   margin-bottom: 28px;
   place-items: center;
   border-radius: 7px;
