@@ -1858,7 +1858,7 @@ body[data-page="contact"] .contact-list {
 .scroll-top-toggle {
   position: fixed;
   top: calc(100vh - clamp(62px, 8vh, 96px) - 36px);
-  right: max(18px, calc((100vw - min(calc(100vw - 120px), 1540px)) / 4 - 12px));
+  right: max(0px, calc(max(18px, (100vw - min(100vw - 120px, 1540px)) / 4 - 12px) - 20px));
   z-index: 65;
   display: grid;
   place-items: center;
@@ -1894,7 +1894,7 @@ body[data-page="contact"] .contact-list {
 @media (max-width: 640px) {
   .scroll-top-toggle {
     top: calc(100vh - 64px);
-    right: 12px;
+    right: 0;
   }
 }
 
@@ -5234,7 +5234,7 @@ body {
 
   .scroll-top-toggle {
     top: auto;
-    right: 14px;
+    right: 0;
     bottom: 16px;
   }
 }
@@ -6655,4 +6655,12 @@ body[data-page="clients"] .clients-hero-logos .logo-tile img {
   body[data-page="contact"] .contact-hero {
     padding: 100px 0 56px;
   }
+}
+
+/* Consistent horizontal margins for every page's content containers. */
+body[data-page] .container {
+  width: calc(100% - 100px);
+  max-width: none;
+  margin-left: 50px;
+  margin-right: 50px;
 }
