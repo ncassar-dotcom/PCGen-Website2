@@ -1902,7 +1902,7 @@ body[data-page="contact"] .contact-list {
   display: grid;
   height: 300px;
   grid-template-columns: minmax(260px, 1.3fr) repeat(3, minmax(160px, 0.7fr));
-  gap: 44px;
+  gap: 60px;
 }
 
 .footer-logo {
@@ -5208,7 +5208,7 @@ body {
   }
 
   .footer-grid {
-    gap: 28px;
+    gap: 60px;
   }
 
   .site-footer {
