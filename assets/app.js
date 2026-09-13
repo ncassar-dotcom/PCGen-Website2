@@ -371,16 +371,6 @@ function homeHero() {
           <h1><span>YOUR IT</span><span>OUR PASSION<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
           <p class="home-hero-kicker">Managed IT. Secure Infrastructure. Results.</p>
         </div>
-        <div class="home-logo-scene" data-hero-3d role="img" aria-label="Three-dimensional PC Gen logo" tabindex="0">
-          <div class="home-logo-shadow" aria-hidden="true"></div>
-          <div class="home-logo-float" aria-hidden="true">
-            <div class="home-logo-object">
-              ${Array.from({ length: 24 }, (_, index) => `<span class="home-logo-slice" style="--depth: ${index * 2}px; --tone: ${17 + index * 0.7}%"></span>`).join("")}
-              <span class="home-logo-face"></span>
-              <span class="home-logo-outline"></span>
-            </div>
-          </div>
-        </div>
         ${logoGrid(partnerLogos, "logos home-hero-logos")}
         <div class="home-hero-actions" aria-label="Home actions">
           <a class="home-action-tile" href="/services/"><span aria-hidden="true">+</span><strong>Our<br>Services</strong></a>
@@ -1510,24 +1500,32 @@ function bindNewsletterParallax() {
   window.addEventListener("resize", requestUpdate);
 }
 
-function bindHero3D() {
-  const scene = document.querySelector("[data-hero-3d]");
-  if (!scene) return;
+function bindHeroBackground() {
+  const hero = document.querySelector(".home-hero");
+  if (!hero) return;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   let frame = 0;
   let targetX = 0;
   let targetY = 0;
   let currentX = 0;
   let currentY = 0;
 
+  const paint = () => {
+    hero.style.setProperty("--hero-mouse-x", `${(currentX * 24).toFixed(2)}px`);
+    hero.style.setProperty("--hero-mouse-y", `${(currentY * 16).toFixed(2)}px`);
+    hero.style.setProperty("--hero-tilt-x", `${(-currentY * 0.7).toFixed(2)}deg`);
+    hero.style.setProperty("--hero-tilt-y", `${(currentX * 1).toFixed(2)}deg`);
+  };
   const draw = () => {
-    currentX += (targetX - currentX) * 0.09;
-    currentY += (targetY - currentY) * 0.09;
-    scene.style.setProperty("--logo-rotate-x", `${(-12 - currentY * 12).toFixed(2)}deg`);
-    scene.style.setProperty("--logo-rotate-y", `${(-22 + currentX * 22).toFixed(2)}deg`);
-    scene.style.setProperty("--logo-light-x", `${50 + currentX * 35}%`);
-    scene.style.setProperty("--logo-light-y", `${30 + currentY * 30}%`);
+    currentX += (targetX - currentX) * 0.075;
+    currentY += (targetY - currentY) * 0.075;
     const moving = Math.abs(targetX - currentX) + Math.abs(targetY - currentY) > 0.002;
+    if (!moving) {
+      currentX = targetX;
+      currentY = targetY;
+    }
+    paint();
     frame = moving ? requestAnimationFrame(draw) : 0;
   };
   const update = (x, y) => {
@@ -1535,32 +1533,28 @@ function bindHero3D() {
     targetY = y;
     if (!frame) frame = requestAnimationFrame(draw);
   };
-  const reset = () => update(0, 0);
-  scene.addEventListener("pointermove", (event) => {
-    if (reducedMotion.matches || event.pointerType === "touch") return;
-    const rect = scene.getBoundingClientRect();
-    const clamp = (value) => Math.max(-1, Math.min(1, value));
-    update(clamp((event.clientX - rect.left) / rect.width * 2 - 1), clamp((event.clientY - rect.top) / rect.height * 2 - 1));
-  }, { passive: true });
-  scene.addEventListener("pointerleave", reset);
-  scene.addEventListener("blur", reset);
-  scene.addEventListener("keydown", (event) => {
-    if (reducedMotion.matches) return;
-    const positions = { ArrowLeft: [-0.8, 0], ArrowRight: [0.8, 0], ArrowUp: [0, -0.8], ArrowDown: [0, 0.8], Escape: [0, 0] };
-    if (!positions[event.key]) return;
-    event.preventDefault();
-    update(...positions[event.key]);
-  });
-  reducedMotion.addEventListener("change", () => {
+  const stop = () => {
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
     currentX = currentY = targetX = targetY = 0;
-    draw();
-  });
+    paint();
+  };
+  hero.addEventListener("pointermove", (event) => {
+    if (reducedMotion.matches || !finePointer.matches || event.pointerType === "touch") return;
+    const rect = hero.getBoundingClientRect();
+    const clamp = (value) => Math.max(-1, Math.min(1, value));
+    update(clamp((event.clientX - rect.left) / rect.width * 2 - 1), clamp((event.clientY - rect.top) / rect.height * 2 - 1));
+  }, { passive: true });
+  hero.addEventListener("pointerleave", () => update(0, 0));
+  hero.addEventListener("pointercancel", stop);
+  window.addEventListener("blur", stop);
+  document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); });
+  reducedMotion.addEventListener("change", stop);
+  finePointer.addEventListener("change", stop);
 }
 
 function bindUI() {
-  bindHero3D();
+  bindHeroBackground();
   document.querySelectorAll(".team-flip-card").forEach((card) => {
     card.addEventListener("pointerup", (event) => {
       if (event.pointerType !== "mouse" && !event.target.closest("a")) card.focus();
