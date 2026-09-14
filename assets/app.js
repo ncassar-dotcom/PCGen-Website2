@@ -815,6 +815,7 @@ const pages = {
 
   about: () => `
     <section class="hero about-hero">
+      <video class="about-hero-video" src="${assets.growthVideo}" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="container about-hero-stage">
         <div class="about-hero-title">
           <h1><span>WE OPERATE IN</span><span>A UNIQUE WAY<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
@@ -866,6 +867,7 @@ const pages = {
 
   team: () => `
     <section class="hero team-hero">
+      <video class="team-hero-video" src="${assets.growthVideo}" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="container team-hero-stage">
         <div class="team-hero-top">
           <div class="team-hero-copy">
@@ -902,6 +904,7 @@ const pages = {
 
   services: () => `
     <section class="hero services-hero">
+      <video class="hero-background-video" src="${assets.growthVideo}" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="container hero-grid services-hero-grid">
         <div class="hero-content services-hero-copy">
           <h1><span>OUR</span><span>SERVICES<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
@@ -963,6 +966,7 @@ const pages = {
 
   clients: () => `
     <section class="hero clients-hero">
+      <video class="hero-background-video" src="${assets.growthVideo}" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="container clients-hero-grid">
         <div class="hero-content clients-hero-copy">
           <span class="clients-hero-kicker">Client satisfaction</span>
@@ -986,6 +990,7 @@ const pages = {
 
   careers: () => `
     <section class="hero services-hero careers-services-hero">
+      <video class="hero-background-video" src="${assets.growthVideo}" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="container hero-grid services-hero-grid careers-services-hero-grid">
         <div class="hero-content services-hero-copy careers-services-hero-copy">
           <h1>We're looking for IT experts<span class="title-accent-dot" aria-hidden="true"></span></h1>

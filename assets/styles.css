@@ -982,7 +982,7 @@ h1 {
   width: 0.16em;
   height: 0.16em;
   margin-left: 0.08em;
-  background: var(--accent);
+  background: #ff9000;
   vertical-align: baseline;
 }
 
@@ -2240,7 +2240,7 @@ h3 {
   width: 0.2em;
   height: 0.2em;
   margin-left: 0.14em;
-  background: var(--accent);
+  background: #ff9000;
   vertical-align: baseline;
 }
 
@@ -2965,7 +2965,7 @@ h3 {
   margin-left: 0.12em;
   padding: 0;
   border: 0;
-  background: var(--accent);
+  background: #ff9000;
   vertical-align: baseline;
 }
 
@@ -4226,6 +4226,27 @@ body[data-page="team"] .team-hero::before {
   background: linear-gradient(180deg, rgba(2, 14, 34, 0.72) 0%, rgba(2, 14, 34, 0.36) 44%, rgba(2, 14, 34, 0.9) 100%);
 }
 
+body[data-page="about"] .about-hero::after,
+body[data-page="services"] .services-hero::after,
+body[data-page="clients"] .clients-hero::after,
+body[data-page="careers"] .careers-services-hero::after {
+  display: none;
+  background: none;
+}
+
+.about-hero-video,
+.team-hero-video,
+.hero-background-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.24;
+  pointer-events: none;
+}
+
 .about-hero-stage,
 .about-founder-grid,
 .about-support-content {
@@ -4264,7 +4285,7 @@ body[data-page="about"] .about-hero-title h1 .title-accent-dot {
   width: 0.16em;
   height: 0.16em;
   margin-left: 0.1em;
-  background: var(--accent);
+  background: #ff9000;
   vertical-align: baseline;
 }
 
@@ -5359,7 +5380,7 @@ body[data-page="team"] .team-hero-copy h1 .title-accent-dot {
   width: 0.16em;
   height: 0.16em;
   margin-left: 0.11em;
-  background: var(--accent);
+  background: #ff9000;
   vertical-align: baseline;
 }
 
@@ -5600,13 +5621,14 @@ h1 .title-accent-dot {
   width: 0.16em;
   height: 0.16em;
   margin-left: 0.1em;
-  background: var(--accent);
+  background: #ff9000;
   vertical-align: baseline;
 }
 
 body[data-page="team"] .team-hero::after {
   background: url("backgrounds/hero-flow.jpg") center calc(48% + var(--hero-flow-parallax, 0px)) / cover no-repeat;
   opacity: 0.24;
+  display: none;
 }
 
 body[data-page="team"] .team-hero::before {
