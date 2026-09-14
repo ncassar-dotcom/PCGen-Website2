@@ -133,7 +133,7 @@ const team = [
   { name: "Bridget Muscat", role: "Accounts Executive", image: "/assets/team/bridget-muscat.png" },
   { name: "Joe Smart", role: "IT Support Engineer", image: "/assets/team/joe-smart.png" },
   { name: "Rajul Raj", role: "IT Support Engineer", image: "/assets/team/rajul-raj.png" },
-  { name: "Sphamandla Maduna", role: "IT Support Officer" },
+  { name: "Sphamandla Maduna", role: "IT Support Officer", image: "/assets/team/Sphamandla%20Maduna.png" },
   { name: "Nipuna Athauda", role: "IT Support Engineer", image: "/assets/team/nipuna-athauda.png" },
   { name: "Asma Troudi", role: "Client Support Coordinator", image: "/assets/team/asma-troudi.jpg" },
   { name: "Neville Cassar", role: "Technical Support Officer", image: "/assets/team/neville-cassar.png" },
