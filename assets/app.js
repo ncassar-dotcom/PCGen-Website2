@@ -448,6 +448,69 @@ function serviceCards(limit) {
     </article>`).join("")}</div>`;
 }
 
+function serviceExplorerItems() {
+  return [...services.slice(0, 13), services[14], services[13], ...services.slice(15)].map(([name, intro, detail]) => {
+    if (name === "Remote Support") return [name,
+      "PC Gen provides fast, secure, and convenient Remote Support to help businesses resolve technical issues without the need for an on-site visit.",
+      "Our specialists can securely connect to your systems, investigate problems, and provide effective solutions while minimising disruption to your day-to-day operations."];
+    return [name === "Security" ? "IT Security" : name === "On-site Support" ? "On-Site Support" : name, intro, detail];
+  });
+}
+
+function serviceExplorerCopy(index) {
+  const [name, intro, detail] = serviceExplorerItems()[index];
+  return `<span class="service-explorer-dot" aria-hidden="true"></span>
+    <h2>${escapeHtml(name)}</h2>
+    <p>${escapeHtml(intro)}</p>
+    <p>${escapeHtml(detail)}</p>
+    <a class="service-explorer-contact" href="${siteUrl('/contact/')}">Get more info about this service</a>`;
+}
+
+function serviceExplorer() {
+  return `<div class="service-explorer" data-service-explorer>
+    <div class="service-explorer-list" role="tablist" aria-label="Our services" aria-orientation="vertical">
+      ${serviceExplorerItems().map(([name], index) => `<button type="button" role="tab" id="service-tab-${index}" aria-controls="service-detail" aria-selected="${index === 1}" tabindex="${index === 1 ? 0 : -1}" data-service-index="${index}"><span aria-hidden="true"></span>${escapeHtml(name)}</button>`).join('')}
+    </div>
+    <div class="service-explorer-panel" role="tabpanel" id="service-detail" aria-labelledby="service-tab-1" tabindex="0">
+      <div class="service-explorer-copy" data-service-copy aria-live="polite" aria-atomic="true">${serviceExplorerCopy(1)}</div>
+      <div class="service-explorer-controls">
+        <button type="button" data-service-step="-1" aria-label="Previous service">&#8249;</button>
+        <button type="button" data-service-step="1" aria-label="Next service">&#8250;</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function bindServiceExplorer() {
+  const explorer = document.querySelector('[data-service-explorer]');
+  if (!explorer) return;
+  const tabs = [...explorer.querySelectorAll('[data-service-index]')];
+  const panel = explorer.querySelector('[role="tabpanel"]');
+  let selected = 1;
+  const select = (index, focus = false) => {
+    selected = (index + tabs.length) % tabs.length;
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === selected));
+      tab.tabIndex = i === selected ? 0 : -1;
+    });
+    panel.setAttribute('aria-labelledby', tabs[selected].id);
+    explorer.querySelector('[data-service-copy]').innerHTML = serviceExplorerCopy(selected);
+    if (focus) tabs[selected].focus();
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => select(index));
+    tab.addEventListener('keydown', (event) => {
+      const next = {ArrowDown: index + 1, ArrowUp: index - 1, Home: 0, End: tabs.length - 1}[event.key];
+      if (next === undefined) return;
+      event.preventDefault();
+      select(next, true);
+    });
+  });
+  explorer.querySelectorAll('[data-service-step]').forEach((button) => {
+    button.addEventListener('click', () => select(selected + Number(button.dataset.serviceStep)));
+  });
+}
+
 function servicePills(limit = 6) {
   return `<div class="home-services-pills">${services.slice(0, limit).map((service) => `
     <a class="home-service-pill" href="/services/">
@@ -903,15 +966,16 @@ const pages = {
   `,
 
   services: () => `
+    <div class="services-page-stage">
+    <video class="hero-background-video services-page-video" src="${assets.growthVideo}" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
     <section class="hero services-hero">
-      <video class="hero-background-video" src="${assets.growthVideo}" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="container hero-grid services-hero-grid">
         <div class="hero-content services-hero-copy">
-          <h1><span>OUR</span><span>SERVICES<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
+          <h1>OUR SERVICES<span class="title-accent-dot" aria-hidden="true"></span></h1>
           <p class="lead">From desktop support to bespoke projects, PC Gen is every business's one-stop-shop for IT solutions.</p>
         </div>
         <div class="services-hero-services">
-          ${serviceCards()}
+          ${serviceExplorer()}
         </div>
       </div>
     </section>
@@ -926,6 +990,7 @@ const pages = {
         </div>
       </div>
     </section>
+    </div>
     ${newsletter()}
   `,
 
@@ -1559,6 +1624,7 @@ function bindHeroBackground() {
 }
 
 function bindUI() {
+  bindServiceExplorer();
   bindHeroBackground();
   document.querySelectorAll(".team-flip-card").forEach((card) => {
     card.addEventListener("pointerup", (event) => {
