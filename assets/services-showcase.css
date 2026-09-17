@@ -75,6 +75,7 @@ body[data-page="services"] .services-hero-copy .lead {
   line-height: 1.25;
   text-align: left;
   cursor: pointer;
+  transition: color 180ms ease;
 }
 .service-explorer-list [role="tab"]:last-child { border-bottom: 0; }
 .service-explorer-list [role="tab"] > span {
@@ -82,14 +83,17 @@ body[data-page="services"] .services-hero-copy .lead {
   height: 3px;
   flex-shrink: 0;
   background: var(--accent);
-  transition: width 180ms ease;
+  transition: width 180ms ease, background-color 180ms ease;
 }
 .service-explorer-list [aria-selected="true"] {
   color: #fff;
   font-weight: 800;
 }
 .service-explorer-list [aria-selected="true"] > span { width: 40px; }
-.service-explorer-list [role="tab"]:hover { color: #fff; }
+.service-explorer-list [role="tab"]:hover,
+.service-explorer-list [role="tab"]:focus-visible { color: #ff9000; }
+.service-explorer-list [role="tab"]:hover > span,
+.service-explorer-list [role="tab"]:focus-visible > span { background: #ff9000; }
 .service-explorer-panel {
   display: flex;
   flex-direction: column;
@@ -100,6 +104,171 @@ body[data-page="services"] .services-hero-copy .lead {
   border: 1px solid rgba(46,183,160,0.8);
   border-radius: 20px;
   background: rgba(24,43,71,0.66);
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+.service-explorer-panel-slot {
+  position: relative;
+  display: grid;
+  min-width: 0;
+}
+.service-contact-dialog {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(26px, 2.4vw, 40px);
+  border: 1px solid rgba(46,183,160,0.8);
+  border-radius: 20px;
+  background: rgba(24,43,71,0.97);
+  color: #fff;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  scrollbar-gutter: stable;
+  scrollbar-width: auto;
+  scrollbar-color: #20a5a0 #0b1c30;
+}
+/* Keep the native scroll behavior, with a wide pill-shaped track and thumb. */
+@supports selector(::-webkit-scrollbar) {
+  .service-contact-dialog {
+    /* Standard scrollbar colors override the detailed styling in Chromium. */
+    scrollbar-color: auto;
+  }
+  .service-contact-dialog::-webkit-scrollbar {
+    width: 30px;
+  }
+  .service-contact-dialog::-webkit-scrollbar-track {
+    background: #0b1c30;
+    border: 1px solid #20a5a0;
+    border-radius: 999px;
+  }
+  .service-contact-dialog::-webkit-scrollbar-thumb {
+    min-height: 60px;
+    background: #20a5a0;
+    border: 4px solid #0b1c30;
+    border-radius: 999px;
+    background-clip: padding-box;
+  }
+  .service-contact-dialog::-webkit-scrollbar-thumb:hover {
+    background-color: #2eb7a0;
+  }
+  .service-contact-dialog::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  .service-contact-dialog::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+.service-contact-dialog[hidden] { display: none; }
+.service-contact-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.service-contact-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 2.4vw, 36px);
+  color: #fff;
+}
+.service-contact-close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #ff9000;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.service-contact-close:hover { color: #ff9000; }
+.service-contact-service { margin: 14px 0 20px; color: rgba(255,255,255,0.78); font-size: 16px; }
+.service-contact-dialog form { display: grid; gap: 13px; }
+.service-contact-dialog label { display: grid; gap: 6px; color: #fff; font-size: 14px; }
+.service-contact-dialog input,
+.service-contact-dialog textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(46,183,160,0.6);
+  border-radius: 7px;
+  background: rgba(6,20,39,0.65);
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.service-contact-dialog textarea { resize: vertical; min-height: 68px; }
+.service-contact-send {
+  justify-self: start;
+  padding: 12px 30px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.service-contact-send:hover { background: #ff9000; color: #081322; }
+.service-contact-dialog .service-contact-note,
+.service-contact-dialog .service-contact-status {
+  margin: 0;
+  color: rgba(255,255,255,0.78);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.service-contact-status:empty { display: none; }
+.service-explorer-panel.is-rotating {
+  will-change: transform, filter;
+  animation: service-panel-turn var(--service-turn-duration, 700ms) ease-in-out both;
+}
+@keyframes service-panel-turn {
+  0%, 100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: perspective(1200px) translateX(0) rotateY(0deg) scale(1);
+  }
+  40% {
+    opacity: 0.45;
+    filter: blur(6px);
+  }
+  49%, 50% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: perspective(1200px) translateX(var(--service-turn-shift, 18px)) rotateY(var(--service-turn-out, 90deg)) scale(0.96);
+  }
+  51% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: perspective(1200px) translateX(calc(-1 * var(--service-turn-shift, 18px))) rotateY(var(--service-turn-in, -90deg)) scale(0.96);
+  }
+  65% {
+    opacity: 0.65;
+    filter: blur(4px);
+  }
+}
+/* Match the homepage's staggered fade-and-rise entrance. Animate the
+   surrounding layout separately so a service turn never conflicts with it. */
+body[data-page="services"] #app:not(.app-ready) .services-hero-services {
+  opacity: 0;
+}
+body[data-page="services"] #app.app-ready .services-hero-copy h1 {
+  animation: hero-title-reveal 900ms cubic-bezier(0.2, 0.78, 0.18, 1) both;
+}
+body[data-page="services"] #app.app-ready .services-hero-copy .lead {
+  animation: hero-title-reveal 900ms cubic-bezier(0.2, 0.78, 0.18, 1) 160ms both;
+}
+body[data-page="services"] #app.app-ready .services-hero-services {
+  animation: hero-title-reveal 900ms cubic-bezier(0.2, 0.78, 0.18, 1) 300ms both;
 }
 .service-explorer-dot {
   display: block;
@@ -125,12 +294,14 @@ body[data-page="services"] .services-hero-copy .lead {
   display: inline-block;
   margin-top: 16px;
   padding: 15px 20px;
+  border: 0;
   border-radius: 8px;
   background: var(--accent);
   color: #fff;
   font-size: 14px;
   line-height: 1.4;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .service-explorer-contact:hover { background: #238c79; }
 .service-explorer-controls {
@@ -194,10 +365,22 @@ body[data-page="services"] .services-cta-button { width: 100%; }
   body[data-page="services"] .services-hero-copy { margin-bottom: 32px; }
   .service-explorer { padding: 14px; border-radius: 14px; }
   .service-explorer-panel { padding: 22px; min-height: 0; border-radius: 12px; }
+  .service-contact-dialog { padding: 22px; border-radius: 12px; }
   .service-explorer-dot { width: 22px; height: 22px; margin-bottom: 28px; }
   .service-explorer-copy h2 { font-size: 32px; margin-bottom: 26px; }
   .service-explorer-contact { font-size: 12px; padding: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .service-explorer-list [role="tab"],
   .service-explorer-list [role="tab"] > span { transition: none; }
+  .service-explorer-panel.is-rotating,
+  body[data-page="services"] #app.app-ready .services-hero-copy h1,
+  body[data-page="services"] #app.app-ready .services-hero-copy .lead,
+  body[data-page="services"] #app.app-ready .services-hero-services {
+    animation: none;
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+  body[data-page="services"] #app:not(.app-ready) .services-hero-services { opacity: 1; }
 }

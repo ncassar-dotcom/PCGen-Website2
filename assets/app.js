@@ -101,7 +101,7 @@ const partnerLogos = [
 ];
 
 const services = [
-  ["Business IT Support", "Keep your office devices functioning properly and your business running smoothly with desktop support services.", "Software standardisation, application support, equipment setup, and problem resolution."],
+  ["Business IT Support", "Keep your business running smoothly with managed IT, desktop support and help desk support in Malta.", "Our IT support team helps with software standardisation, application support, equipment setup and day-to-day problem resolution."],
   ["Remote Support", "Get instant support through remote troubleshooting services.", "Our specialists connect securely to investigate and resolve technical issues with minimal downtime."],
   ["Bespoke Projects", "Get the IT package your business actually needs.", "From new office systems to industry-specific software configuration, we assess, recommend, and implement."],
   ["On-site Support", "Localised IT support when remote work is not the right option.", "Break/fix support, cabling, hardware work, and practical offline IT assistance."],
@@ -369,7 +369,7 @@ function homeHero() {
       <div class="container home-hero-stage">
         <div class="home-hero-copy">
           <h1><span>YOUR IT</span><span>OUR PASSION<span class="title-accent-dot" aria-hidden="true"></span></span></h1>
-          <p class="home-hero-kicker">Managed IT. Secure Infrastructure. Results.</p>
+          <p class="home-hero-kicker">IT Support Malta. Managed IT. Secure Infrastructure.</p>
         </div>
         ${logoGrid(partnerLogos, "logos home-hero-logos")}
         <div class="home-hero-actions" aria-label="Home actions">
@@ -385,7 +385,8 @@ function homeProofSection() {
     <section class="section home-proof-section">
       <div class="container home-proof-grid">
         <div class="home-proof-copy">
-          <p>PC Gen delivers end-to-end IT services without the cost and complexity of maintaining an in-house team. From technical support and managed IT to cybersecurity, infrastructure, and bespoke technology projects, we provide the expertise your business needs through a single trusted partner.</p>
+          <h2 class="section-title">IT support and managed IT services in Malta</h2>
+          <p>PC Gen provides IT support in Malta for businesses that need reliable desktop support, help desk support and managed IT services without maintaining a full in-house team. Based in Haz-Zebbug, we help with remote and on-site support, cybersecurity, infrastructure and bespoke technology projects through a single trusted partner.</p>
         </div>
         <div class="home-proof-metrics" aria-label="PC Gen highlights">
           <article>
@@ -463,20 +464,49 @@ function serviceExplorerCopy(index) {
     <h2>${escapeHtml(name)}</h2>
     <p>${escapeHtml(intro)}</p>
     <p>${escapeHtml(detail)}</p>
-    <a class="service-explorer-contact" href="${siteUrl('/contact/')}">Get more info about this service</a>`;
+    <button class="service-explorer-contact" type="button" data-service-contact-open aria-haspopup="dialog" aria-controls="service-contact-dialog">Get more info about this service</button>`;
+}
+
+function serviceContactForm() {
+  return `<div class="service-contact-dialog" id="service-contact-dialog" role="dialog" aria-labelledby="service-contact-title" aria-describedby="service-contact-note" hidden>
+    <div class="service-contact-heading">
+      <h2 id="service-contact-title">Contact us</h2>
+      <button class="service-contact-close" type="button" data-service-contact-close aria-label="Close contact form"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <p class="service-contact-service">Enquiry about <strong data-contact-service></strong></p>
+    <form data-service-contact-form>
+      <label for="service-company">Company Name:<input id="service-company" name="company" autocomplete="organization" maxlength="120" required></label>
+      <label for="service-full-name">Full Name:<input id="service-full-name" name="fullName" autocomplete="name" maxlength="120" required></label>
+      <label for="service-address">Address:<textarea id="service-address" name="address" autocomplete="street-address" rows="2" maxlength="300" required></textarea></label>
+      <label for="service-tel">Tel:<input id="service-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" pattern="[0-9+]+" title="Use only digits 0 to 9 and the + character." maxlength="40" required></label>
+      <label for="service-email">Email:<input id="service-email" name="email" type="email" autocomplete="email" maxlength="254" required></label>
+      <label for="service-message">Message:<textarea id="service-message" name="message" rows="4" maxlength="2000"></textarea></label>
+      <button class="service-contact-send" type="submit">SEND</button>
+      <p class="service-contact-note" id="service-contact-note">SEND opens your email app with this enquiry. Send the email there to complete delivery.</p>
+      <p class="service-contact-status" data-service-contact-status role="status"></p>
+    </form>
+  </div>`;
+}
+
+function serviceEnquiryMailto(service, details) {
+  const body = [`Service: ${service}`, `Company Name: ${details.company}`, `Full Name: ${details.fullName}`, `Address: ${details.address}`, `Tel: ${details.tel}`, `Email: ${details.email}`, `Message: ${details.message || ''}`].join('\r\n');
+  return `mailto:${contact.email}?subject=${encodeURIComponent('Service enquiry - ' + service)}&body=${encodeURIComponent(body)}`;
 }
 
 function serviceExplorer() {
   return `<div class="service-explorer" data-service-explorer>
     <div class="service-explorer-list" role="tablist" aria-label="Our services" aria-orientation="vertical">
-      ${serviceExplorerItems().map(([name], index) => `<button type="button" role="tab" id="service-tab-${index}" aria-controls="service-detail" aria-selected="${index === 1}" tabindex="${index === 1 ? 0 : -1}" data-service-index="${index}"><span aria-hidden="true"></span>${escapeHtml(name)}</button>`).join('')}
+      ${serviceExplorerItems().map(([name], index) => `<button type="button" role="tab" id="service-tab-${index}" aria-controls="service-detail" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}" data-service-index="${index}"><span aria-hidden="true"></span>${escapeHtml(name)}</button>`).join('')}
     </div>
-    <div class="service-explorer-panel" role="tabpanel" id="service-detail" aria-labelledby="service-tab-1" tabindex="0">
-      <div class="service-explorer-copy" data-service-copy aria-live="polite" aria-atomic="true">${serviceExplorerCopy(1)}</div>
+    <div class="service-explorer-panel-slot">
+    <div class="service-explorer-panel" role="tabpanel" id="service-detail" aria-labelledby="service-tab-0" tabindex="0">
+      <div class="service-explorer-copy" data-service-copy aria-live="polite" aria-atomic="true">${serviceExplorerCopy(0)}</div>
       <div class="service-explorer-controls">
         <button type="button" data-service-step="-1" aria-label="Previous service">&#8249;</button>
         <button type="button" data-service-step="1" aria-label="Next service">&#8250;</button>
       </div>
+    </div>
+    ${serviceContactForm()}
     </div>
   </div>`;
 }
@@ -486,15 +516,111 @@ function bindServiceExplorer() {
   if (!explorer) return;
   const tabs = [...explorer.querySelectorAll('[data-service-index]')];
   const panel = explorer.querySelector('[role="tabpanel"]');
-  let selected = 1;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let selected = 0;
+  let turnTimer = null;
+  const updateCopy = () => {
+    panel.setAttribute('aria-labelledby', tabs[selected].id);
+    explorer.querySelector('[data-service-copy]').innerHTML = serviceExplorerCopy(selected);
+  };
+  const clearRotation = () => {
+    panel.classList.remove('is-rotating');
+    if (turnTimer !== null) {
+      clearTimeout(turnTimer);
+      turnTimer = null;
+      updateCopy();
+    }
+  };
+  panel.addEventListener('animationend', (event) => {
+    if (event.target === panel && event.animationName === 'service-panel-turn') clearRotation();
+  });
+  reducedMotion.addEventListener('change', clearRotation);
+  const dialog = explorer.querySelector('#service-contact-dialog');
+  const form = dialog.querySelector('form');
+  const closeContact = (restoreFocus = true) => {
+    if (dialog.hidden) return;
+    dialog.hidden = true;
+    panel.inert = false;
+    if (restoreFocus) panel.querySelector('[data-service-contact-open]').focus({preventScroll: true});
+  };
+  panel.addEventListener('click', (event) => {
+    if (!event.target.closest('[data-service-contact-open]')) return;
+    clearRotation();
+    dialog.querySelector('[data-contact-service]').textContent = serviceExplorerItems()[selected][0];
+    dialog.querySelector('[data-service-contact-status]').textContent = '';
+    dialog.hidden = false;
+    panel.inert = true;
+    form.elements.company.focus({preventScroll: true});
+  });
+  dialog.querySelector('[data-service-contact-close]').addEventListener('click', () => closeContact());
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      closeContact();
+    }
+  });
+  // This is a panel-sized, non-modal dialog: the service list remains usable.
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const fields = ['company', 'fullName', 'address', 'tel', 'email'];
+    const details = {};
+    for (const name of fields) {
+      const input = form.elements[name];
+      details[name] = input.value.trim();
+      input.setCustomValidity(details[name] ? '' : 'Please complete this field.');
+    }
+    if (details.tel && !/^[0-9+]+$/.test(details.tel)) {
+      form.elements.tel.setCustomValidity('Use only digits 0 to 9 and the + character.');
+    }
+    details.message = form.elements.message.value.trim();
+    if (!form.reportValidity()) return;
+    window.location.href = serviceEnquiryMailto(serviceExplorerItems()[selected][0], details);
+    dialog.querySelector('[data-service-contact-status]').textContent = `Your enquiry is ready in your email app. If it did not open, email ${contact.email}.`;
+  });
+  form.addEventListener('input', (event) => {
+    if (event.target.name === 'tel') {
+      const input = event.target;
+      const cleaned = input.value.replace(/[^0-9+]/g, '');
+      if (cleaned !== input.value) {
+        const caret = input.value.slice(0, input.selectionStart ?? input.value.length).replace(/[^0-9+]/g, '').length;
+        input.value = cleaned;
+        input.setSelectionRange(caret, caret);
+      }
+    }
+    if (typeof event.target.setCustomValidity === 'function') event.target.setCustomValidity('');
+    dialog.querySelector('[data-service-contact-status]').textContent = '';
+  });
   const select = (index, focus = false) => {
-    selected = (index + tabs.length) % tabs.length;
+    const next = (index + tabs.length) % tabs.length;
+    closeContact(false);
+    if (next === selected) {
+      if (focus) tabs[next].focus();
+      return;
+    }
+    const turnDirection = index < selected ? -1 : 1;
+    clearRotation();
+    selected = next;
     tabs.forEach((tab, i) => {
       tab.setAttribute('aria-selected', String(i === selected));
       tab.tabIndex = i === selected ? 0 : -1;
     });
-    panel.setAttribute('aria-labelledby', tabs[selected].id);
-    explorer.querySelector('[data-service-copy]').innerHTML = serviceExplorerCopy(selected);
+    if (!reducedMotion.matches) {
+      panel.style.setProperty('--service-turn-out', `${turnDirection * 90}deg`);
+      panel.style.setProperty('--service-turn-in', `${turnDirection * -90}deg`);
+      panel.style.setProperty('--service-turn-shift', `${turnDirection * 18}px`);
+      panel.style.setProperty('--service-turn-duration', '700ms');
+      // Restart the CSS turn even when selections change rapidly.
+      void panel.offsetWidth;
+      panel.classList.add('is-rotating');
+      // Change the content while the card is edge-on and hidden.
+      turnTimer = setTimeout(() => {
+        turnTimer = null;
+        updateCopy();
+      }, 350);
+    } else {
+      updateCopy();
+    }
     if (focus) tabs[selected].focus();
   };
   tabs.forEach((tab, index) => {
@@ -972,7 +1098,7 @@ const pages = {
       <div class="container hero-grid services-hero-grid">
         <div class="hero-content services-hero-copy">
           <h1>OUR SERVICES<span class="title-accent-dot" aria-hidden="true"></span></h1>
-          <p class="lead">From desktop support to bespoke projects, PC Gen is every business's one-stop-shop for IT solutions.</p>
+          <p class="lead">Managed IT, desktop support and help desk support for businesses in Malta. From remote IT support to on-site assistance and bespoke projects, PC Gen keeps your business connected.</p>
         </div>
         <div class="services-hero-services">
           ${serviceExplorer()}
@@ -997,7 +1123,8 @@ const pages = {
   "remote-support": () => `
     <section class="section dark remote-support-page">
       <div class="container">
-        ${sectionHead("Remote Support", "Remote Support", "Choose your device to download the PC Gen remote-support application.")}
+        <h1 class="section-title">Remote Support</h1>
+        <p class="section-copy">Choose your device to download the PC Gen remote-support application.</p>
         <div class="remote-support-grid">
           <a class="remote-support-card" href="https://my.anydesk.com/v2/api/v2/custom-clients/downloads/public/FY8O7MPM13EK/AnyDeskClient.exe" target="_blank" rel="noopener">
             <span class="platform-icon windows" aria-hidden="true">
@@ -1723,9 +1850,15 @@ function bindUI() {
   bindNewsletterParallax();
 }
 
-root.setAttribute("aria-busy", "true");
-preloadWholeSite().finally(() => {
-  render();
-  root.removeAttribute("aria-busy");
-  requestAnimationFrame(() => root.classList.add("app-ready"));
-});
+// Public pages include their real content in HTML for visitors and crawlers.
+// Bind their controls without replacing the HTML or waiting for site-wide preloads.
+if (root.dataset.prerendered === pageKey) {
+  bindUI();
+} else {
+  root.setAttribute("aria-busy", "true");
+  preloadWholeSite().finally(() => {
+    render();
+    root.removeAttribute("aria-busy");
+    requestAnimationFrame(() => root.classList.add("app-ready"));
+  });
+}

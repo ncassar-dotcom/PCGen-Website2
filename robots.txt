@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Login and admin pages use HTML noindex; they must remain crawlable.
+Sitemap: https://pcgen.mt/sitemap.xml

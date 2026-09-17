@@ -1858,7 +1858,7 @@ body[data-page="contact"] .contact-list {
 .scroll-top-toggle {
   position: fixed;
   top: calc(100vh - clamp(62px, 8vh, 96px) - 36px);
-  right: max(0px, calc(max(18px, (100vw - min(100vw - 120px, 1540px)) / 4 - 12px) - 20px));
+  right: 10px;
   z-index: 65;
   display: grid;
   place-items: center;
@@ -1894,7 +1894,7 @@ body[data-page="contact"] .contact-list {
 @media (max-width: 640px) {
   .scroll-top-toggle {
     top: calc(100vh - 64px);
-    right: 0;
+    right: 10px;
   }
 }
 
@@ -3179,7 +3179,7 @@ h3 {
 
 .home-proof-copy p {
   color: rgba(255, 255, 255, 0.72);
-  font-size: clamp(6.075px, 0.454vw, 7.29px);
+  font-size: clamp(16px, 1.15vw, 18px);
   line-height: 1.55;
   text-align: left;
 }
@@ -4015,8 +4015,8 @@ body.menu-open .menu-toggle:hover {
 }
 
 .why-grid .card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
   min-height: 190px;
   padding: 30px;
   border: 2px solid var(--accent);
@@ -4027,12 +4027,14 @@ body.menu-open .menu-toggle:hover {
 }
 
 .why-grid .card h3 {
+  align-self: start;
   margin: 0 0 10px;
   color: var(--white);
   font-size: 22px;
 }
 
 .why-grid .card p {
+  grid-row: 2;
   margin: 0;
   color: rgba(255, 255, 255, 0.72);
   font-size: 18px;
@@ -5255,7 +5257,7 @@ body {
 
   .scroll-top-toggle {
     top: auto;
-    right: 0;
+    right: 10px;
     bottom: 16px;
   }
 }

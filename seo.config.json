@@ -1,0 +1,19 @@
+{
+  "baseUrl": "https://pcgen.mt/",
+  "indexingEnabled": false,
+  "pages": [
+    {"file":"index.html","key":"home","path":"","title":"IT Support Malta & Managed IT Services | PC Gen","description":"Business IT support in Malta from PC Gen. Managed IT services, desktop and help desk support, cybersecurity, remote assistance and on-site technical support."},
+    {"file":"about/index.html","key":"about","path":"about/","title":"IT Company in Malta | About PC Gen","description":"Meet PC Gen, an IT company based in Haz-Zebbug, Malta. We provide managed IT, business support, cybersecurity and infrastructure services for organisations."},
+    {"file":"services/index.html","key":"services","path":"services/","title":"Managed IT, Desktop & Help Desk Support Malta | PC Gen","description":"Explore PC Gen IT services in Malta: managed IT, desktop support, help desk support, remote and on-site assistance, backup, IT security and network management."},
+    {"file":"clients/index.html","key":"clients","path":"clients/","title":"Business IT Support Clients in Malta | PC Gen","description":"Discover businesses supported by PC Gen in Malta. Read client feedback on our IT support, managed services, technical expertise and responsive assistance."},
+    {"file":"meet-the-team/index.html","key":"team","path":"meet-the-team/","title":"Meet Our IT Support Team in Malta | PC Gen","description":"Meet the PC Gen team delivering IT support in Malta. Our engineers and support professionals help businesses with managed IT, infrastructure and cybersecurity."},
+    {"file":"contact/index.html","key":"contact","path":"contact/","title":"Contact PC Gen | IT Support Malta","description":"Contact PC Gen for IT support and managed IT services in Malta. Call +356 2146 1111, email info@pcgen.mt or visit our team in Haz-Zebbug."},
+    {"file":"careers/index.html","key":"careers","path":"careers/","title":"IT Support Careers in Malta | PC Gen","description":"Explore IT careers with PC Gen in Malta. Join a team supporting local businesses with desktop support, technical assistance, infrastructure and managed IT."},
+    {"file":"remote-support.html","key":"remote-support","path":"remote-support.html","title":"Remote IT Support Malta | PC Gen","description":"Connect with PC Gen remote IT support in Malta. Download our Windows or Mac remote-support application and share your address with your support engineer."},
+    {"file":"client-login/index.html","key":"client-login","path":"client-login/","title":"Client Login | PC Gen","description":"Sign in to your PC Gen client area.","noindex":true},
+    {"file":"client-portal/index.html","key":"client-portal","path":"client-portal/","title":"Client Portal | PC Gen","description":"Manage your PC Gen client information and services.","noindex":true},
+    {"file":"client-admin/index.html","key":"client-admin","path":"client-admin/","title":"Administration | PC Gen","description":"Authorised PC Gen administration area.","noindex":true},
+    {"file":"jobs/technical-support-engineer/index.html","key":"job:technical-support-engineer","path":"jobs/technical-support-engineer/","title":"Technical Support Engineer Job in Malta | PC Gen","description":"Explore the Technical Support Engineer role at PC Gen in Malta, supporting business systems, networking, Microsoft platforms and day-to-day IT operations.","dynamic":true},
+    {"file":"jobs/junior-it-support-officer/index.html","key":"job:junior-it-support-officer","path":"jobs/junior-it-support-officer/","title":"Junior IT Support Officer Job in Malta | PC Gen","description":"Explore the Junior IT Support Officer role at PC Gen in Malta. Develop practical skills in technical support and business IT services.","dynamic":true}
+  ]
+}
