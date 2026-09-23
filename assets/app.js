@@ -96,8 +96,8 @@ const partnerLogos = [
   ["3CX", "/assets/3cx-logo.png"],
   ["Acronis", "/assets/Acronis-logo-white.svg"],
   ["CodeTwo", "/assets/codetwo-logo.webp"],
-  ["Dell Technologies", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dell_Technologies_logo.svg"],
-  ["Bitdefender", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Bitdefender_logo.svg"]
+  ["Dell Technologies", "/assets/Dell_Technologies_logo.svg"],
+  ["Bitdefender", "/assets/Bitdefender_logo.svg"]
 ];
 
 const services = [
@@ -252,8 +252,9 @@ function header() {
   return `
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/" aria-label="PC Gen home"><img src="${assets.logo}" alt="PC Gen"></a>
-        <nav class="main-nav" id="main-nav">
+        <a class="brand" href="/" aria-label="PC Gen home"><img src="${assets.logo}" alt="PC Gen"><span class="mobile-only mobile-brand" aria-hidden="true"><img src="/assets/brand/pcgen-mobile-mark.svg" alt=""><span></span></span></a>
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+          <div class="mobile-only mobile-menu-socials">${mobileSocials()}</div>
           <div class="main-nav-top">
             <a class="main-nav-support" href="/remote-support.html">Remote Support</a>
           </div>
@@ -266,8 +267,11 @@ function header() {
               <a href="${contact.instagram}" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
               <a href="${contact.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
             </div>
-            <a href="" title="Call 0035621461111 via 3CX" tcxhref="0035621461111" target="_blank">${contact.phone}</a>
+            <strong class="mobile-only mobile-menu-contact-title">Get in touch:</strong>
+            <a href="tel:${contact.tel}">${contact.phone}</a>
             <a href="mailto:${contact.support}">${contact.support}</a>
+            <a class="mobile-only" href="mailto:${contact.email}">${contact.email}</a>
+            <img class="mobile-only mobile-menu-mark" src="/assets/brand/pcgen-mobile-mark.svg" alt="">
           </div>
         </nav>
         <div class="support-downloads" aria-label="Header actions">
@@ -278,10 +282,18 @@ function header() {
     </header>`;
 }
 
+function mobileSocials() {
+  return `<div class="socials"><a href="${contact.facebook}" target="_blank" rel="noopener" aria-label="Facebook">f</a><a href="${contact.instagram}" target="_blank" rel="noopener" aria-label="Instagram">ig</a><a href="${contact.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">in</a></div>`;
+}
+
 function footer() {
   return `
     <footer class="site-footer">
       <div class="container">
+        <div class="mobile-only mobile-footer">
+          <div class="mobile-footer-brand"><a href="/" aria-label="PC Gen home"><img src="/assets/brand/pcgen-mobile-mark.svg" alt="PC Gen"></a>${mobileSocials()}</div>
+          <div class="mobile-footer-contact"><a href="tel:${contact.tel}"><strong>Get in touch:</strong> +356 21461111</a><a href="mailto:${contact.support}">${contact.support}</a><a href="mailto:${contact.email}">${contact.email}</a></div>
+        </div>
         <div class="footer-grid">
           <div>
             <img class="footer-logo" src="${assets.logo}" alt="PC Gen">
@@ -386,7 +398,7 @@ function homeProofSection() {
       <div class="container home-proof-grid">
         <div class="home-proof-copy">
           <h2 class="section-title">IT support and managed IT services in Malta</h2>
-          <p>PC Gen provides IT support in Malta for businesses that need reliable desktop support, help desk support and managed IT services without maintaining a full in-house team. Based in Haz-Zebbug, we help with remote and on-site support, cybersecurity, infrastructure and bespoke technology projects through a single trusted partner.</p>
+          <p>PC Gen provides IT support in Malta for businesses that need reliable desktop support, help desk support and managed IT services without maintaining a full in-house team.<span class="mobile-proof-break"></span> Based in Haz-Zebbug, we help with remote and on-site support, cybersecurity, infrastructure and bespoke technology projects through a single trusted partner.</p>
         </div>
         <div class="home-proof-metrics" aria-label="PC Gen highlights">
           <article>
@@ -1275,7 +1287,7 @@ function render() {
   let content;
   if (pageKey.startsWith("job:")) content = jobPage(pageKey.split(":")[1]);
   else content = pages[pageKey] ? pages[pageKey]() : pages.home();
-  root.innerHTML = rewriteSiteUrls(header() + content + footer() + `<button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button>`);
+  root.innerHTML = rewriteSiteUrls(header() + '<main id="main-content">' + content + '</main>' + footer() + `<button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button>`);
   bindUI();
 }
 
@@ -1793,18 +1805,41 @@ function bindUI() {
 
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.querySelector(".main-nav");
-  toggle?.addEventListener("click", () => {
-    const open = !menu.classList.contains("is-open");
+  const setMenuOpen = (open, restoreFocus = false) => {
     menu.classList.toggle("is-open", open);
     document.body.classList.toggle("menu-open", open);
     toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.querySelectorAll('#main-content, .site-footer, .cookie, .scroll-top-toggle, .site-header .brand, .support-downloads').forEach(element => { element.inert = open; });
+    if (open) menu.querySelector('.main-nav-links a')?.focus({preventScroll: true});
+    else if (restoreFocus) toggle.focus({preventScroll: true});
+  };
+  toggle?.addEventListener("click", () => {
+    setMenuOpen(!menu.classList.contains("is-open"));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!menu?.classList.contains('is-open')) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setMenuOpen(false, true);
+    } else if (event.key === 'Tab') {
+      const focusable = [...menu.querySelectorAll('a[href], button'), toggle].filter(element => element.getClientRects().length);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  });
+  menu?.querySelectorAll('.main-nav-links a').forEach(link => {
+    if (new URL(link.href, location.href).pathname.replace(siteBasePath, '') === currentPath) {
+      link.classList.add('is-active');
+      link.setAttribute('aria-current', 'page');
+    }
   });
 
   document.querySelectorAll(".main-nav a").forEach((link) => {
     link.addEventListener("click", () => {
-      menu.classList.remove("is-open");
-      document.body.classList.remove("menu-open");
-      toggle?.setAttribute("aria-expanded", "false");
+      setMenuOpen(false);
     });
   });
 
