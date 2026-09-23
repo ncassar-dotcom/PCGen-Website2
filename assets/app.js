@@ -316,7 +316,7 @@ function footer() {
           </div>
         </div>
         <div class="copyright">
-          <span>©2026 PC Generation LTD. All rights reserved.</span>
+          <span><sup>©</sup> 2026 PC Gen Ltd. All rights reserved.</span>
           <a href="https://pcgen.mt/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
         </div>
       </div>
