@@ -80,6 +80,8 @@ body.menu-open { overflow: hidden; }
     min-height: 44px;
   }
   .main-nav.is-open .main-nav-links a:is(:hover, :focus-visible, .is-active) { color: #2eb7a0; }
+  .main-nav.is-open .main-nav-access a { font-size: 16px; letter-spacing: 0; }
+  .main-nav-access { gap: 12px 28px; margin-top: 4px; }
   .main-nav-footer {
     position: relative;
     isolation: isolate;
@@ -234,6 +236,7 @@ body.menu-open { overflow: hidden; }
   .site-footer { background: #0d2a42; padding: 26px 0 0; }
   .site-footer .footer-grid { display: none; }
   .mobile-footer { display: block; }
+  .footer-access-links { justify-content: center; margin: 0 0 14px; }
   .mobile-footer-brand { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
   .mobile-footer-brand > a img { width: 100px; height: auto; }
   .mobile-footer .socials { display: flex; gap: clamp(14px, 5vw, 28px); margin: 0; }

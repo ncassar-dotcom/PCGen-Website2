@@ -260,6 +260,7 @@ function header() {
           </div>
           <div class="main-nav-links">
             ${menuLinks}
+            ${portalAccessLinks('main-nav-access')}
           </div>
           <div class="main-nav-footer">
             <div class="socials">
@@ -275,6 +276,7 @@ function header() {
           </div>
         </nav>
         <div class="support-downloads" aria-label="Header actions">
+          <a class="remote-header-link client-access-link" href="/client-login/">Client Access</a>
           <a class="remote-header-link" href="/remote-support.html">Remote Support</a>
         </div>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -286,50 +288,58 @@ function mobileSocials() {
   return `<div class="socials"><a href="${contact.facebook}" target="_blank" rel="noopener" aria-label="Facebook">f</a><a href="${contact.instagram}" target="_blank" rel="noopener" aria-label="Instagram">ig</a><a href="${contact.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">in</a></div>`;
 }
 
+function portalAccessLinks(className) {
+  return `<div class="${className}" role="group" aria-label="Account access"><a href="/client-login/">Client Access</a><a href="/client-admin/">Web Admin</a></div>`;
+}
+
 function footer() {
   return `
-    <footer class="site-footer">
+    <footer class="site-footer footer-directory">
       <div class="container">
-        <div class="mobile-only mobile-footer">
-          <div class="mobile-footer-brand"><a href="/" aria-label="PC Gen home"><img src="/assets/brand/pcgen-mobile-mark.svg" alt="PC Gen"></a>${mobileSocials()}</div>
-          <div class="mobile-footer-contact"><a href="tel:${contact.tel}"><strong>Get in touch:</strong> +356 21461111</a><a href="mailto:${contact.support}">${contact.support}</a><a href="mailto:${contact.email}">${contact.email}</a></div>
-        </div>
         <div class="footer-grid">
-          <div>
-            <img class="footer-logo" src="${assets.logo}" alt="PC Gen">
+          <div class="footer-company">
+            <a class="footer-brand-link" href="/" aria-label="PC Gen home"><img class="footer-logo" src="${assets.logo}" alt="PC Gen"></a>
             <p>IT solutions for businesses across Malta, from desktop support to bespoke infrastructure projects.</p>
-            <div class="socials">
-              <a href="${contact.facebook}" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-              <a href="${contact.instagram}" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
-              <a href="${contact.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-            </div>
+            <a class="footer-phone" href="tel:${contact.tel}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m7 3 3 5-2 2c1.3 2.5 3.5 4.7 6 6l2-2 5 3c0 3-2 4-4 4C9 20 4 15 3 7c0-2 1-4 4-4Z"/></svg>${contact.phone}</a>
+            <a class="footer-email" href="mailto:${contact.email}">${contact.email}</a>
+            ${mobileSocials()}
           </div>
-          <div>
-            <h3>Get in touch</h3>
+          <nav class="footer-link-group" aria-label="Footer services">
+            <h3>Services</h3>
             <ul>
-              <li><a href="tel:${contact.tel}">${contact.phone}</a></li>
-              <li><a href="mailto:${contact.email}">${contact.email}</a></li>
-              <li><a href="mailto:${contact.support}">${contact.support}</a></li>
+              <li><a href="/services/">Business IT Support</a></li>
+              <li><a href="/services/">Managed IT Services</a></li>
+              <li><a href="/services/">Backup &amp; Recovery</a></li>
+              <li><a href="/services/">IT Security</a></li>
+              <li><a href="/services/">All Services</a></li>
             </ul>
-          </div>
-          <div>
-            <h3>Pages</h3>
-            <ul>${nav.map((item) => `<li><a href="${item.href}">${item.label}</a></li>`).join("")}</ul>
-          </div>
-          <div>
-            <h3>Popular services</h3>
+          </nav>
+          <nav class="footer-link-group" aria-label="Footer company">
+            <h3>Company</h3>
             <ul>
-              <li>Business IT support</li>
-              <li>Help desk services</li>
-              <li>Backup recovery</li>
-              <li>Network administration</li>
-              <li>Antivirus protection</li>
+              <li><a href="/about/">About Us</a></li>
+              <li><a href="/meet-the-team/">The Team</a></li>
+              <li><a href="/clients/">Our Clients</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
             </ul>
-          </div>
+          </nav>
+          <nav class="footer-link-group" aria-label="Footer support and account">
+            <h3>Support &amp; Account</h3>
+            <ul>
+              <li><a href="/remote-support.html">Remote Support</a></li>
+              <li><a href="mailto:${contact.support}">Email Support</a></li>
+              <li><a href="/client-login/">Client Access</a></li>
+              <li><a href="/client-admin/">Web Admin</a></li>
+            </ul>
+          </nav>
         </div>
-        <div class="copyright">
-          <span><sup>©</sup> 2026 PC Gen Ltd. All rights reserved.</span>
-          <a href="https://pcgen.mt/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+        <div class="footer-bottom">
+          <div class="copyright">
+            <span><sup>©</sup> 2026 PC Gen Ltd. All rights reserved.</span>
+            <a href="https://pcgen.mt/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+          </div>
+          <span class="footer-location">${contact.address}</span>
         </div>
       </div>
     </footer>
@@ -936,14 +946,16 @@ function clientLoginPage() {
           <div class="portal-auth-cards">
             <form class="form-shell portal-form portal-auth-card" data-client-login>
               <h2>Client access</h2>
-              <input type="email" name="email" placeholder="Client email" autocomplete="email" required>
-              <input type="password" name="accessCode" placeholder="Access code" autocomplete="current-password" required>
+              <input type="email" name="email" aria-label="Client email" placeholder="Client email" autocomplete="email" required>
+              <input type="password" name="accessCode" aria-label="Access code" placeholder="Access code" autocomplete="current-password" required>
               <button class="button" type="submit">Login</button>
+              <p class="notice" data-login-message role="status"></p>
             </form>
             <form class="form-shell portal-form portal-auth-card" data-admin-login>
               <h2>Web admin</h2>
-              <input type="password" name="password" placeholder="Admin password" autocomplete="current-password" required>
+              <input type="password" name="password" aria-label="Admin password" placeholder="Admin password" autocomplete="current-password" required>
               <button class="button" type="submit">Admin login</button>
+              <p class="notice" data-admin-message role="status"></p>
             </form>
           </div>
         </div>

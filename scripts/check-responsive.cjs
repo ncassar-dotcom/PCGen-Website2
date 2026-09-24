@@ -19,10 +19,11 @@ const base = process.env.PREVIEW_URL || 'http://127.0.0.1:4174';
       await page.waitForTimeout(600);
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForTimeout(300);
-      console.log('HOME', width, await page.evaluate(() => ({width: innerWidth, scroll: document.documentElement.scrollWidth, height: document.body.scrollHeight, hero: document.querySelector('.home-hero').getBoundingClientRect().height, mobileFooter: getComputedStyle(document.querySelector('.mobile-footer')).display})));
-      const home = await page.evaluate(() => ({width: innerWidth, scroll: document.documentElement.scrollWidth, mobile: getComputedStyle(document.querySelector('.mobile-footer')).display}));
+      console.log('HOME', width, await page.evaluate(() => ({width: innerWidth, scroll: document.documentElement.scrollWidth, height: document.body.scrollHeight, hero: document.querySelector('.home-hero').getBoundingClientRect().height})));
+      const home = await page.evaluate(() => ({width: innerWidth, scroll: document.documentElement.scrollWidth, mobile: getComputedStyle(document.querySelector('.mobile-brand')).display, footer: getComputedStyle(document.querySelector('.footer-grid')).display}));
       assert(home.scroll <= home.width, `Homepage overflow at ${width}`);
-      assert.equal(home.mobile, width <= 1366 ? 'block' : 'none');
+      assert.equal(home.mobile, width <= 1366 ? 'grid' : 'none');
+      assert.equal(home.footer, 'grid');
       const logos = await page.locator('.home-hero-logos img').evaluateAll(images => images.map(image => ({name: image.alt, width: image.getBoundingClientRect().width, height: image.getBoundingClientRect().height, loaded: image.complete && image.naturalWidth > 0})));
       assert.equal(logos.length, 6);
       for (const logo of logos) assert(logo.loaded && logo.width > 10 && logo.height > 5, `Visible partner logo: ${logo.name} at ${width}`);
@@ -43,7 +44,7 @@ const base = process.env.PREVIEW_URL || 'http://127.0.0.1:4174';
       await page.waitForTimeout(350);
       if (width <= 1366) {
         const bounds = await page.locator('.main-nav').boundingBox();
-        console.log('MENU', width, bounds, await page.evaluate(() => ({width: innerWidth, coarse: matchMedia('(pointer: coarse)').matches, query: matchMedia('(max-width: 1366px)').matches, mobile: getComputedStyle(document.querySelector('.mobile-footer')).display})));
+        console.log('MENU', width, bounds);
         assert(Math.abs(bounds.y) < 1 && Math.abs(bounds.width - width) < 1, 'Mobile menu fills viewport after scrolling');
       }
       await page.keyboard.press('Escape');

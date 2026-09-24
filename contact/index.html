@@ -29,7 +29,7 @@
   <link rel="preload" as="image" href="../assets/backgrounds/HeaderBG.png" fetchpriority="high">
   <link rel="preload" as="image" href="../assets/brand/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/styles.css?v=c2d747e7e557">
+  <link rel="stylesheet" href="../assets/styles.css?v=140ad44a1a0f">
 
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
@@ -38,7 +38,8 @@
 <mso:_dlc_DocIdUrl msdt:dt="string">https://pcgeneration0.sharepoint.com/sites/Marketing/_layouts/15/DocIdRedir.aspx?ID=MRYKD3H7JWR2-918958877-7572, MRYKD3H7JWR2-918958877-7572</mso:_dlc_DocIdUrl>
 </mso:CustomDocumentProperties>
 </xml><![endif]-->
-  <link rel="stylesheet" href="../assets/mobile.css?v=477aa085ed0e">
+  <link rel="stylesheet" href="../assets/mobile.css?v=02979b671dfd">
+  <link rel="stylesheet" href="../assets/footer.css?v=4309a0eafcdd">
 </head>
 <body data-page="contact">
   <!-- PRERENDER:START -->
@@ -53,6 +54,7 @@
           </div>
           <div class="main-nav-links">
             <a class="" href="../about/">About</a><a class="" href="../meet-the-team/">The Team</a><a class="" href="../services/">Services</a><a class="" href="../clients/">Clients</a><a class="" href="../careers/">Careers</a><a class="" href="../contact/">Contact</a>
+            <div class="main-nav-access" role="group" aria-label="Account access"><a href="../client-login/">Client Access</a><a href="../client-admin/">Web Admin</a></div>
           </div>
           <div class="main-nav-footer">
             <div class="socials">
@@ -68,6 +70,7 @@
           </div>
         </nav>
         <div class="support-downloads" aria-label="Header actions">
+          <a class="remote-header-link client-access-link" href="../client-login/">Client Access</a>
           <a class="remote-header-link" href="../remote-support.html">Remote Support</a>
         </div>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -121,48 +124,52 @@
     </section>
 
   </main>
-    <footer class="site-footer">
+    <footer class="site-footer footer-directory">
       <div class="container">
-        <div class="mobile-only mobile-footer">
-          <div class="mobile-footer-brand"><a href="../" aria-label="PC Gen home"><img src="../assets/brand/pcgen-mobile-mark.svg" alt="PC Gen"></a><div class="socials"><a href="https://www.facebook.com/pcgen.mt" target="_blank" rel="noopener" aria-label="Facebook">f</a><a href="https://www.instagram.com/pcgen.mt" target="_blank" rel="noopener" aria-label="Instagram">ig</a><a href="https://www.linkedin.com/company/pcgen/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a></div></div>
-          <div class="mobile-footer-contact"><a href="tel:0035621461111"><strong>Get in touch:</strong> +356 21461111</a><a href="mailto:support@pcgen.mt">support@pcgen.mt</a><a href="mailto:info@pcgen.mt">info@pcgen.mt</a></div>
-        </div>
         <div class="footer-grid">
-          <div>
-            <img class="footer-logo" src="../assets/brand/logo.png" alt="PC Gen">
+          <div class="footer-company">
+            <a class="footer-brand-link" href="../" aria-label="PC Gen home"><img class="footer-logo" src="../assets/brand/logo.png" alt="PC Gen"></a>
             <p>IT solutions for businesses across Malta, from desktop support to bespoke infrastructure projects.</p>
-            <div class="socials">
-              <a href="https://www.facebook.com/pcgen.mt" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-              <a href="https://www.instagram.com/pcgen.mt" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
-              <a href="https://www.linkedin.com/company/pcgen/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-            </div>
+            <a class="footer-phone" href="tel:0035621461111"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m7 3 3 5-2 2c1.3 2.5 3.5 4.7 6 6l2-2 5 3c0 3-2 4-4 4C9 20 4 15 3 7c0-2 1-4 4-4Z"/></svg>+356 2146 1111</a>
+            <a class="footer-email" href="mailto:info@pcgen.mt">info@pcgen.mt</a>
+            <div class="socials"><a href="https://www.facebook.com/pcgen.mt" target="_blank" rel="noopener" aria-label="Facebook">f</a><a href="https://www.instagram.com/pcgen.mt" target="_blank" rel="noopener" aria-label="Instagram">ig</a><a href="https://www.linkedin.com/company/pcgen/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a></div>
           </div>
-          <div>
-            <h3>Get in touch</h3>
+          <nav class="footer-link-group" aria-label="Footer services">
+            <h3>Services</h3>
             <ul>
-              <li><a href="tel:0035621461111">+356 2146 1111</a></li>
-              <li><a href="mailto:info@pcgen.mt">info@pcgen.mt</a></li>
-              <li><a href="mailto:support@pcgen.mt">support@pcgen.mt</a></li>
+              <li><a href="../services/">Business IT Support</a></li>
+              <li><a href="../services/">Managed IT Services</a></li>
+              <li><a href="../services/">Backup &amp; Recovery</a></li>
+              <li><a href="../services/">IT Security</a></li>
+              <li><a href="../services/">All Services</a></li>
             </ul>
-          </div>
-          <div>
-            <h3>Pages</h3>
-            <ul><li><a href="../about/">About</a></li><li><a href="../services/">Services</a></li><li><a href="../clients/">Clients</a></li><li><a href="../careers/">Careers</a></li><li><a href="../contact/">Contact</a></li></ul>
-          </div>
-          <div>
-            <h3>Popular services</h3>
+          </nav>
+          <nav class="footer-link-group" aria-label="Footer company">
+            <h3>Company</h3>
             <ul>
-              <li>Business IT support</li>
-              <li>Help desk services</li>
-              <li>Backup recovery</li>
-              <li>Network administration</li>
-              <li>Antivirus protection</li>
+              <li><a href="../about/">About Us</a></li>
+              <li><a href="../meet-the-team/">The Team</a></li>
+              <li><a href="../clients/">Our Clients</a></li>
+              <li><a href="../careers/">Careers</a></li>
+              <li><a href="../contact/">Contact Us</a></li>
             </ul>
-          </div>
+          </nav>
+          <nav class="footer-link-group" aria-label="Footer support and account">
+            <h3>Support &amp; Account</h3>
+            <ul>
+              <li><a href="../remote-support.html">Remote Support</a></li>
+              <li><a href="mailto:support@pcgen.mt">Email Support</a></li>
+              <li><a href="../client-login/">Client Access</a></li>
+              <li><a href="../client-admin/">Web Admin</a></li>
+            </ul>
+          </nav>
         </div>
-        <div class="copyright">
-          <span><sup>©</sup> 2026 PC Gen Ltd. All rights reserved.</span>
-          <a href="https://pcgen.mt/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+        <div class="footer-bottom">
+          <div class="copyright">
+            <span><sup>©</sup> 2026 PC Gen Ltd. All rights reserved.</span>
+            <a href="https://pcgen.mt/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+          </div>
+          <span class="footer-location">21, Triq Hal Dwin, Haz-Zebbug, Malta</span>
         </div>
       </div>
     </footer>
@@ -171,6 +178,6 @@
       <button class="button" type="button" data-accept-cookies>Accept Cookies</button>
     </aside><button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button></div>
   <!-- PRERENDER:END -->
-  <script src="../assets/app.js?v=2cc236f1f898" defer></script>
+  <script src="../assets/app.js?v=1a3e7d0d8a83" defer></script>
 </body>
 </html>

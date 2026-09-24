@@ -15,6 +15,7 @@ const templates = source.slice(0, source.indexOf(marker));
 const version = crypto.createHash('sha256').update(source).digest('hex').slice(0, 12);
 const cssVersion = crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/styles.css'))).digest('hex').slice(0,12);
 const mobileVersion = crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/mobile.css'))).digest('hex').slice(0,12);
+const footerVersion = crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/footer.css'))).digest('hex').slice(0,12);
 const attr = value => String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const url = value => new URL(value, base).href;
 const id = value => url('') + '#' + value;
@@ -68,7 +69,8 @@ for (const page of config.pages) {
   html=html.replace(/assets\/styles\.css\?v=[^"\s]+/g,`assets/styles.css?v=${cssVersion}`);
   html=html.replace(/\s*<link rel="stylesheet" href="[^"\s]*assets\/mobile\.css[^"\s]*">/g,'');
   const mobilePrefix='../'.repeat(page.file.split('/').length-1) || './';
-  html=html.replace('</head>', `  <link rel="stylesheet" href="${mobilePrefix}assets/mobile.css?v=${mobileVersion}">\n</head>`);
+  html=html.replace(/\s*<link rel="stylesheet" href="[^"\s]*assets\/footer\.css[^"\s]*">/g,'');
+  html=html.replace('</head>', `  <link rel="stylesheet" href="${mobilePrefix}assets/mobile.css?v=${mobileVersion}">\n  <link rel="stylesheet" href="${mobilePrefix}assets/footer.css?v=${footerVersion}">\n</head>`);
   if (!page.noindex && !page.dynamic) {
     context.renderPageKey=page.key;
     let rendered=vm.runInContext(`header() + '<main id="main-content">' + pages[renderPageKey]() + '</main>' + footer() + '<button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button>'`,context);

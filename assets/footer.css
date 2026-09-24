@@ -1,0 +1,67 @@
+/* Shared footer: wide brand column, three link groups and a legal strip. */
+.site-footer.footer-directory {
+  position: relative;
+  isolation: isolate;
+  padding: 66px 0 0;
+  border-top: 1px solid rgba(51, 186, 158, .22);
+  background: #0b2739;
+  color: #a9bdca;
+}
+.footer-directory::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url('brand/footer-world-dots.svg') center 20% / min(1120px, 100%) auto no-repeat;
+  opacity: .25;
+}
+.footer-directory .footer-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.7fr) repeat(3, minmax(140px, 1fr));
+  height: auto;
+  gap: clamp(28px, 4vw, 64px);
+  padding-bottom: 58px;
+  align-items: start;
+}
+.footer-directory .footer-company { max-width: 345px; min-width: 0; }
+.footer-directory .footer-brand-link { display: inline-block; }
+.footer-directory .footer-logo { width: 180px; height: auto; margin: 0 0 22px; }
+.footer-directory .footer-company p { margin: 0 0 18px; color: #a9bdca; font-size: 14px; line-height: 1.65; }
+.footer-directory .footer-phone { display: flex; align-items: center; gap: 9px; min-height: 36px; font-weight: 700; color: #eaf3f8; font-size: 16px; }
+.footer-phone svg { width: 19px; height: 19px; flex: 0 0 19px; }
+.footer-directory .footer-email { display: inline-flex; align-items: center; min-height: 36px; font-size: 14px; }
+.footer-directory .socials { display: flex; gap: 12px; margin: 20px 0 0; }
+.footer-directory .socials a { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid rgba(169,189,202,.25); border-radius: 50%; color: #d9e6ee; font-size: 17px; line-height: 1; font-weight: 700; }
+.footer-directory .footer-link-group { min-width: 0; }
+.footer-directory .footer-link-group h3 { margin: 0 0 22px; color: #eaf3f8; font-size: 12px; line-height: 1.4; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.footer-directory .footer-link-group ul { list-style: none; display: grid; gap: 8px; margin: 0; padding: 0; }
+.footer-directory .footer-link-group li { margin: 0; padding: 0; }
+.footer-directory .footer-link-group a { display: inline-block; padding: 4px 0; font-size: 14px; line-height: 1.45; color: #a9bdca; }
+.footer-directory a { transition: color 180ms ease, transform 180ms ease; transform-origin: left center; }
+.footer-directory a:hover { color: var(--accent); font-weight: 700; transform: scale(1.01); }
+.footer-directory a:focus-visible { outline: 2px solid #ff9000; outline-offset: 4px; }
+.footer-directory .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid rgba(169,189,202,.16); padding: 22px 0; }
+.footer-directory .copyright { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; width: auto; margin: 0; padding: 0; gap: 10px 24px; border: 0; color: #a9bdca; font-size: 12px; }
+.footer-directory .copyright > span { text-align: left; }
+.footer-directory .copyright > a { order: 0; }
+.footer-directory .footer-location { font-size: 12px; line-height: 1.5; text-align: right; }
+@media (max-width: 1050px) {
+  .footer-directory .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 38px 30px; }
+  .footer-directory .footer-company { grid-column: 1 / -1; max-width: 520px; }
+  .footer-directory .footer-bottom { flex-wrap: wrap; }
+  .footer-directory .footer-location { text-align: left; }
+}
+@media (max-width: 600px) {
+  .site-footer.footer-directory { padding-top: 42px; }
+  .footer-directory::before { background-size: auto 80%; background-position: 45% center; opacity: .18; }
+  .footer-directory .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; padding-bottom: 32px; }
+  .footer-directory .footer-link-group:last-child { grid-column: 1 / -1; }
+  .footer-directory .footer-link-group:last-child ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 20px; }
+  .footer-directory .footer-link-group h3 { margin-bottom: 10px; }
+  .footer-directory .footer-link-group a { min-height: 44px; display: flex; align-items: center; }
+  .footer-directory .socials a { width: 44px; height: 44px; }
+  .footer-directory .footer-bottom { display: grid; gap: 12px; }
+  .footer-directory .copyright { gap: 8px 18px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .footer-directory a { transition: none; } }

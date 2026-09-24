@@ -9,6 +9,7 @@ for(const page of config.pages){
   assert.equal((html.match(/name="description"/g)||[]).length,1,page.file+': description count');
   assert.equal((html.match(/rel="canonical"/g)||[]).length,1,page.file+': canonical count');
   assert.equal((html.match(/assets\/mobile\.css\?v=/g)||[]).length,1,page.file+': responsive stylesheet count');
+  assert.equal((html.match(/assets\/footer\.css\?v=/g)||[]).length,1,page.file+': footer stylesheet count');
   assert(html.includes(`href="${new URL(page.path,config.baseUrl)}"`),page.file+': canonical');
   assert(!titles.has(page.title),'Duplicate title'); titles.add(page.title);
   assert(!descriptions.has(page.description),'Duplicate description'); descriptions.add(page.description);

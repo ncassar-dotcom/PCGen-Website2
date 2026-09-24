@@ -8,6 +8,8 @@ The menu supports touch, keyboard focus containment and Escape, and prevents int
 
 ## Build and verify
 
+The footer now uses the WISECP-inspired directory layout in `assets/footer.css`, loaded after the mobile styles on every page. It shows a brand/contact column, Services, Company, Support & Account, and a legal strip. Below 1051px it stacks the brand above three groups; below 601px the groups use two columns. Client Access and Web Admin remain visible at every size.
+
 - Edit shared markup/content in `assets/app.js`, responsive styles in `assets/mobile.css`.
 - Run `node scripts/build-seo.cjs` to refresh the public HTML and cache versions on all 13 pages.
 - Run `node scripts/check-seo.cjs` and `node scripts/check-service-motion.cjs`.
