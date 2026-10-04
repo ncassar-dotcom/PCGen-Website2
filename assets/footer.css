@@ -14,7 +14,7 @@
   z-index: -1;
   pointer-events: none;
   background: url('line-art-world-map-isolated-white-background/sl_070722_51460_23%20%5BConverted%5D.png') center 20% / min(1680px, 150%) auto no-repeat;
-  opacity: .20;
+  opacity: .04;
 }
 .footer-directory .footer-grid {
   display: grid;

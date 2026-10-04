@@ -73,7 +73,7 @@ for (const page of config.pages) {
   html=html.replace('</head>', `  <link rel="stylesheet" href="${mobilePrefix}assets/mobile.css?v=${mobileVersion}">\n  <link rel="stylesheet" href="${mobilePrefix}assets/footer.css?v=${footerVersion}">\n</head>`);
   if (!page.noindex && !page.dynamic) {
     context.renderPageKey=page.key;
-    let rendered=vm.runInContext(`header() + '<main id="main-content">' + pages[renderPageKey]() + '</main>' + footer() + '<button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button>'`,context);
+    let rendered=vm.runInContext(`header(renderPageKey) + '<main id="main-content">' + pages[renderPageKey]() + '</main>' + footer() + '<button class="scroll-top-toggle" type="button" aria-label="Back to top" data-scroll-top><span aria-hidden="true"></span></button>'`,context);
     // Relative links work on localhost, GitHub project pages and a custom domain.
     const prefix='../'.repeat(page.file.split('/').length-1) || './';
     rendered=rendered.replace(/\b(href|src|data-logo-default|data-logo-hover)="\/(?!\/)([^"]*)"/g,(_,key,value)=>`${key}="${prefix}${value}"`);

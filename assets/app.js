@@ -240,7 +240,7 @@ function preloadWholeSite() {
   ]);
 }
 
-function header() {
+function header(headerPageKey = pageKey) {
   const menuLinks = [
     ["About", "/about/"],
     ["The Team", "/meet-the-team/"],
@@ -276,7 +276,7 @@ function header() {
           </div>
         </nav>
         <div class="support-downloads" aria-label="Header actions">
-          <a class="remote-header-link client-access-link" href="/client-login/">Client Access</a>
+          <a class="remote-header-link client-access-link" href="${headerPageKey === 'home' ? 'https://clientops.pcgen.mt:4443/marketplace' : '/client-login/'}">${headerPageKey === 'home' ? 'MARKETPLACE / CLIENT AREA' : 'Client Access'}</a>
           <a class="remote-header-link" href="/remote-support.html">Remote Support</a>
         </div>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false"><span></span><span></span><span></span></button>
