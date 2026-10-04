@@ -101,12 +101,14 @@ body.menu-open { overflow: hidden; }
     position: absolute;
     z-index: -1;
     inset: 0 -15% -60px -25%;
+    transform: translate(-20px, -100px);
     background: #ff9000;
-    mask: url('brand/pcgen-outline-icon.svg') 10% top / auto 100% no-repeat;
-    -webkit-mask: url('brand/pcgen-outline-icon.svg') 10% top / auto 100% no-repeat;
+    mask: url('brand/pcgen-outline-icon.svg') 10% top / auto 140% no-repeat;
+    -webkit-mask: url('brand/pcgen-outline-icon.svg') 10% top / auto 140% no-repeat;
   }
-  .main-nav-footer .mobile-menu-contact-title { display: block; font-size: clamp(18px, 4.5vw, 28px); text-transform: none; }
-  .main-nav.is-open .main-nav-footer > a { display: block; font-size: clamp(16px, 4.1vw, 24px); font-weight: 600; }
+  .main-nav-footer .mobile-menu-contact-title { display: block; font-size: clamp(14.4px, 3.6vw, 22.4px); line-height: 1.395; text-transform: none; }
+  .main-nav.is-open .main-nav-footer > a { display: block; font-size: clamp(12.8px, 3.28vw, 19.2px); line-height: 1.395; font-weight: 600; }
+  .main-nav.is-open .mobile-menu-socials a { font-size: 27.9px; }
   .main-nav-footer .mobile-menu-mark { display: block; width: 78px; height: auto; margin: 48px 0 0; }
 
   /* Landing: statement, outlined brand mark, six partners and two actions. */
@@ -149,10 +151,11 @@ body.menu-open { overflow: hidden; }
     width: fit-content;
     max-width: 100%;
     margin: 20px 0 0;
-    padding: 8px 9px;
-    border-color: #91a0aa;
+    padding: 10px 12px;
+    border-color: #ffffff;
+    border-radius: 10px;
     color: #1da5a0;
-    font-size: clamp(9px, 2.65vw, 16px);
+    font-size: clamp(2.7px, .795vw, 4.8px);
     line-height: 1.25;
     font-weight: 500;
   }
@@ -281,6 +284,21 @@ body.menu-open { overflow: hidden; }
     .mobile-footer-contact { flex-wrap: wrap; justify-content: center; }
     .mobile-footer-contact a { font-size: 10px; }
     .copyright { flex-wrap: wrap; justify-content: center; }
+  }
+  /* One fluid row of six logos, retaining the reduced mobile logo height. */
+  .logos.home-hero-logos {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    width: min(450px, 100%);
+    max-width: 450px;
+    gap: 12px;
+  }
+  .logos.home-hero-logos .logo-tile {
+    height: 11.4px;
+    min-height: 11.4px;
+  }
+  .logos.home-hero-logos .logo-tile:nth-child(n) img {
+    height: 11.4px;
+    max-height: 11.4px;
   }
   @media (prefers-reduced-motion: reduce) {
     .main-nav.is-open { animation: none; }

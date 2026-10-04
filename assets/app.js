@@ -260,7 +260,6 @@ function header(headerPageKey = pageKey) {
           </div>
           <div class="main-nav-links">
             ${menuLinks}
-            ${portalAccessLinks('main-nav-access')}
           </div>
           <div class="main-nav-footer">
             <div class="socials">

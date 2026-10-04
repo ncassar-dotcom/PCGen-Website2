@@ -64,4 +64,25 @@
   .footer-directory .footer-bottom { display: grid; gap: 12px; }
   .footer-directory .copyright { gap: 8px 18px; font-size: 11px; }
 }
+@media (max-width: 1366px) {
+  .footer-directory .footer-company > p,
+  .footer-directory .footer-link-group[aria-label="Footer services"],
+  .footer-directory .footer-link-group[aria-label="Footer company"] { display: none; }
+  .footer-directory .footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .footer-directory .footer-company {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 12px;
+    max-width: none;
+  }
+  .footer-directory .footer-brand-link,
+  .footer-directory .footer-company .socials { grid-column: 1 / -1; }
+  .footer-directory .footer-phone { grid-column: 1; font-size: clamp(11px, 3vw, 16px); gap: 5px; white-space: nowrap; }
+  .footer-directory .footer-email { grid-column: 2; justify-self: end; text-align: right; white-space: nowrap; font-size: clamp(11px, 3vw, 14px); }
+  .footer-directory .copyright > span { font-size: 7.2px; }
+}
+@media (max-width: 600px) {
+  .footer-directory .copyright > span { font-size: 6.6px; }
+}
 @media (prefers-reduced-motion: reduce) { .footer-directory a { transition: none; } }
