@@ -1,6 +1,6 @@
 # Mobile and tablet edition
 
-The responsive edition uses the existing Website 2 pages and canonical URLs. There is no device redirect, duplicated mobile site or user-agent detection. `assets/mobile.css` loads after the page's other styles and applies up to 1366 CSS pixels, including large tablets in landscape and narrow desktop windows. Larger desktop layouts retain the existing design. A width-based breakpoint keeps the layout stable when switching between touch, keyboard and mouse.
+The responsive edition uses the existing Website 2 pages and canonical URLs. There is no device redirect, duplicated mobile site or user-agent detection. `assets/mobile.css` loads after the page's other styles and applies up to 1024 CSS pixels for phone and tablet layouts. Above 1024px, Website 2 uses its desktop design, including common 1280px and 1366px desktop windows. A width-based breakpoint keeps the layout stable when switching between touch, keyboard and mouse.
 
 The supplied landing/menu references guide the stacked brand mark, hero, orange outline artwork, six-partner grid, two action tiles, centered introduction, metrics, client carousel, compact footer and full-screen menu. The second action remains **Get in Touch**, and the existing **16+** experience figure is retained. Home-page benefit cards and the extra services list are omitted from the compact layout; services remain available from the action tile and menu. Other pages retain their content with responsive layouts and the shared mobile header, menu and footer.
 

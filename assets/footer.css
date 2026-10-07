@@ -64,7 +64,7 @@
   .footer-directory .footer-bottom { display: grid; gap: 12px; }
   .footer-directory .copyright { gap: 8px 18px; font-size: 11px; }
 }
-@media (max-width: 1366px) {
+@media (max-width: 1024px) {
   .footer-directory .footer-company > p,
   .footer-directory .footer-link-group[aria-label="Footer services"],
   .footer-directory .footer-link-group[aria-label="Footer company"] { display: none; }

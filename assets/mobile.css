@@ -3,7 +3,7 @@
 .mobile-only { display: none; }
 body.menu-open { overflow: hidden; }
 
-@media (max-width: 1366px) {
+@media (max-width: 1024px) {
   body { background: #001a2c; }
   body[data-page] .container {
     width: calc(100% - 40px);
